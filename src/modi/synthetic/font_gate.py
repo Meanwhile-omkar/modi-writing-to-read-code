@@ -17,7 +17,7 @@ import pyarrow.parquet as pq
 from fontTools.ttLib import TTFont
 from PIL import Image, ImageChops, ImageDraw, ImageFont, features
 
-from modi.synthetic.mapping import dev_to_modi, modi_to_dev
+from modi.synthetic.mapping import dev_to_modi, modi_to_dev, unmappable
 from modi.utils import console  # noqa: F401
 from modi.utils.paths import CODE_ROOT, P
 
@@ -61,8 +61,11 @@ def charset_sheet(modi, label, cmap):
             empty.append(c)
         x, y = (i % cols) * cw, (i // cols) * ch
         sheet.paste(glyph, (x + (cw - glyph.width) // 2, y + max(0, 100 - glyph.height) // 2))
-        dev = modi_to_dev(chr(c))
-        sheet.paste(render(f'{c:X} {dev if dev != chr(c) else "-"}', label), (x + 8, y + 108))
+        try:
+            dev = modi_to_dev(chr(c))
+        except ValueError:  # Modi-only signs such as ardhacandra have no Devanagari twin
+            dev = '-'
+        sheet.paste(render(f'{c:X} {dev}', label), (x + 8, y + 108))
     return sheet, chars, empty
 
 
@@ -113,7 +116,7 @@ def main():
            render('Same text, Noto Sans Modi', big_label), fake]).save(out / '03_real_vs_font.png')
 
     dev = [s for s in symbols if unicodedata.name(s, '').startswith('DEVANAGARI')]
-    unmapped = [s for s in dev if dev_to_modi(s) == s or ord(dev_to_modi(s)) not in cmap]
+    unmapped = [s for s in dev if unmappable(s) or ord(dev_to_modi(s)) not in cmap]
     print(f'Font: {MODI_FONT.name}')
     print(f'  Modi code points in font: {sum(c in cmap for c in chars)} of {len(chars)} assigned')
     print(f'  drawn without ink (empty): {[f"{c:X}" for c in empty] or "none"}')
