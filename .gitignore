@@ -1,0 +1,30 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Generated outputs
+outputs/logs/*
+outputs/figures/*
+!outputs/**/.gitkeep
+
+# Model artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+wandb/
+
+# Never commit data
+*.jpg
+*.png
+*.parquet
+
+# Archives
+*.zip
+*.rar
+
+# Transcriptions of the published book used as out-of-domain test data are shared
+# outside git because of the book's / dataset's terms of use
+assets/folder18_gt/

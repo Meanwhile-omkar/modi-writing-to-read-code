@@ -1,0 +1,18 @@
+# Local environment (CPU, Windows) - data audit, cleaning, preprocessing, EDA.
+# Training runs on Colab/Kaggle GPU; see requirements-train.txt.
+numpy>=1.26
+pandas>=2.2
+pillow>=10.4
+opencv-python>=4.10
+scikit-image>=0.25
+imagehash>=4.3
+scikit-learn>=1.5
+pyarrow>=17.0
+openpyxl>=3.1
+pyyaml>=6.0
+tqdm>=4.66
+matplotlib>=3.8
+jiwer>=3.0
+editdistance>=0.8
+sacrebleu>=2.4
+pytest>=8.0

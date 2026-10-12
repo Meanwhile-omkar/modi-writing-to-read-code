@@ -1,0 +1,18 @@
+# Central path config. Every script reads paths from here - never hard-code them.
+# Paths are relative to the FYP-modi-script-code/ folder.
+
+data_root: ../FYP-modi-script-data
+
+raw:
+  modetrans_parquet: ../FYP-modi-script-data/MoDeTrans-dataset/train-00000-of-00001.parquet
+  modetrans_images:  ../FYP-modi-script-data/MoDeTrans-dataset/images
+  modetrans_meta:    ../FYP-modi-script-data/MoDeTrans-dataset/MoDeTrans_metadata.csv
+  hchar_root:        "../FYP-modi-script-data/MODI-HChar Historical MODI Script Handwritten Character Dataset/MODI-HChar Historical MODI Script Handwritten Character Dataset/MODI_HChar/MODI_HChar"
+  hhdoc_root:        ../FYP-modi-script-data/MODI_HHdoc-dataset/MODI_HHdoc
+
+# Derived data artifacts (manifests, splits, cleaned text). Small files only.
+# Raw images are NEVER copied or modified.
+processed: ../FYP-modi-script-data/processed
+
+# Code-side outputs (reports, figures, logs).
+outputs: outputs
