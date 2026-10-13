@@ -16,7 +16,7 @@ Decisions for everything else in charset.json:
   occur in the training text.
 - <FRAC> (a fraction whose value the transcribers did not record) -> U+A830 NORTH INDIC FRACTION ONE
   QUARTER, which the Modi font draws. Any North Indic fraction sign (U+A830-U+A835) maps back to <FRAC>.
-  ponytail: assumes the fractions in the documents are written with these signs; to confirm with
+  Assumption: the fractions in the documents are written with these signs; to confirm with
   someone who reads Modi.
 """
 import unicodedata

@@ -67,7 +67,7 @@ def test_no_leakage(source, train):
     honest generator still rebuilds some formula variants that happen to occur only in val / test
     (~1.7 % of texts, e.g. both halves of a salutation are in train, the exact join is only in test).
     So we compare with a control: the same model that also read val / test, on the same 5,000 seeds.
-    ponytail: the 1/3 margin is a judgement call; the decision to move away from "zero" is with the team.
+    The 1/3 margin is a judgement call, and moving away from "zero" needs the team's agreement.
     """
     held = held_out_sentences()
     held_only = pieces(held) - pieces(train)
