@@ -1,7 +1,8 @@
 """22 - Export every Stage-1 Reader pipeline's TEST predictions in the team's results format (contract C1).
 
 For each pipeline this writes results/<run>/ with
-  test_predictions.csv   image_id,reference,prediction (UTF-8), one row per MoDeTrans test patch
+  test_predictions.csv   image_id,reference,prediction (UTF-8), one row per MoDeTrans test patch, all runs in the
+                         same row order (the test order of assets/metadata/splits.json)
   config.json            what the pipeline is and which saved file the predictions were copied from
   metrics.json           scores recomputed here with notebooks/lr05/lr05_lib.metrics, the code behind every Stage-1 number
 
@@ -66,15 +67,17 @@ RUNS = [
 
 def main():
     splits = json.load(open(CODE / "assets/metadata/splits.json", encoding="utf-8"))["modetrans"]["assignment"]
-    test_ids = {k for k, v in splits.items() if v == "test"}
+    test_order = [k for k, v in splits.items() if v == "test"]
+    test_ids = set(test_order)
     text = (pd.read_csv(CODE / "assets/metadata/modetrans_text.csv", keep_default_na=False, dtype=str)
             .set_index("image_id")["text_train"].to_dict())
     table = []
     for run, src, id_col, pred_col, logged, dec, desc in RUNS:
         df = pd.read_csv(CODE / src, keep_default_na=False, dtype=str)
-        ids, refs, hyps = list(df[id_col]), list(df["reference"]), list(df[pred_col])
-        if len(ids) != len(set(ids)) or set(ids) != test_ids:
+        if len(df) != df[id_col].nunique() or set(df[id_col]) != test_ids:
             sys.exit(f"{run}: image ids are not exactly the {len(test_ids)} test patches")
+        df = df.set_index(id_col).loc[test_order].reset_index()  # one row order for every run
+        ids, refs, hyps = list(df[id_col]), list(df["reference"]), list(df[pred_col])
         bad = [i for i, r in zip(ids, refs) if r != text[i]]
         if bad:
             sys.exit(f"{run}: {len(bad)} references differ from text_train, e.g. {bad[:3]}")
