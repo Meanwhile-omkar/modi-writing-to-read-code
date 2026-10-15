@@ -13,6 +13,7 @@ Two commands, run from the repository root:
 Everything is written to assets/folder18_gt/, which git ignores (the book's terms): share it outside git.
 PaddleOCR lives in its own environment (default ../ocr-venv, override with PADDLE_PYTHON).
 """
+import argparse
 import base64
 import difflib
 import importlib.util
@@ -33,8 +34,12 @@ from modi.utils.paths import CODE_ROOT, P
 META = CODE_ROOT / 'assets/metadata'
 OUT = CODE_ROOT / 'assets/folder18_gt'
 TESSDATA = P.data_root / 'tessdata'
-PADDLE_PYTHON = os.environ.get('PADDLE_PYTHON', str(CODE_ROOT.parent / 'ocr-venv/bin/python'))
+PADDLE_PYTHON = os.environ.get('PADDLE_PYTHON', str(CODE_ROOT.parent / 'ocr-venv' /
+                                                    ('Scripts/python.exe' if os.name == 'nt' else 'bin/python')))
 NOT_DONE = '# status: NOT PROOFREAD  <- change to "# status: proofread" when every line matches the page'
+HEADER = re.compile(r'क्र\.?\s*[०-९0-9]')  # the 'क्र. N' line that ends a letter's English heading
+DEVANAGARI_LETTERS = re.compile(r'[ऀ-ॣॱ-ॿ]')  # letters and signs, not digits or danda
+LATIN_LETTERS = re.compile(r'[A-Za-z]')
 
 PADDLE_SCRIPT = """
 import json, os, sys
@@ -58,16 +63,18 @@ def letters(tier='strict'):
 
 def is_body(line):
     """False for lines the rules drop: English (also when OCR turned it into Latin digits and symbols), the
-    'क्र. N' / date line, page numbers, footnotes, star rows."""
+    'क्र. N' / date line, page numbers, footnote lines starting with †, star rows. A body line keeps its place
+    when OCR slips in a Latin letter or digit, or reads a danda as '|': it still has more Devanagari letters
+    than Latin ones."""
     s = line.strip()
-    return bool(s) and not (re.search('[A-Za-z0-9&$%@|]', s) or s.startswith(('क्र', '†', '*'))
-                            or re.fullmatch(r'[०-९\s.,\[\]()-]+', s))
+    return bool(s) and not (HEADER.match(s) or s.startswith(('†', '*'))
+                            or len(DEVANAGARI_LETTERS.findall(s)) <= len(LATIN_LETTERS.findall(s)))
 
 
 def body_lines(lines):
     """The letter body of one page: on a letter's first page the English header comes before the 'क्र. N'
     line, so everything up to that line goes; then the other non-body lines."""
-    start = next((i + 1 for i, l in enumerate(lines) if l.strip().startswith('क्र')), 0)
+    start = next((i + 1 for i, l in enumerate(lines) if HEADER.match(l.strip())), 0)
     return [l.strip() for l in lines[start:] if is_body(l)]
 
 
@@ -88,8 +95,9 @@ def ocr():
             print(f'tesseract page {p}', flush=True)
     missing = [str(OUT / f'ocr/page{p}.png') for p in pages if not (OUT / f'ocr/page{p}.paddle.txt').exists()]
     if missing:
-        run = subprocess.Popen([PADDLE_PYTHON, '-I', '-c', PADDLE_SCRIPT, *missing],
-                               stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True)
+        # -X utf8 + encoding: the Devanagari output survives a Windows pipe (cp1252 by default)
+        run = subprocess.Popen([PADDLE_PYTHON, '-X', 'utf8', '-I', '-c', PADDLE_SCRIPT, *missing],
+                               stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, encoding='utf-8')
         for line in run.stdout:
             r = json.loads(line)
             (OUT / f'ocr/{os.path.basename(r["path"])[:-4]}.paddle.txt').write_text('\n'.join(r['lines']) + '\n',
@@ -110,7 +118,7 @@ def ocr():
         html = [f'<meta charset="utf-8"><title>Letter {n}</title><style>body{{font-family:sans-serif}} td{{font-size:18px}}'
                 ' .page{display:flex;gap:16px;align-items:flex-start} img{width:48%;border:1px solid #888}</style>',
                 f'<h1>Letter {n}</h1><p>Left: the printed page. Right: Tesseract vs PaddleOCR; coloured = they disagree, '
-                'so check those words on the page first. Then correct proofread/letter{n:02d}.txt line by line.</p>']
+                f'so check those words on the page first. Then correct proofread/letter{n:02d}.txt line by line.</p>']
         for p in printed:
             buf = io.BytesIO()
             Image.open(OUT / f'ocr/page{p}.png').convert('L').save(buf, 'JPEG', quality=80)
@@ -140,12 +148,20 @@ def join(lines):
     return re.sub(r'\s+', ' ', text).strip()
 
 
-def to_train():
-    """The team's text-cleaning rule (scripts/15_text_decisions.py), so the answer key matches the training text."""
-    spec = importlib.util.spec_from_file_location('text_decisions', CODE_ROOT / 'scripts/15_text_decisions.py')
+def _script(filename, name):
+    spec = importlib.util.spec_from_file_location(name, CODE_ROOT / 'scripts' / filename)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    return module.to_train
+    return module
+
+
+def to_train():
+    """The team's text cleaning, in the order MoDeTrans went through it, so the answer key matches the training
+    text: step 05 (NFC, spaces, σ -> <FRAC>; scripts/05_modetrans_text_normalise.py), then step 15 (editor's
+    marks; scripts/15_text_decisions.py)."""
+    normalise = _script('05_modetrans_text_normalise.py', 'text_normalise').normalise
+    clean = _script('15_text_decisions.py', 'text_decisions').to_train
+    return lambda text: clean(normalise(text)[0])
 
 
 def build():
@@ -179,4 +195,8 @@ def build():
 
 
 if __name__ == '__main__':
-    {'ocr': ocr, 'build': build}[sys.argv[1]]()
+    parser = argparse.ArgumentParser(description='Folder-18 answer key (see the module docstring for details).')
+    parser.add_argument('command', choices=['ocr', 'build'],
+                        help='ocr: OCR the printed pages and write the proofreading files; build: after proofreading, '
+                             'write folder18_gt.csv, the audit file and the OOV report')
+    {'ocr': ocr, 'build': build}[parser.parse_args().command]()

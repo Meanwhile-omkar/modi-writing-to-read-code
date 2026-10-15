@@ -7,6 +7,8 @@ Nothing is stored or downloaded: each patch is drawn when it is asked for, on th
 
 ## The function
 
+After the Setup below (the package is imported from `src/`):
+
 ```python
 from modi.synthetic import make_patch
 
@@ -15,16 +17,16 @@ img, text = make_patch(seed)
 
 | | |
 |---|---|
-| `img` | `numpy.uint8`, shape `(512, 1408)`, dark ink = 0 on white = 255. Same geometry as a real MoDeTrans patch after the Reader's resize: height 512, width 1402, padded with white to 1408. Already black and white, like the real scans. |
+| `img` | `numpy.uint8`, shape `(512, 1408)`, dark ink = 0 on white = 255. Same geometry as a real MoDeTrans patch after the Reader's resize: height 512, width 1402, padded with white to 1408. Almost black and white: the final resize leaves grey edge pixels (about 4 % of all pixels; the real scans are greyer). |
 | `text` | The Devanagari label, in the same format as `text_train` in `assets/metadata/modetrans_text.csv`: only symbols from `charset.json`, fractions written as `<FRAC>`, words separated by single spaces. |
 | `seed` | Any int. The same seed always gives byte-identical output; different seeds give different patches. |
-| Speed | About 16 patches per second on one CPU core (Apple M1). |
+| Speed | About 16 patches per second on one CPU core (Apple M1); 5-10 on an Intel Windows laptop. |
 | Needs | Only files already in the repository (`assets/metadata/`, `assets/fonts/`). Not the MoDeTrans images. |
 
 ## Setup (Colab or local)
 
 ```python
-!git clone -b feat/synth https://github.com/Meanwhile-omkar/modi-writing-to-read-code.git   # or main after merge
+!git clone https://github.com/Meanwhile-omkar/modi-writing-to-read-code.git
 %cd modi-writing-to-read-code
 !pip install -q -r requirements.txt
 import sys; sys.path.insert(0, 'src')
@@ -38,6 +40,8 @@ Modi letters only join correctly when Pillow's text-shaping library (Raqm) is ac
 
 - Colab / Linux: if it prints `False`, run `!apt-get -qq install libfribidi0`, restart the runtime, check again.
 - macOS: `brew install fribidi`, and add `export DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` to `.venv/bin/activate`.
+- Windows: the standard Pillow wheel already has Raqm. In PowerShell write `$env:PYTHONPATH='src'; python -m ...`
+  where this page says `PYTHONPATH=src python -m ...`.
 
 ## Using it in Reader training (Reader handout, Step 9)
 
@@ -71,6 +75,10 @@ class SyntheticPatches:
 
 # train_set = torch.utils.data.ConcatDataset([real_train_set, SyntheticPatches(1430, transform)])
 ```
+
+On Windows (and macOS) DataLoader workers start fresh processes: with `num_workers >= 2`, define the dataset
+class and `transform` at module level (no lambda) and start training under `if __name__ == '__main__':`.
+In a notebook there, use `num_workers=0`.
 
 ## How a patch is made
 
@@ -132,5 +140,5 @@ Checks, from the repository root:
 
 ```bash
 python -m pytest -q tests/test_mapping.py tests/test_text_source.py tests/test_make_patch.py
-PYTHONPATH=src python -m modi.synthetic.calibrate     # about 3 minutes, needs the MoDeTrans parquet
+PYTHONPATH=src python -m modi.synthetic.calibrate     # 3-7 minutes; needs the MoDeTrans parquet at raw.modetrans_parquet in configs/paths.yaml
 ```

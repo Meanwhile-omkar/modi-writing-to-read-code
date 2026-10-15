@@ -87,7 +87,7 @@ def words_sheet(modi_basic, modi_raqm, label):
 
 def main():
     if not features.check('raqm'):
-        raise SystemExit('Pillow cannot shape Modi (raqm is off). Run: source .venv/bin/activate')
+        raise SystemExit('Pillow cannot shape Modi (raqm is off): see Setup in src/modi/synthetic/README.md')
     out = P.figures / 'font_gate'
     out.mkdir(exist_ok=True)
     modi = ImageFont.truetype(str(MODI_FONT), 64, layout_engine=ImageFont.Layout.RAQM)

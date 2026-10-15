@@ -56,7 +56,7 @@ def draw_line(line, font, rng):
 def render(text, rng):
     """Devanagari label text -> numpy uint8 (512, 1408), dark ink 0 on white 255. All randomness from rng."""
     if not features.check('raqm'):
-        raise RuntimeError('Pillow cannot join Modi letters (raqm is off); on macOS run: source .venv/bin/activate')
+        raise RuntimeError('Pillow cannot join Modi letters (raqm is off): see Setup in src/modi/synthetic/README.md')
     nr = np.random.default_rng(rng.getrandbits(64))
     # LINE_CHARS characters per line, at most 4-6 lines:
     # long texts get longer, denser lines, as real ones do
