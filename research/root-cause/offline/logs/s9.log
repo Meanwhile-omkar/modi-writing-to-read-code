@@ -1,0 +1,12 @@
+no stretch: VAL-SEL 29.69 | VAL-REP 36.50 | 45s
+fixed stretch x0.7: VAL-SEL 34.24 | 63s
+fixed stretch x1.3: VAL-SEL 31.17 | 93s
+fixed stretch x1.6: VAL-SEL 34.83 | 129s
+adaptive target 3.5 frames/char, length correction 1.0: VAL-SEL 30.44 | 191s
+adaptive target 3.5 frames/char, length correction 1.2: VAL-SEL 28.99 | 212s
+adaptive target 4.0 frames/char, length correction 1.0: VAL-SEL 29.34 | 231s
+adaptive target 4.0 frames/char, length correction 1.2: VAL-SEL 29.26 | 255s
+adaptive target 4.5 frames/char, length correction 1.0: VAL-SEL 29.03 | 277s
+adaptive target 4.5 frames/char, length correction 1.2: VAL-SEL 29.87 | 303s
+BEST adaptive (target 3.5, c 1.2): VAL-SEL 28.99 -> VAL-REP 35.89 (no stretch 36.50) | 320s
+EXIT=0

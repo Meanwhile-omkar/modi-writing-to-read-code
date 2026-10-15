@@ -1,0 +1,122 @@
+built 5,901 real lines in 288s
+JOB EVAL_X4B | hypotheses None | 
+  device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:59:54
+  model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init x4b_model.pt
+  1.071 M parameters | 3,975 real training lines in 1,430 patches | val-sel 150 / val-rep 157 patches
+  loaded C:\Users\Omkar\Desktop\Firstprinciples\Final_year_project\FYP-modi-script-code\research\root-cause\experiments\cache\x4b_model.pt (strict)
+==============================================================================================================
+FINAL [EVAL_X4B] best checkpoint, greedy decoding
+  VAL-SEL (150 patches, used to pick the epoch): CER  52.2 | no-space  51.7 | WER  97.4 | BLEU  0.21 | chrF++  18.6 | median patch  55.0 | <50%: 56/150 | len 0.69x | blank 80.5%
+  VAL-REP (157 patches, never used for any choice): CER  59.3 | no-space  60.0 | WER  98.7 | BLEU  0.08 | chrF++  13.9 | median patch  60.3 | <50%: 23/157 | len 0.62x | blank 85.8%
+  TRAIN   (150 patches; reading vs memorising): CER  65.5 | no-space  66.6 | WER  99.1 | BLEU  0.04 | chrF++  11.3 | median patch  65.1 | <50%: 13/150 | len 0.53x | blank 90.9%
+  errors on all val: 23,674 = deletions 63.5% / insertions 2.5% / substitutions 34.0%
+  most missed: [(' ', 2324), ('ा', 1726), ('्', 1117), ('र', 979), ('ं', 675), ('त', 525), ('ी', 509), ('े', 472), ('य', 439), ('म', 429), ('व', 421), ('न', 391)]
+  top confusions: [('ि->ी', 190), ('ी->ि', 112), ('अ->आ', 100), ('ो->े', 89), ('ा-> ', 75), ('म->क', 70), ('ा->े', 68), ('्-> ', 66), ('ज->न', 64), ('ै->े', 61)]
+  recall of key marks: {' ': 54.1, 'ा': 47.6, '्': 22.5, 'र': 39.8, 'ं': 1.9, 'ि': 28.6, 'ी': 55.4, 'ु': 9.0, 'ू': 13.5, 'े': 72.2, 'ो': 40.1}
+  N1/N2 frames_per_char : Spearman with CER +0.25, with deletion rate +0.41 | CER by quartile {'Q1 low': 58.2, 'Q2': 53.1, 'Q3': 57.2, 'Q4 high': 66.2}
+  N1/N2 pitch           : Spearman with CER +0.15, with deletion rate -0.01 | CER by quartile {'Q1 low': 55.7, 'Q2': 59.7, 'Q3': 59.2, 'Q4 high': 60.2}
+  N1/N2 n_lines         : Spearman with CER -0.23, with deletion rate -0.05 | CER by quartile {'Q1 low': 61.4, 'Q2': 57.0, 'Q3': 61.8, 'Q4 high': 54.7}
+  N1/N2 label_len       : Spearman with CER -0.35, with deletion rate -0.26 | CER by quartile {'Q1 low': 62.3, 'Q2': 61.3, 'Q3': 59.5, 'Q4 high': 51.7}
+  N1/N2 ink             : Spearman with CER -0.14, with deletion rate -0.22 | CER by quartile {'Q1 low': 62.0, 'Q2': 57.7, 'Q3': 58.7, 'Q4 high': 56.4}
+  N1/N2 stroke          : Spearman with CER +0.05, with deletion rate +0.22 | CER by quartile {'Q1 low': 61.8, 'Q2': 55.7, 'Q3': 53.4, 'Q4 high': 63.9}
+   GT  : करून केर गडाखालें न टाकिता जागा जागा जाळोन ते राखही परसापरसांत टाकऊन घरोघर होतील भाजीपाले ते करवावे गडावरी धान
+   PRED: नकररड कालेनबकिताजागाजगाजलेनते रद अकरसदरसत ठकऊन गघहतीलभ्ाजी जाले तकरवावे गडा वरी घा्ययहे आहेत तास आतरी दर्ी मगी
+   GT  : ठेवावे त्यांणी रात्रंदिवस पाहरियाप्रमाणे जागत जावें परवानगी विरहित आसपास मनुष्य येऊं न द्यावें किल्लासंरक्षणाच
+   PRED: त्याणी ान दवस पाबर याक आाणे जगत जावे परवाजगी वीरहित आस पासन ययेऊन घावे किलसरसणाचे कारणते जाऊवहकयायाकरीता किल्य
+   GT  : अव्याहत चालतो पर्जन्यकाळीं भांडीयास व दरवाज्यांस तेल मेण देऊन भांडीयांचे काने मेणाने भरुन भांडियांवर भांडियां 
+   PRED: आवयाबतचालतोकरजयकाली भाोऊ यास वलवान्यास तेले कोण देऊन भां याचे काे कोण े जन जाऊ यावर जांजी पालुवती आघोडघाडन नाय
+  inside the network: 210 characters emitted on 4 val lines, mean confidence 0.61 -> inside_alignment.png
+  (final evaluation 44s)
+==============================================================================================================
+JOB EVAL_X4B OK in 0.74 min
+
+### EVAL_X4B: job.py VAL-SEL CER 52.22 vs logged CPU value 52.18 -> DIFFERENT
+
+JOB EVAL_X3A | hypotheses None | 
+  device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:59:53
+  model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init x3a_model.pt
+  1.071 M parameters | 3,975 real training lines in 1,430 patches | val-sel 150 / val-rep 157 patches
+  loaded C:\Users\Omkar\Desktop\Firstprinciples\Final_year_project\FYP-modi-script-code\research\root-cause\experiments\cache\x3a_model.pt (strict)
+==============================================================================================================
+FINAL [EVAL_X3A] best checkpoint, greedy decoding
+  VAL-SEL (150 patches, used to pick the epoch): CER  42.6 | no-space  40.8 | WER  94.0 | BLEU  0.44 | chrF++  26.5 | median patch  41.5 | <50%: 102/150 | len 0.76x | blank 78.4%
+  VAL-REP (157 patches, never used for any choice): CER  48.3 | no-space  47.3 | WER  96.2 | BLEU  0.19 | chrF++  21.5 | median patch  47.2 | <50%: 87/157 | len 0.71x | blank 83.4%
+  TRAIN   (150 patches; reading vs memorising): CER  53.3 | no-space  53.1 | WER  96.1 | BLEU  0.19 | chrF++  18.9 | median patch  51.0 | <50%: 68/150 | len 0.63x | blank 88.7%
+  errors on all val: 19,285 = deletions 62.6% / insertions 4.0% / substitutions 33.4%
+  most missed: [(' ', 2251), ('ा', 1189), ('्', 853), ('े', 827), ('र', 705), ('ं', 688), ('ी', 361), ('त', 342), ('ु', 284), ('न', 281), ('य', 277), ('स', 263)]
+  top confusions: [('ि->ी', 243), ('ी->ि', 124), ('अ->आ', 88), ('ज->न', 66), ('ो->ा', 60), (' ->म', 52), ('ि-> ', 50), ('ै->े', 50), (' ->ह', 50), (' ->ा', 50)]
+  recall of key marks: {' ': 56.3, 'ा': 64.5, '्': 44.6, 'र': 57.7, 'ं': 9.0, 'ि': 35.9, 'ी': 66.7, 'ु': 28.9, 'ू': 15.3, 'े': 54.9, 'ो': 42.8}
+  N1/N2 frames_per_char : Spearman with CER +0.05, with deletion rate +0.17 | CER by quartile {'Q1 low': 50.6, 'Q2': 44.0, 'Q3': 44.8, 'Q4 high': 51.7}
+  N1/N2 pitch           : Spearman with CER +0.16, with deletion rate +0.09 | CER by quartile {'Q1 low': 45.0, 'Q2': 47.7, 'Q3': 48.2, 'Q4 high': 50.2}
+  N1/N2 n_lines         : Spearman with CER -0.25, with deletion rate -0.16 | CER by quartile {'Q1 low': 52.2, 'Q2': 45.3, 'Q3': 49.5, 'Q4 high': 44.1}
+  N1/N2 label_len       : Spearman with CER -0.24, with deletion rate -0.23 | CER by quartile {'Q1 low': 50.6, 'Q2': 48.8, 'Q3': 49.2, 'Q4 high': 42.5}
+  N1/N2 ink             : Spearman with CER -0.10, with deletion rate -0.19 | CER by quartile {'Q1 low': 51.1, 'Q2': 46.0, 'Q3': 47.7, 'Q4 high': 46.3}
+  N1/N2 stroke          : Spearman with CER -0.10, with deletion rate +0.01 | CER by quartile {'Q1 low': 53.3, 'Q2': 45.2, 'Q3': 42.4, 'Q4 high': 50.1}
+   GT  : करून केर गडाखालें न टाकिता जागा जागा जाळोन ते राखही परसापरसांत टाकऊन घरोघर होतील भाजीपाले ते करवावे गडावरी धान
+   PRED: न कररड काले नबामिता जागा जागा जालोन तेरद आरसहासात ठकऊन गाथहोतील भाजी पालं गकर वावे गडावरी धाच्यत्रहे आहत तास आ
+   GT  : ठेवावे त्यांणी रात्रंदिवस पाहरियाप्रमाणे जागत जावें परवानगी विरहित आसपास मनुष्य येऊं न द्यावें किल्लासंरक्षणाच
+   PRED: तत्याणी शत्रदिवस पाबरयाप्रराणे नागत जावे करवाजगी विरहित आस पासन ्य येऊन द्यावे किला सरक्षणाचे कारणते भाड वबडया
+   GT  : अव्याहत चालतो पर्जन्यकाळीं भांडीयास व दरवाज्यांस तेल मेण देऊन भांडीयांचे काने मेणाने भरुन भांडियांवर भांडियां 
+   PRED: आवयाबत चाल तोकज्य काली भांडयास वकवाम्यास तल मण देऊन भांऊ याचे काने मेणर ने भरान भाड यावर भांऊ यापुरती आथोड घाल
+  inside the network: 230 characters emitted on 4 val lines, mean confidence 0.72 -> inside_alignment.png
+  (final evaluation 46s)
+==============================================================================================================
+JOB EVAL_X3A OK in 0.77 min
+
+### EVAL_X3A: job.py VAL-SEL CER 42.55 vs logged CPU value 42.44 -> DIFFERENT
+
+JOB FT_FROM_X4B | hypotheses None | 
+  device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:59:52
+  model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init x4b_model.pt
+  1.071 M parameters | 3,975 real training lines in 1,430 patches | val-sel 150 / val-rep 157 patches
+  loaded C:\Users\Omkar\Desktop\Firstprinciples\Final_year_project\FYP-modi-script-code\research\root-cause\experiments\cache\x4b_model.pt (strict)
+FINE-TUNE on real lines: 3,966 usable training lines (dropped 9) | 2 epochs x 124 steps (batch 32) | augmentation off | re-align after epochs never | select by val CER
+[ft     20/248   8%] loss  2.100 (ema  2.349) | lr 8.61e-04 | |g|   0.72 (max    2.0) | blank 87.0% | len  27.9/ 43.8 |     15 lines/s |      640 lines | 0:00:43 el, ETA 0:08:11 | mem cpu
+[ft     40/248  16%] loss  2.241 (ema  2.359) | lr 9.38e-04 | |g|   1.00 (max    2.0) | blank 88.7% | len  28.2/ 43.2 |     14 lines/s |    1,278 lines | 0:01:28 el, ETA 0:07:40 | mem cpu
+[ft     60/248  24%] loss  2.153 (ema  2.332) | lr 8.65e-04 | |g|   0.73 (max    2.1) | blank 78.1% | len  22.7/ 33.8 |     16 lines/s |    1,918 lines | 0:02:09 el, ETA 0:06:45 | mem cpu
+[ft     80/248  32%] loss  2.106 (ema  2.331) | lr 7.69e-04 | |g|   0.57 (max    2.1) | blank 86.2% | len  33.3/ 49.6 |     11 lines/s |    2,558 lines | 0:03:06 el, ETA 0:06:31 | mem cpu
+[ft    100/248  40%] loss  2.127 (ema  2.295) | lr 6.57e-04 | |g|   0.78 (max    2.1) | blank 82.5% | len  25.0/ 38.9 |     15 lines/s |    3,198 lines | 0:03:48 el, ETA 0:05:37 | mem cpu
+[ft    120/248  48%] loss  2.428 (ema  2.276) | lr 5.35e-04 | |g|   0.86 (max    2.1) | blank 88.8% | len  29.5/ 47.9 |     14 lines/s |    3,838 lines | 0:04:34 el, ETA 0:04:52 | mem cpu
+ep   1/2 | train loss  2.284 | val CER  47.7 | no-space  46.8 | WER  96.4 | BLEU  0.39 | chrF++  21.7 | median patch  49.2 | <50%: 76/150 | len 0.72x | blank 79.5% | best  47.7@1 | 298.5s/epoch | 0:05:04 job time  *BEST*
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: माततीेावण मदे आहे वीचावक ातर आपणत सुजमरवील वाज भा बी व पसर देणे
+     errors: deletions 61.5% insertions 3.7% substitutions 34.9% | recall of key marks {' ': 59.4, 'ा': 57.9, '्': 39.4, 'र': 50.9, 'ं': 3.3, 'ि': 28.0, 'ी': 66.0, 'ु': 22.8, 'ू': 14.7, 'े': 65.7, 'ो': 37.6}
+[ft    140/248  56%] loss  2.053 (ema  2.241) | lr 4.11e-04 | |g|   0.56 (max    2.1) | blank 73.0% | len  25.3/ 37.2 |      9 lines/s |    4,478 lines | 0:05:44 el, ETA 0:04:25 | mem cpu
+[ft    160/248  65%] loss  2.262 (ema  2.240) | lr 2.94e-04 | |g|   0.72 (max    2.1) | blank 84.0% | len  26.4/ 40.6 |      9 lines/s |    5,118 lines | 0:06:58 el, ETA 0:03:50 | mem cpu
+[ft    180/248  73%] loss  2.090 (ema  2.191) | lr 1.91e-04 | |g|   0.68 (max    2.1) | blank 80.8% | len  23.8/ 35.3 |     11 lines/s |    5,758 lines | 0:07:58 el, ETA 0:03:00 | mem cpu
+[ft    200/248  81%] loss  2.022 (ema  2.173) | lr 1.08e-04 | |g|   0.61 (max    2.1) | blank 73.8% | len  24.8/ 37.1 |     12 lines/s |    6,398 lines | 0:08:52 el, ETA 0:02:07 | mem cpu
+[ft    220/248  89%] loss  2.026 (ema  2.144) | lr 5.05e-05 | |g|   0.66 (max    2.1) | blank 74.7% | len  24.3/ 35.5 |     12 lines/s |    7,038 lines | 0:09:47 el, ETA 0:01:14 | mem cpu
+[ft    240/248  97%] loss  2.206 (ema  2.144) | lr 2.25e-05 | |g|   0.64 (max    2.1) | blank 88.1% | len  26.9/ 42.1 |     12 lines/s |    7,678 lines | 0:10:42 el, ETA 0:00:21 | mem cpu
+ep   2/2 | train loss  2.154 | val CER  46.4 | no-space  45.3 | WER  95.9 | BLEU  0.35 | chrF++  22.8 | median patch  48.0 | <50%: 85/150 | len 0.73x | blank 79.0% | best  46.4@2 | 380.1s/epoch | 0:11:24 job time  *BEST*
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: नामतीेावण मदे आहे वसीचवघा ासर आप सुजमरवील पजभाग ब वपसर देणो
+     errors: deletions 61.0% insertions 3.7% substitutions 35.4% | recall of key marks {' ': 58.0, 'ा': 60.3, '्': 39.4, 'र': 52.0, 'ं': 4.3, 'ि': 32.4, 'ी': 65.1, 'ु': 26.7, 'ू': 15.1, 'े': 65.1, 'ो': 45.5}
+FINE-TUNE done: best val(sel) CER 46.38 at epoch 2 | 0:11:18
+==============================================================================================================
+FINAL [FT_FROM_X4B] best checkpoint, greedy decoding
+  VAL-SEL (150 patches, used to pick the epoch): CER  46.4 | no-space  45.3 | WER  95.9 | BLEU  0.35 | chrF++  22.8 | median patch  48.0 | <50%: 85/150 | len 0.73x | blank 79.0%
+  VAL-REP (157 patches, never used for any choice): CER  52.6 | no-space  52.7 | WER  97.8 | BLEU  0.16 | chrF++  18.0 | median patch  54.0 | <50%: 55/157 | len 0.69x | blank 84.1%
+  TRAIN   (150 patches; reading vs memorising): CER  58.5 | no-space  59.2 | WER  98.1 | BLEU  0.14 | chrF++  14.9 | median patch  57.8 | <50%: 38/150 | len 0.59x | blank 89.7%
+  errors on all val: 21,001 = deletions 61.5% / insertions 3.4% / substitutions 35.0%
+  most missed: [(' ', 2140), ('ा', 1422), ('्', 962), ('र', 798), ('ं', 681), ('े', 657), ('ी', 425), ('त', 360), ('न', 336), ('ु', 309), ('म', 301), ('य', 291)]
+  top confusions: [('ि->ी', 234), ('ी->ि', 110), ('अ->आ', 102), ('र-> ', 64), (' ->ा', 62), ('ा-> ', 61), ('ज->न', 60), ('ं-> ', 56), ('ि-> ', 56), (' ->ह', 55)]
+  recall of key marks: {' ': 57.5, 'ा': 56.1, '्': 34.8, 'र': 50.1, 'ं': 3.7, 'ि': 32.8, 'ी': 63.3, 'ु': 24.7, 'ू': 11.4, 'े': 62.3, 'ो': 41.3}
+  N1/N2 frames_per_char : Spearman with CER +0.11, with deletion rate +0.29 | CER by quartile {'Q1 low': 53.6, 'Q2': 47.8, 'Q3': 49.6, 'Q4 high': 57.2}
+  N1/N2 pitch           : Spearman with CER +0.16, with deletion rate +0.02 | CER by quartile {'Q1 low': 49.1, 'Q2': 52.5, 'Q3': 52.5, 'Q4 high': 54.2}
+  N1/N2 n_lines         : Spearman with CER -0.25, with deletion rate -0.09 | CER by quartile {'Q1 low': 55.8, 'Q2': 50.1, 'Q3': 54.4, 'Q4 high': 48.0}
+  N1/N2 label_len       : Spearman with CER -0.28, with deletion rate -0.25 | CER by quartile {'Q1 low': 55.2, 'Q2': 53.8, 'Q3': 53.2, 'Q4 high': 46.0}
+  N1/N2 ink             : Spearman with CER -0.13, with deletion rate -0.20 | CER by quartile {'Q1 low': 55.8, 'Q2': 50.3, 'Q3': 52.0, 'Q4 high': 50.2}
+  N1/N2 stroke          : Spearman with CER -0.09, with deletion rate +0.10 | CER by quartile {'Q1 low': 57.0, 'Q2': 49.9, 'Q3': 46.6, 'Q4 high': 54.8}
+   GT  : करून केर गडाखालें न टाकिता जागा जागा जाळोन ते राखही परसापरसांत टाकऊन घरोघर होतील भाजीपाले ते करवावे गडावरी धान
+   PRED: नकररड काले रबमिता जागा जगा जालेनते रद अररसदर सत ठकाऊन गथहोतीलभ्ाजी पाले तकर वावे गड वरी या्यगरहे आहत त्ास आतरी
+   GT  : ठेवावे त्यांणी रात्रंदिवस पाहरियाप्रमाणे जागत जावें परवानगी विरहित आसपास मनुष्य येऊं न द्यावें किल्लासंरक्षणाच
+   PRED: त्याणी रान दिवस पाबर याकर याणे जागत जावे ररवाजगी विरहित आस पासन ्ययेऊन घयावे किला सरस्णाचे कारणत भात वहडकायाकर
+   GT  : अव्याहत चालतो पर्जन्यकाळीं भांडीयास व दरवाज्यांस तेल मेण देऊन भांडीयांचे काने मेणाने भरुन भांडियांवर भांडियां 
+   PRED: आवयाबत चालताोकरज्य काली भांडयास वरवाज्यासतेल मोण देऊन भां याचे काने कोण े भशन भाऊ यावर ांऊी कापुवती आथोडघाडन न
+  inside the network: 233 characters emitted on 4 val lines, mean confidence 0.66 -> inside_alignment.png
+  (final evaluation 39s)
+==============================================================================================================
+JOB FT_FROM_X4B OK in 12.07 min
+
+### FT_FROM_X4B (2 epoch(s) of job.py's loop): VAL-SEL CER 46.38 (start 52.18; X3ctl after 3 CPU epochs 42.67) | train-150 58.51
+EXIT=0

@@ -1,0 +1,14 @@
+AUG       VAL-REP greedy CER  36.50 (notebook on T4:  36.53, diff -0.03) | 123s
+BIG       VAL-REP greedy CER  38.70 (notebook on T4:  38.70, diff -0.01) | 139s
+B60       VAL-REP greedy CER  41.30 (notebook on T4:  41.32, diff -0.02) | 84s
+A120      VAL-REP greedy CER  41.06 (notebook on T4:  41.08, diff -0.02) | 80s
+FT_A0_s0  VAL-REP greedy CER  40.55 (notebook on T4:  40.57, diff -0.02) | 90s
+FT_A0_s1  VAL-REP greedy CER  41.22 (notebook on T4:  41.21, diff +0.01) | 87s
+FT_A0_s2  VAL-REP greedy CER  41.36 (notebook on T4:  41.37, diff -0.01) | 105s
+MIX       VAL-REP greedy CER  41.42 (notebook on T4:  41.42, diff +0.01) | 80s
+FT_LONG   VAL-REP greedy CER  40.55 (notebook on T4:  40.59, diff -0.04) | 99s
+PRE_LONG  VAL-REP greedy CER  41.44 (notebook on T4:  41.43, diff +0.01) | 107s
+C60       VAL-REP greedy CER  42.10 (notebook on T4:  42.14, diff -0.04) | 108s
+A12       VAL-REP greedy CER  42.89 (notebook on T4:  42.89, diff +0.00) | 92s
+DONE
+EXIT=0
