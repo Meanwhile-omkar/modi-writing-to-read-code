@@ -1,0 +1,7 @@
+pipeline,models,val_sel_LM_CER,lm,val_rep_greedy_CER,val_rep_LM_CER,val_rep_LM_CER_nospace,val_rep_LM_BLEU,val_rep_LM_chrF
+anchor,FT_A0_s0,29.17,"(0.45, 1.0, 4)",40.55,35.53,35.88,5.98,38.3
+best_single,AUG,25.66,"(0.45, 1.0, 4)",36.5,31.6,31.87,9.22,43.6
+combo,COMBO,78.44,"(0.45, 1.0, 4)",81.76,79.76,79.36,0.0,8.9
+final_s0,FINAL_s0,77.29,"(0.45, 1.0, 4)",81.66,79.97,80.2,0.0,9.8
+final_s1,FINAL_s1,78.69,"(0.45, 1.0, 4)",83.32,81.1,82.04,0.0,9.5
+ensemble,AUG+BIG+B60,24.05,"(0.3, 1.0, 4)",36.73,29.15,29.6,10.22,45.4

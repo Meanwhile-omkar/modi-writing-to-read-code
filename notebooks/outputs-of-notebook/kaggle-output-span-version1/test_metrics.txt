@@ -1,0 +1,19 @@
+{
+  "CER": 74.36142821336614,
+  "WER": 108.24640541302509,
+  "median_CER": 74.73932877158684,
+  "catastrophic_pct": 100.0,
+  "chrF_pp": 6.311240145009727,
+  "BLEU": 0.015249440301664353,
+  "n": 306,
+  "CER_CI95": [
+    74.06334402658113,
+    74.66345962553673
+  ],
+  "run": "SPAN_seed42",
+  "from_checkpoint": "/kaggle/working/runs/SPAN_seed42/best.pt",
+  "best_epoch": 105,
+  "val_CER": 74.20892767888039,
+  "hours": 10.75,
+  "blank_slot_pct": 92.9
+}

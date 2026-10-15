@@ -1,0 +1,12 @@
+check,n_flagged,pct,meaning
+02_deskew__angle_at_search_limit,4,0.2,"skew pinned at the +-8 deg search limit, so the page may still be slanted"
+03_lines__old_finder_merged_everything,150,7.34,v1 returned one band for a multi-line page
+03_lines__still_single_band,6,0.29,v2 STILL returns one band - needs attention
+03b_lines__ink_left_outside_every_line,68,3.33,"ink the model never sees, although its characters are in the label"
+04_crops__near_blank_line,0,0.0,a detected line is almost pure paper
+04_crops__extreme_aspect,0,0.0,a crop is far wider than tall; probably two lines joined
+05_resize__writing_too_small_in_strip,0,0.0,"after growing the band, the writing fills under half the 64 px strip"
+06_strip__hit_the_width_cap,190,9.3,"strip longer than the 8192 px cap, so it was squeezed horizontally"
+07_ctc__too_few_slots,0,0.0,fewer output slots than the label needs; CTC would return zero loss
+07_ctc__slots_per_char_low,0,0.0,still below 3 slots per character after widening
+06b_widened_to_fit_the_label,142,6.95,"strip stretched horizontally so CTC has room; not a failure, a repair"

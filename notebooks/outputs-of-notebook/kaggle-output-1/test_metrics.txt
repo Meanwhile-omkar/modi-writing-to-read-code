@@ -1,0 +1,18 @@
+{
+  "CER": 81.31565155968738,
+  "WER": 100.49337468283056,
+  "median_CER": 79.51313450523405,
+  "catastrophic_pct": 100.0,
+  "chrF_pp": 3.3668377524953232,
+  "BLEU": 0.009902994933323027,
+  "n": 306,
+  "CER_CI95": [
+    80.58091550510497,
+    82.12468753375617
+  ],
+  "run": "B1_seed42",
+  "from_checkpoint": "/kaggle/working/runs/B1_seed42/best.pt",
+  "best_epoch": 1,
+  "val_CER": 80.75666115575378,
+  "hours": 1.24
+}

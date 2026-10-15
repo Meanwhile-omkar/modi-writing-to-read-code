@@ -1,0 +1,40 @@
+renderer: 1430 training labels, 3 processes, pools ['A', 'B', 'C']
+  pool A: milestone 12,000 lines published (87s)
+  pool A: 20,000/200,000 lines | 142 lines/s | ETA 0:21:05
+  pool A: 40,000/200,000 lines | 116 lines/s | ETA 0:23:04
+  pool A: milestone 60,000 lines published (615s)
+  pool A: 60,200/200,000 lines | 98 lines/s | ETA 0:23:48
+  pool A: 80,000/200,000 lines | 93 lines/s | ETA 0:21:35
+  pool A: 100,000/200,000 lines | 91 lines/s | ETA 0:18:22
+  pool A: milestone 120,000 lines published (1327s)
+  pool A: 120,000/200,000 lines | 90 lines/s | ETA 0:14:44
+  pool A: 140,000/200,000 lines | 91 lines/s | ETA 0:10:59
+  pool A: 160,000/200,000 lines | 92 lines/s | ETA 0:07:16
+  pool A: 180,000/200,000 lines | 92 lines/s | ETA 0:03:38
+  pool A: 200,000/200,000 lines | 92 lines/s | ETA 0:00:00
+POOL A DONE: 200,000 lines (plain, text=labels) in 2175s | width@40 median 393 | chars median 33 | frames/char median 6.1
+  pool B: 12,000/120,000 lines | 90 lines/s | ETA 0:19:59
+  pool B: 24,000/120,000 lines | 89 lines/s | ETA 0:17:53
+  pool B: 36,200/120,000 lines | 90 lines/s | ETA 0:15:29
+  pool B: 48,000/120,000 lines | 91 lines/s | ETA 0:13:13
+  pool B: milestone 60,000 lines published (661s)
+  pool B: 60,000/120,000 lines | 91 lines/s | ETA 0:11:01
+  pool B: 72,000/120,000 lines | 93 lines/s | ETA 0:08:38
+  pool B: 84,000/120,000 lines | 89 lines/s | ETA 0:06:42
+  pool B: 96,000/120,000 lines | 87 lines/s | ETA 0:04:36
+  pool B: 108,000/120,000 lines | 85 lines/s | ETA 0:02:20
+  pool B: 120,000/120,000 lines | 86 lines/s | ETA 0:00:00
+POOL B DONE: 120,000 lines (realistic, text=labels) in 1403s | width@40 median 362 | chars median 33 | frames/char median 5.6
+  pool C: 12,000/120,000 lines | 67 lines/s | ETA 0:27:02
+  pool C: 24,000/120,000 lines | 66 lines/s | ETA 0:24:15
+  pool C: 36,200/120,000 lines | 65 lines/s | ETA 0:21:34
+  pool C: 48,000/120,000 lines | 65 lines/s | ETA 0:18:22
+  pool C: milestone 60,000 lines published (909s)
+  pool C: 60,000/120,000 lines | 66 lines/s | ETA 0:15:09
+  pool C: 72,000/120,000 lines | 66 lines/s | ETA 0:12:04
+  pool C: 84,000/120,000 lines | 67 lines/s | ETA 0:08:56
+  pool C: 96,000/120,000 lines | 67 lines/s | ETA 0:05:59
+  pool C: 108,000/120,000 lines | 67 lines/s | ETA 0:02:59
+  pool C: 120,000/120,000 lines | 68 lines/s | ETA 0:00:00
+POOL C DONE: 120,000 lines (plain, text=lm) in 1774s | width@40 median 475 | chars median 41 | frames/char median 5.9
+RENDERER FINISHED in 5353s

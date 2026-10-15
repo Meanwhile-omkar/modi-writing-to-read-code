@@ -1,0 +1,32 @@
+{
+  "tag": "FT_A0_s2",
+  "priority": 2,
+  "hyp": [
+    "seeds"
+  ],
+  "desc": "anchor, fine-tune seed 2",
+  "size": "small",
+  "H": 40,
+  "vocab": "char",
+  "no_space": false,
+  "init": "/kaggle/working/runs/PT_A60/pre.pt",
+  "pretrain": null,
+  "finetune": {
+    "epochs": 57,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.0,
+    "seed": 2,
+    "realign_at": []
+  },
+  "save_pre": false,
+  "after": [
+    "PT_A60"
+  ],
+  "pools": [],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/FT_A0_s2",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 792.813437777108
+}

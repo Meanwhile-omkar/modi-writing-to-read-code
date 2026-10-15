@@ -1,0 +1,361 @@
+{
+  "tag": "AUG",
+  "hyp": [
+    "N6"
+  ],
+  "desc": "anchor fine-tune with augmented real lines",
+  "status": "ok",
+  "capped": false,
+  "spec": {
+    "tag": "AUG",
+    "priority": 2,
+    "hyp": [
+      "N6"
+    ],
+    "desc": "anchor fine-tune with augmented real lines",
+    "size": "small",
+    "H": 40,
+    "vocab": "char",
+    "no_space": false,
+    "init": "/kaggle/working/runs/PT_A60/pre.pt",
+    "pretrain": null,
+    "finetune": {
+      "epochs": 57,
+      "lr": 0.001,
+      "batch": 32,
+      "aug": true,
+      "mix": 0.0,
+      "seed": 0,
+      "realign_at": []
+    },
+    "save_pre": false,
+    "after": [
+      "PT_A60"
+    ],
+    "pools": [],
+    "deadline": 1792005244.4431353,
+    "time_cap_s": 792.4712777332227
+  },
+  "params_M": 1.071,
+  "ft": {
+    "epochs_done": 57,
+    "epochs_planned": 57,
+    "best_epoch": 34,
+    "best_val_sel_primary": 29.685877965319698,
+    "minutes": 5.27,
+    "lines_seen": 226062,
+    "skipped": 4,
+    "lines_per_s": 715.0,
+    "realign": [],
+    "train_lines": 3966,
+    "dropped": 9
+  },
+  "val_sel": {
+    "CER": 29.685877965319698,
+    "CER_nospace": 27.80731651897296,
+    "WER": 84.20799229658161,
+    "BLEU": 4.451338957318399,
+    "chrF_pp": 42.857531897963575,
+    "median_patch_CER": 30.130454684162345,
+    "patches_below_50": 130,
+    "best_patch_CER": 13.186813186813188,
+    "len_ratio": 0.9019570148794648,
+    "n": 150,
+    "blank_pct": 71.58237910285565,
+    "primary": 29.685877965319698
+  },
+  "val_rep": {
+    "CER": 36.532016228611745,
+    "CER_nospace": 35.653329602686064,
+    "WER": 88.63319386331939,
+    "BLEU": 2.451036895309319,
+    "chrF_pp": 34.39576452355845,
+    "median_patch_CER": 35.810810810810814,
+    "patches_below_50": 131,
+    "best_patch_CER": 11.458333333333332,
+    "len_ratio": 0.8795201975657082,
+    "n": 157,
+    "blank_pct": 77.48226723752316,
+    "primary": 36.532016228611745
+  },
+  "train150": {
+    "CER": 32.39288008074135,
+    "CER_nospace": 33.16480738583283,
+    "WER": 75.84644094908025,
+    "BLEU": 9.642063240189765,
+    "chrF_pp": 42.08246725774458,
+    "median_patch_CER": 30.277777777777782,
+    "patches_below_50": 124,
+    "best_patch_CER": 7.096774193548387,
+    "len_ratio": 0.8525552803009451,
+    "n": 150,
+    "blank_pct": 82.48519988723724,
+    "primary": 32.39288008074135
+  },
+  "anatomy": {
+    "errors": 13935,
+    "deletions_pct": 46.2,
+    "insertions_pct": 13.2,
+    "substitutions_pct": 40.6,
+    "most_missed": [
+      [
+        " ",
+        1317
+      ],
+      [
+        "ा",
+        594
+      ],
+      [
+        "ं",
+        437
+      ],
+      [
+        "्",
+        423
+      ],
+      [
+        "र",
+        363
+      ],
+      [
+        "े",
+        343
+      ],
+      [
+        "त",
+        207
+      ],
+      [
+        "ी",
+        201
+      ],
+      [
+        "न",
+        167
+      ],
+      [
+        "य",
+        155
+      ],
+      [
+        "म",
+        153
+      ],
+      [
+        "ल",
+        151
+      ]
+    ],
+    "most_inserted": [
+      [
+        " ",
+        602
+      ],
+      [
+        "ा",
+        159
+      ],
+      [
+        "ं",
+        143
+      ],
+      [
+        "े",
+        122
+      ],
+      [
+        "र",
+        76
+      ],
+      [
+        "्",
+        74
+      ],
+      [
+        "ी",
+        58
+      ],
+      [
+        "स",
+        54
+      ]
+    ],
+    "top_confusions": [
+      [
+        "ि->ी",
+        194
+      ],
+      [
+        "ी->ि",
+        189
+      ],
+      [
+        "अ->आ",
+        83
+      ],
+      [
+        "ि-> ",
+        66
+      ],
+      [
+        "ज->न",
+        56
+      ],
+      [
+        "ू->ु",
+        56
+      ],
+      [
+        " ->ा",
+        55
+      ],
+      [
+        "ा-> ",
+        54
+      ],
+      [
+        "ा->ो",
+        52
+      ],
+      [
+        "ु->ू",
+        48
+      ],
+      [
+        "न->ज",
+        48
+      ],
+      [
+        "ळ->ल",
+        42
+      ],
+      [
+        "ो->ा",
+        40
+      ],
+      [
+        "र-> ",
+        38
+      ],
+      [
+        "ह->ब",
+        33
+      ]
+    ],
+    "focus_char_recall": {
+      " ": 72.7,
+      "ा": 78.7,
+      "्": 68.4,
+      "र": 75.5,
+      "ं": 38.7,
+      "ि": 55.2,
+      "ी": 70.5,
+      "ु": 62.7,
+      "ू": 48.7,
+      "े": 78.0,
+      "ो": 69.3
+    }
+  },
+  "n1n2": {
+    "n": 307,
+    "frames_per_char": {
+      "spearman_cer": 0.102,
+      "spearman_del": 0.068,
+      "cer_by_quartile": {
+        "Q1 low": 38.4,
+        "Q2": 32.1,
+        "Q3": 33.4,
+        "Q4 high": 41.4
+      },
+      "del_by_quartile": {
+        "Q1 low": 19.2,
+        "Q2": 15.6,
+        "Q3": 15.2,
+        "Q4 high": 18.7
+      }
+    },
+    "pitch": {
+      "spearman_cer": 0.216,
+      "spearman_del": 0.238,
+      "cer_by_quartile": {
+        "Q1 low": 32.0,
+        "Q2": 37.1,
+        "Q3": 35.8,
+        "Q4 high": 40.6
+      },
+      "del_by_quartile": {
+        "Q1 low": 14.4,
+        "Q2": 16.4,
+        "Q3": 16.4,
+        "Q4 high": 21.6
+      }
+    },
+    "n_lines": {
+      "spearman_cer": -0.318,
+      "spearman_del": -0.297,
+      "cer_by_quartile": {
+        "Q1 low": 41.7,
+        "Q2": 34.6,
+        "Q3": 38.6,
+        "Q4 high": 30.5
+      },
+      "del_by_quartile": {
+        "Q1 low": 21.4,
+        "Q2": 17.4,
+        "Q3": 16.8,
+        "Q4 high": 13.2
+      }
+    },
+    "label_len": {
+      "spearman_cer": -0.343,
+      "spearman_del": -0.307,
+      "cer_by_quartile": {
+        "Q1 low": 42.0,
+        "Q2": 37.1,
+        "Q3": 37.2,
+        "Q4 high": 29.1
+      },
+      "del_by_quartile": {
+        "Q1 low": 21.6,
+        "Q2": 17.1,
+        "Q3": 17.0,
+        "Q4 high": 13.1
+      }
+    },
+    "ink": {
+      "spearman_cer": -0.145,
+      "spearman_del": -0.232,
+      "cer_by_quartile": {
+        "Q1 low": 39.7,
+        "Q2": 35.0,
+        "Q3": 35.8,
+        "Q4 high": 34.8
+      },
+      "del_by_quartile": {
+        "Q1 low": 20.3,
+        "Q2": 17.1,
+        "Q3": 16.9,
+        "Q4 high": 14.5
+      }
+    },
+    "stroke": {
+      "spearman_cer": -0.109,
+      "spearman_del": -0.089,
+      "cer_by_quartile": {
+        "Q1 low": 42.2,
+        "Q2": 33.5,
+        "Q3": 31.2,
+        "Q4 high": 38.5
+      },
+      "del_by_quartile": {
+        "Q1 low": 20.7,
+        "Q2": 17.2,
+        "Q3": 13.2,
+        "Q4 high": 17.7
+      }
+    }
+  },
+  "job_minutes": 5.46,
+  "peak_gpu_mem": "1.01 GB"
+}
