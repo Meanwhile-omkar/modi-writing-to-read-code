@@ -28,3 +28,20 @@ wandb/
 # Transcriptions of the published book used as out-of-domain test data are shared
 # outside git because of the book's / dataset's terms of use
 assets/folder18_gt/
+
+# Caches that code re-creates (pickled line images / log-probs, hundreds of MB each)
+*.pkl
+research/root-cause/offline/cache/
+research/root-cause/experiments/cache/fonts/
+
+# Editor / manual backups
+*.bak
+*.bak2
+
+# Stage 1 frozen record (tag stage1-final-baseline): run figures and checkpoints ARE kept.
+# All of these images come from MoDeTrans (MIT licence) or are synthetic renders. HHDoc / Folder-18
+# page images (research-use licence, no redistribution) stay out: outputs/figures/ is still ignored above.
+!notebooks/outputs-of-notebook/**/*.png
+!research/**/*.png
+!notebooks/outputs-of-notebook/05-notebook-kaggle/extracted/runs/*/*.pt
+!research/root-cause/experiments/cache/*.pt
