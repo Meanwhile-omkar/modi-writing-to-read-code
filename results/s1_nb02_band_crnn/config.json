@@ -1,0 +1,9 @@
+{
+ "run": "s1_nb02_band_crnn",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "Notebook 02, lines cut and stacked into fixed bands, CRNN. Best epoch 1; 74 of 306 predictions empty.",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "notebooks/outputs-of-notebook/kaggle-output-1/test_predictions.txt",
+ "source_column": "prediction",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

@@ -1,0 +1,9 @@
+{
+ "run": "s1_nb05_final_ens3_greedy",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "Notebook 05's ensemble AUG+BIG+B60, greedy CTC decoding (no LM).",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "notebooks/outputs-of-notebook/05-notebook-kaggle/extracted/test_predictions_ensemble.csv",
+ "source_column": "greedy",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}
