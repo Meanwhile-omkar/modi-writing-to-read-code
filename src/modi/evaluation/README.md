@@ -53,14 +53,15 @@ virama (broken conjuncts), anusvara dropped or added, space (word boundary misse
 What deliberately bad predictors score on the test split (`outputs/reports/floor_baselines.md`; regenerate with
 `PYTHONPATH=src python -m modi.evaluation.floor_baselines`, in PowerShell `$env:PYTHONPATH='src'; python -m modi.evaluation.floor_baselines`):
 
-| Predictor | Test CER |
+| Predictor | Test CER, mean ± std over 100 seeds |
 |---|---|
 | empty text | 100.0 |
-| random training sentence | 95.0 |
-| random training text of the right length | 83.2 |
-| correct letters, shuffled | 84.5 |
-| correct text, 10 % of characters damaged | 9.9 |
-| correct text, 30 % of characters damaged | 28.8 |
+| random training sentence | 98.1 ± 1.7 |
+| random training sentence, cut or padded with spaces to the right length | 84.3 ± 0.1 |
+| random training text of the right length | 83.1 ± 0.1 |
+| correct letters, shuffled | 84.6 ± 0.1 |
+| correct text, 10 % of characters damaged | 9.9 ± 0.0 |
+| correct text, 30 % of characters damaged | 28.9 ± 0.1 |
 
 A Reader at CER 80 or above is no better than guessing.
 
