@@ -1,0 +1,23 @@
+train lines 3,966 (dropped 9 whose label is too long for the width) | eval on 150 val patches and 150 train patches
+model 1.07 M params | lr 0.001 | batch 8 | aug 0 | budget 13.0 min
+ep  1 | train loss 3.089 | val(60 patches) CER  76.7  no-space  76.6  BLEU   0.0  best patch  61.6  len 42/105 |  6.8 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: मतीेणहे आहेवक व स सनेरल तजागहीवेसहे
+ep  2 | train loss 2.574 | val(60 patches) CER  61.2  no-space  62.7  BLEU   0.2  best patch  43.5  len 64/105 | 12.7 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: ततीणेावणमदे आहे वीचवय ासेर अप सुनरणल याज भा दी पंसर देणो
+ep  3 | train loss 2.433 | val(60 patches) CER  60.5  no-space  61.7  BLEU   0.2  best patch  44.2  len 68/105 | 13.1 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: मतीेास मदे आहे ेचसघ ासरो आप सज मरवोल घजजा बो व पस देणो
+
+FINAL after 3 epochs / 13.1 min:
+  VAL   150 patches: CER 52.2 | no-space 51.7 | BLEU 0.20 | patches with CER<50%: 56/150 | best patch 33.3
+  TRAIN 150 patches: CER 65.5 | no-space 66.7 | BLEU 0.04
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+   PRED: मतीेास मदे आहे ेचसघ ासरो आप सज मरवोल घजजा बो व पस देणो
+   GT  : सदरहू प्रमाणे सालाबाद चालीले आहे हाली पाा मजकूर साहेब अर्जानीजाला आहे त्यास हाली कारकून ताजे खुर्दखत
+   PRED: सहकल हडल पक ाहली आहाड आामन कर होकर आपी काह लीलार अूने ताचे आदे दता सर की काहे जी दबह से हेदी हहे प ज
+   GT  : घेऊनु असल खुरा इनामदार मजकुरास देणे मोर्तब सूद
+   PRED: ह ह हवेल पा ास हेे हे
+logged to results.csv
+EXIT=0

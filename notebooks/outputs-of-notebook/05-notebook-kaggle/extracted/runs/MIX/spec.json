@@ -1,0 +1,40 @@
+{
+  "tag": "MIX",
+  "priority": 2,
+  "hyp": [
+    "N9"
+  ],
+  "desc": "anchor fine-tune with one synthetic batch after every real batch",
+  "size": "small",
+  "H": 40,
+  "vocab": "char",
+  "no_space": false,
+  "init": "/kaggle/working/runs/PT_A60/pre.pt",
+  "pretrain": null,
+  "finetune": {
+    "epochs": 57,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.5,
+    "seed": 0,
+    "mix_pool": "A",
+    "mix_limit": 60000,
+    "realign_at": []
+  },
+  "save_pre": false,
+  "after": [
+    "PT_A60"
+  ],
+  "pools": [
+    [
+      "A",
+      40,
+      60000
+    ]
+  ],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/MIX",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 1223.2076334380663
+}

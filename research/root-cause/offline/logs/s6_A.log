@@ -1,0 +1,7 @@
+single models, LM-decoded VAL-SEL CER (0.3, 1.0, 4): {'AUG': 25.88, 'BIG': 28.22, 'A120': 29.46, 'B60': 29.51, 'C60': 29.72, 'FT_A0_s0': 29.72, 'MIX': 29.82, 'FT_A0_s2': 30.31, 'FT_LONG': 30.35, 'PRE_LONG': 30.75, 'FT_A0_s1': 31.06, 'A12': 31.2} 82s
+  + BIG: 24.77 (current 25.88) | all: [(24.77, 'BIG'), (25.06, 'C60'), (25.13, 'B60'), (25.23, 'A120'), (25.31, 'MIX')] | 159s
+  + MIX: 24.03 (current 24.77) | all: [(24.03, 'MIX'), (24.05, 'B60'), (24.13, 'C60'), (24.47, 'FT_A0_s0'), (24.47, 'FT_A0_s2')] | 241s
+  + B60: 23.75 (current 24.03) | all: [(23.75, 'B60'), (23.9, 'C60'), (24.03, 'A12'), (24.03, 'FT_A0_s2'), (24.08, 'FT_LONG')] | 324s
+  + C60: 23.71 (current 23.75) | all: [(23.71, 'C60'), (23.73, 'FT_A0_s2'), (23.85, 'FT_A0_s1'), (23.9, 'A120'), (23.98, 'PRE_LONG')] | 384s
+STAGE A: chosen ['AUG', 'BIG', 'MIX', 'B60'] -> VAL-SEL 23.75 | notebook ensemble AUG+BIG+B60 24.05 (notebook reported 24.05) | 391s
+EXIT=0

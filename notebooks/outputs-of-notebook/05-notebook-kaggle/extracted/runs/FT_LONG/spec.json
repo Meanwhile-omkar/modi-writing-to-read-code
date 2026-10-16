@@ -1,0 +1,32 @@
+{
+  "tag": "FT_LONG",
+  "priority": 3,
+  "hyp": [
+    "H11-line"
+  ],
+  "desc": "anchor fine-tune for 3x the epochs",
+  "size": "small",
+  "H": 40,
+  "vocab": "char",
+  "no_space": false,
+  "init": "/kaggle/working/runs/PT_A60/pre.pt",
+  "pretrain": null,
+  "finetune": {
+    "epochs": 171,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.0,
+    "seed": 0,
+    "realign_at": []
+  },
+  "save_pre": false,
+  "after": [
+    "PT_A60"
+  ],
+  "pools": [],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/FT_LONG",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 1856.6767189823252
+}

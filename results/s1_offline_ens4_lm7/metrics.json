@@ -1,0 +1,14 @@
+{
+ "CER": 24.5516895663864,
+ "CER_nospace": 24.25671850993288,
+ "WER": 72.93487454186636,
+ "BLEU": 12.989490316590189,
+ "chrF_pp": 52.07556865157134,
+ "median_patch_CER": 25.487526908952766,
+ "patches_below_50": 277,
+ "best_patch_CER": 4.615384615384616,
+ "len_ratio": 0.935288354182332,
+ "n": 306,
+ "logged_CER": 24.55,
+ "metric_code": "notebooks/lr05/lr05_lib.py:metrics (<FRAC> removed; BLEU = word BLEU)"
+}

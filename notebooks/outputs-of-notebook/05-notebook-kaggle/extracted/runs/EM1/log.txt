@@ -1,0 +1,97 @@
+JOB EM1 | hypotheses ['H9/N8a'] | anchor + one CTC re-alignment of the line labels after 1/3 of fine-tuning
+  device cuda (Tesla T4) | torch 2.11.0+cu128 | AMP on | deadline in 0:13:43
+  model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+  1.071 M parameters | 3,975 real training lines in 1,430 patches | val-sel 150 / val-rep 157 patches
+  loaded /kaggle/working/runs/PT_A60/pre.pt (strict)
+FINE-TUNE on real lines: 3,966 usable training lines (dropped 9) | 57 epochs x 124 steps (batch 32) | augmentation off | re-align after epochs [19] | select by val CER
+[ft     60/7068   1%] loss  3.329 (ema  6.314) | lr 6.10e-04 | |g|   1.40 (max   19.0) | blank 96.5% | len   4.0/ 33.8 |    503 lines/s |    1,918 lines | 0:00:03 el, ETA 0:07:25 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    120/7068   2%] loss  2.957 (ema  4.091) | lr 9.99e-04 | |g|   2.08 (max   19.0) | blank 89.4% | len  28.5/ 47.9 |   1005 lines/s |    3,838 lines | 0:00:05 el, ETA 0:05:31 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   1/57 | train loss  4.396 | val CER  70.2 | no-space  69.4 | WER  99.7 | BLEU  0.01 | chrF++   9.9 | median patch  71.1 | <50%: 0/150 | len 0.46x | blank 87.9% | best  70.2@1 |   9.7s/epoch | 0:00:11 job time  *BEST*
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: नामतेमबदहेव वक्र ासोरोशमाार वुततरे लतु पाबीीपेसरदे
+     errors: deletions 77.7% insertions 0.6% substitutions 21.6% | recall of key marks {' ': 29.9, 'ा': 33.1, '्': 10.1, 'र': 27.8, 'ं': 16.9, 'ि': 2.3, 'ी': 54.0, 'ु': 24.9, 'ू': 1.4, 'े': 32.5, 'ो': 11.7}
+[ft    180/7068   3%] loss  2.582 (ema  3.183) | lr 9.98e-04 | |g|   1.05 (max   19.0) | blank 86.5% | len  17.5/ 35.3 |    325 lines/s |    5,758 lines | 0:00:11 el, ETA 0:07:24 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    240/7068   3%] loss  2.658 (ema  2.776) | lr 9.97e-04 | |g|   2.36 (max   19.0) | blank 85.9% | len  31.5/ 42.1 |   1123 lines/s |    7,678 lines | 0:00:13 el, ETA 0:06:19 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   2/57 | train loss  2.733 | val CER  58.6 | no-space  56.8 | WER  99.0 | BLEU  0.03 | chrF++  16.0 | median patch  60.8 | <50%: 18/150 | len 0.58x | blank 84.2% | best  58.6@2 |   5.2s/epoch | 0:00:16 job time  *BEST*
+[ft    300/7068   4%] loss  2.508 (ema  2.582) | lr 9.96e-04 | |g|   1.13 (max   19.0) | blank 77.0% | len  19.5/ 34.3 |    584 lines/s |    9,596 lines | 0:00:16 el, ETA 0:06:14 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    360/7068   5%] loss  2.457 (ema  2.433) | lr 9.94e-04 | |g|   2.61 (max   19.0) | blank 82.4% | len  33.2/ 43.3 |   1061 lines/s |   11,514 lines | 0:00:18 el, ETA 0:05:43 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   3/57 | train loss  2.417 | val CER  48.2 | no-space  46.0 | WER  97.0 | BLEU  0.08 | chrF++  22.8 | median patch  51.5 | <50%: 70/150 | len 0.71x | blank 79.9% | best  48.2@3 |   5.2s/epoch | 0:00:22 job time  *BEST*
+[ft    420/7068   6%] loss  2.274 (ema  2.319) | lr 9.91e-04 | |g|   0.85 (max   19.0) | blank 86.3% | len  31.9/ 48.5 |    600 lines/s |   13,432 lines | 0:00:21 el, ETA 0:05:42 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    480/7068   7%] loss  2.315 (ema  2.224) | lr 9.89e-04 | |g|   1.08 (max   19.0) | blank 80.3% | len  25.4/ 38.0 |   1083 lines/s |   15,352 lines | 0:00:23 el, ETA 0:05:21 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   4/57 | train loss  2.221 | val CER  42.0 | no-space  39.8 | WER  94.8 | BLEU  0.29 | chrF++  28.4 | median patch  44.1 | <50%: 97/150 | len 0.82x | blank 75.8% | best  42.0@4 |   5.2s/epoch | 0:00:27 job time  *BEST*
+[ft    540/7068   8%] loss  2.117 (ema  2.122) | lr 9.86e-04 | |g|   0.94 (max   19.0) | blank 72.1% | len  25.2/ 36.6 |    610 lines/s |   17,272 lines | 0:00:26 el, ETA 0:05:20 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    600/7068   8%] loss  3.164 (ema  2.137) | lr 9.83e-04 | |g|   6.87 (max   19.0) | blank 97.8% | len   7.5/ 32.2 |    966 lines/s |   19,190 lines | 0:00:28 el, ETA 0:05:07 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   5/57 | train loss  2.097 | val CER  44.8 | no-space  42.3 | WER  96.1 | BLEU  0.10 | chrF++  25.7 | median patch  46.2 | <50%: 85/150 | len 0.74x | blank 79.1% | best  42.0@4 |   5.2s/epoch | 0:00:32 job time
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: ानतीचेावरा मब आहेव चकावद पाडे राशपर पुेकरव लाुु राजभाण बोसीवपसतर देण
+     errors: deletions 62.2% insertions 3.8% substitutions 34.0% | recall of key marks {' ': 48.3, 'ा': 70.6, '्': 46.0, 'र': 62.4, 'ं': 23.1, 'ि': 22.3, 'ी': 69.9, 'ु': 41.6, 'ू': 42.7, 'े': 54.0, 'ो': 46.3}
+[ft    660/7068   9%] loss  3.045 (ema  2.069) | lr 9.79e-04 | |g|   1.65 (max   19.0) | blank 97.3% | len   9.2/ 32.2 |    608 lines/s |   21,108 lines | 0:00:31 el, ETA 0:05:07 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    720/7068  10%] loss  1.644 (ema  1.998) | lr 9.75e-04 | |g|   0.91 (max   19.0) | blank 74.1% | len  26.0/ 33.1 |   1062 lines/s |   23,028 lines | 0:00:33 el, ETA 0:04:55 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   6/57 | train loss  1.993 | val CER  38.9 | no-space  36.9 | WER  92.5 | BLEU  0.58 | chrF++  31.4 | median patch  41.8 | <50%: 105/150 | len 0.84x | blank 75.5% | best  38.9@6 |   5.1s/epoch | 0:00:37 job time  *BEST*
+[ft    780/7068  11%] loss  1.826 (ema  1.983) | lr 9.71e-04 | |g|   1.20 (max   19.0) | blank 71.4% | len  22.8/ 33.3 |    589 lines/s |   24,946 lines | 0:00:36 el, ETA 0:04:56 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    840/7068  12%] loss  1.729 (ema  1.900) | lr 9.66e-04 | |g|   0.89 (max   19.0) | blank 70.1% | len  33.9/ 42.0 |   1011 lines/s |   26,866 lines | 0:00:38 el, ETA 0:04:46 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   7/57 | train loss  1.888 | val CER  40.9 | no-space  38.9 | WER  93.0 | BLEU  0.69 | chrF++  28.9 | median patch  42.4 | <50%: 102/150 | len 0.77x | blank 77.9% | best  38.9@6 |   5.2s/epoch | 0:00:42 job time
+[ft    900/7068  13%] loss  1.886 (ema  1.846) | lr 9.61e-04 | |g|   1.48 (max   19.0) | blank 81.1% | len  39.9/ 47.5 |    600 lines/s |   28,786 lines | 0:00:41 el, ETA 0:04:46 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft    960/7068  14%] loss  1.695 (ema  1.813) | lr 9.56e-04 | |g|   1.12 (max   19.0) | blank 81.3% | len  30.9/ 40.9 |   1012 lines/s |   30,704 lines | 0:00:43 el, ETA 0:04:38 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   8/57 | train loss  1.809 | val CER  37.1 | no-space  35.6 | WER  90.9 | BLEU  1.22 | chrF++  33.0 | median patch  38.1 | <50%: 112/150 | len 0.83x | blank 75.8% | best  37.1@8 |   5.4s/epoch | 0:00:48 job time  *BEST*
+[ft   1020/7068  14%] loss  1.601 (ema  1.765) | lr 9.50e-04 | |g|   1.14 (max   19.0) | blank 71.9% | len  29.2/ 37.6 |    567 lines/s |   32,624 lines | 0:00:47 el, ETA 0:04:39 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1080/7068  15%] loss  1.704 (ema  1.768) | lr 9.45e-04 | |g|   1.20 (max   19.0) | blank 62.4% | len  23.4/ 29.1 |    987 lines/s |   34,544 lines | 0:00:49 el, ETA 0:04:32 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep   9/57 | train loss  1.729 | val CER  36.9 | no-space  35.0 | WER  90.3 | BLEU  1.07 | chrF++  33.5 | median patch  38.8 | <50%: 115/150 | len 0.82x | blank 76.0% | best  36.9@9 |   5.4s/epoch | 0:00:53 job time  *BEST*
+[ft   1140/7068  16%] loss  1.482 (ema  1.678) | lr 9.38e-04 | |g|   1.05 (max   19.0) | blank 69.4% | len  26.3/ 33.8 |    594 lines/s |   36,462 lines | 0:00:52 el, ETA 0:04:31 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1200/7068  17%] loss  1.645 (ema  1.719) | lr 9.32e-04 | |g|   1.24 (max   19.0) | blank 76.5% | len  28.9/ 37.5 |   1008 lines/s |   38,380 lines | 0:00:54 el, ETA 0:04:25 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  10/57 | train loss  1.671 | val CER  36.3 | no-space  34.3 | WER  90.3 | BLEU  1.17 | chrF++  34.0 | median patch  37.2 | <50%: 110/150 | len 0.84x | blank 75.3% | best  36.3@10 |   5.2s/epoch | 0:00:58 job time  *BEST*
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: ानतीेावरा मबे आहेंवसिकावद ाडोराशपणव पूजेर लाजु राजभात बासी वपेसतर देणे
+     errors: deletions 52.6% insertions 8.6% substitutions 38.8% | recall of key marks {' ': 64.3, 'ा': 79.1, '्': 65.5, 'र': 76.5, 'ं': 32.6, 'ि': 49.4, 'ी': 66.6, 'ु': 59.9, 'ू': 37.6, 'े': 68.2, 'ो': 64.7}
+[ft   1260/7068  18%] loss  1.606 (ema  1.676) | lr 9.25e-04 | |g|   1.00 (max   19.0) | blank 83.8% | len  34.6/ 44.6 |    581 lines/s |   40,300 lines | 0:00:57 el, ETA 0:04:25 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1320/7068  19%] loss  1.828 (ema  1.623) | lr 9.18e-04 | |g|   1.36 (max   19.0) | blank 82.9% | len  38.7/ 48.2 |   1034 lines/s |   42,220 lines | 0:00:59 el, ETA 0:04:18 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  11/57 | train loss  1.606 | val CER  34.9 | no-space  32.9 | WER  89.4 | BLEU  1.65 | chrF++  35.9 | median patch  35.4 | <50%: 117/150 | len 0.87x | blank 74.5% | best  34.9@11 |   5.3s/epoch | 0:01:04 job time  *BEST*
+[ft   1380/7068  20%] loss  1.371 (ema  1.581) | lr 9.11e-04 | |g|   0.98 (max   19.0) | blank 74.3% | len  30.7/ 37.1 |    592 lines/s |   44,138 lines | 0:01:02 el, ETA 0:04:18 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1440/7068  20%] loss  1.151 (ema  1.545) | lr 9.03e-04 | |g|   1.04 (max   19.0) | blank 66.2% | len  29.4/ 33.6 |   1007 lines/s |   46,056 lines | 0:01:04 el, ETA 0:04:12 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  12/57 | train loss  1.538 | val CER  35.2 | no-space  33.8 | WER  92.8 | BLEU  2.15 | chrF++  36.2 | median patch  36.7 | <50%: 112/150 | len 0.89x | blank 73.3% | best  34.9@11 |   5.2s/epoch | 0:01:09 job time
+[ft   1500/7068  21%] loss  1.369 (ema  1.525) | lr 8.95e-04 | |g|   1.21 (max   19.0) | blank 79.8% | len  38.2/ 48.3 |    610 lines/s |   47,976 lines | 0:01:07 el, ETA 0:04:11 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1560/7068  22%] loss  1.455 (ema  1.526) | lr 8.87e-04 | |g|   1.15 (max   19.0) | blank 82.1% | len  35.0/ 43.1 |    952 lines/s |   49,896 lines | 0:01:09 el, ETA 0:04:06 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  13/57 | train loss  1.501 | val CER  37.0 | no-space  35.4 | WER  89.6 | BLEU  1.59 | chrF++  33.5 | median patch  37.8 | <50%: 104/150 | len 0.81x | blank 76.2% | best  34.9@11 |   5.3s/epoch | 0:01:14 job time
+[ft   1620/7068  23%] loss  1.092 (ema  1.481) | lr 8.78e-04 | |g|   0.98 (max   19.0) | blank 67.9% | len  35.5/ 42.0 |    579 lines/s |   51,814 lines | 0:01:12 el, ETA 0:04:05 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1680/7068  24%] loss  1.245 (ema  1.422) | lr 8.70e-04 | |g|   0.95 (max   19.0) | blank 70.3% | len  32.3/ 39.2 |    980 lines/s |   53,732 lines | 0:01:14 el, ETA 0:04:00 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  14/57 | train loss  1.424 | val CER  35.4 | no-space  33.7 | WER  89.7 | BLEU  1.40 | chrF++  35.5 | median patch  36.7 | <50%: 114/150 | len 0.86x | blank 74.4% | best  34.9@11 |   5.5s/epoch | 0:01:20 job time
+[ft   1740/7068  25%] loss  1.100 (ema  1.462) | lr 8.61e-04 | |g|   1.14 (max   19.0) | blank 69.2% | len  34.3/ 42.9 |    579 lines/s |   55,652 lines | 0:01:18 el, ETA 0:03:59 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1800/7068  25%] loss  1.328 (ema  1.424) | lr 8.51e-04 | |g|   1.21 (max   19.0) | blank 81.7% | len  32.2/ 40.2 |    989 lines/s |   57,572 lines | 0:01:20 el, ETA 0:03:54 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1860/7068  26%] loss  1.543 (ema  1.360) | lr 8.42e-04 | |g|   1.65 (max   19.0) | blank 81.8% | len  39.0/ 45.9 |   1065 lines/s |   59,490 lines | 0:01:22 el, ETA 0:03:49 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  15/57 | train loss  1.379 | val CER  35.6 | no-space  33.8 | WER  91.3 | BLEU  1.75 | chrF++  36.1 | median patch  35.7 | <50%: 118/150 | len 0.91x | blank 71.9% | best  34.9@11 |   5.2s/epoch | 0:01:25 job time
+     GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+     PRED: नानतीये रावरा मबे आहेंवंसीकाव क पाडोरा शपाव सूजे ार ययरे लाजूू राज भाा बासी व पढतर देण
+     errors: deletions 39.9% insertions 15.4% substitutions 44.7% | recall of key marks {' ': 70.9, 'ा': 85.3, '्': 69.8, 'र': 78.4, 'ं': 43.1, 'ि': 46.0, 'ी': 68.1, 'ु': 52.9, 'ू': 49.1, 'े': 67.3, 'ो': 60.7}
+[ft   1920/7068  27%] loss  1.140 (ema  1.310) | lr 8.32e-04 | |g|   1.22 (max   19.0) | blank 66.8% | len  37.4/ 42.1 |    583 lines/s |   61,410 lines | 0:01:25 el, ETA 0:03:48 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   1980/7068  28%] loss  1.322 (ema  1.336) | lr 8.22e-04 | |g|   1.20 (max   19.0) | blank 64.4% | len  32.1/ 38.7 |   1037 lines/s |   63,328 lines | 0:01:27 el, ETA 0:03:43 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  16/57 | train loss  1.323 | val CER  34.9 | no-space  33.2 | WER  90.1 | BLEU  2.15 | chrF++  36.2 | median patch  35.6 | <50%: 116/150 | len 0.89x | blank 72.5% | best  34.9@11 |   5.2s/epoch | 0:01:30 job time
+[ft   2040/7068  29%] loss  1.291 (ema  1.290) | lr 8.12e-04 | |g|   1.52 (max   19.0) | blank 77.1% | len  35.7/ 41.5 |    597 lines/s |   65,246 lines | 0:01:30 el, ETA 0:03:42 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   2100/7068  30%] loss  1.320 (ema  1.268) | lr 8.02e-04 | |g|   1.38 (max   19.0) | blank 78.7% | len  37.2/ 45.2 |   1042 lines/s |   67,166 lines | 0:01:32 el, ETA 0:03:38 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  17/57 | train loss  1.266 | val CER  34.0 | no-space  32.3 | WER  90.5 | BLEU  2.04 | chrF++  37.4 | median patch  35.2 | <50%: 118/150 | len 0.90x | blank 72.4% | best  34.0@17 |   5.2s/epoch | 0:01:35 job time  *BEST*
+[ft   2160/7068  31%] loss  1.213 (ema  1.212) | lr 7.91e-04 | |g|   1.67 (max   19.0) | blank 81.5% | len  38.8/ 47.6 |    591 lines/s |   69,086 lines | 0:01:35 el, ETA 0:03:36 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   2220/7068  31%] loss  1.289 (ema  1.235) | lr 7.80e-04 | |g|   1.24 (max   19.0) | blank 71.1% | len  27.7/ 35.3 |    993 lines/s |   71,004 lines | 0:01:37 el, ETA 0:03:32 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  18/57 | train loss  1.210 | val CER  35.4 | no-space  33.5 | WER  89.9 | BLEU  1.99 | chrF++  36.1 | median patch  35.3 | <50%: 115/150 | len 0.86x | blank 73.9% | best  34.0@17 |   5.2s/epoch | 0:01:41 job time
+[ft   2280/7068  32%] loss  0.940 (ema  1.161) | lr 7.69e-04 | |g|   1.30 (max   19.0) | blank 71.3% | len  31.8/ 35.2 |    604 lines/s |   72,922 lines | 0:01:40 el, ETA 0:03:31 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+[ft   2340/7068  33%] loss  1.525 (ema  1.195) | lr 7.58e-04 | |g|   1.52 (max   19.0) | blank 79.4% | len  29.3/ 38.1 |   1030 lines/s |   74,842 lines | 0:01:42 el, ETA 0:03:26 | mem 1.01 GB | 3 overflow steps skipped (normal for a few early AMP steps)
+ep  19/57 | train loss  1.160 | val CER  34.9 | no-space  33.2 | WER  89.5 | BLEU  1.94 | chrF++  36.0 | median patch  35.2 | <50%: 115/150 | len 0.88x | blank 73.2% | best  34.0@17 |   5.2s/epoch | 0:01:46 job time
+JOB FAILED:
+Traceback (most recent call last):
+  File "/kaggle/working/lr05_code/job.py", line 563, in <module>
+    main()
+    ~~~~^^
+  File "/kaggle/working/lr05_code/job.py", line 554, in main
+    finetune(model, S["finetune"])
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/lr05_code/job.py", line 359, in finetune
+    ra_log.append(dict(epoch=ep, **realign(model, line_labels)))
+                                   ~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/lr05_code/job.py", line 270, in realign
+    pieces = L.realign_patch([lps[i] for i in ls], TEXT[p], vocab)
+  File "/kaggle/working/lr05_code/lr05_lib.py", line 639, in realign_patch
+    cof, _ = viterbi_ctc(logp, np.array(flat))
+             ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/kaggle/working/lr05_code/lr05_lib.py", line 618, in viterbi_ctc
+    s -= bp[t, s]
+OverflowError: Python integer 222 out of bounds for int8
+
+JOB EM1 FAILED in 1.79 min

@@ -1,0 +1,26 @@
+train lines 3,966 (dropped 9 whose label is too long for the width) | eval on 150 val patches and 150 train patches
+model 1.07 M params | lr 0.001 | batch 8 | aug 0 | budget 13.0 min
+ep  1 | train loss 3.721 | val(60 patches) CER 100.0  no-space 100.0  BLEU   0.0  best patch 100.0  len 0/105 |  3.8 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: 
+ep  2 | train loss 3.448 | val(60 patches) CER  96.3  no-space  97.5  BLEU   0.0  best patch  92.7  len 4/105 |  7.8 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: क क क
+ep  3 | train loss 3.366 | val(60 patches) CER  95.3  no-space  97.5  BLEU   0.0  best patch  81.8  len 6/105 | 12.0 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: प प प
+ep  4 | train loss 3.338 | val(60 patches) CER  93.4  no-space  96.8  BLEU   0.0  best patch  78.6  len 8/105 | 13.1 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: क क स
+
+FINAL after 4 epochs / 13.1 min:
+  VAL   150 patches: CER 93.4 | no-space 97.3 | BLEU 0.00 | patches with CER<50%: 0/150 | best patch 78.6
+  TRAIN 150 patches: CER 94.4 | no-space 97.1 | BLEU 0.00
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+   PRED: क क स
+   GT  : सदरहू प्रमाणे सालाबाद चालीले आहे हाली पाा मजकूर साहेब अर्जानीजाला आहे त्यास हाली कारकून ताजे खुर्दखत
+   PRED: क  क क     क क     क क      क
+   GT  : घेऊनु असल खुरा इनामदार मजकुरास देणे मोर्तब सूद
+   PRED: क
+logged to results.csv
+EXIT=0

@@ -1,0 +1,2 @@
+stage,step,samples,loss,lr,CER,CER_nospace,primary,WER,BLEU,chrF_pp,below50,len_ratio,blank_pct,minutes,best
+ft,1,6,11.3381,1.9999999846503276e-05,80.972,81.418,80.972,100.12,0.001,10.27,0,0.759,83.79,123.16,80.972

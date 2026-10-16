@@ -1,0 +1,6 @@
+train mean 215.61 std 85.27 (6s)
+scratch  (epoch 52) TRAIN first 100 patches: CER 71.5 | median 71.7 | best 65.6 | below 50%: 0/100 | 122s
+scratch  (epoch 52) VAL   first 100 patches: CER 72.5 | median 72.0 | best 66.1 | below 50%: 0/100 | 117s
+iam      (epoch 147) TRAIN first 100 patches: CER 43.6 | median 39.2 | best 5.6 | below 50%: 73/100 | 115s
+iam      (epoch 147) VAL   first 100 patches: CER 68.2 | median 69.3 | best 52.4 | below 50%: 0/100 | 124s
+EXIT=0

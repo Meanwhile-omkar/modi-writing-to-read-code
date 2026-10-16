@@ -1,0 +1,1146 @@
+wrote C:\Users\Omkar\Desktop\Firstprinciples\Final_year_project\FYP-modi-script-code\notebooks\05_line_reader_round2_GPU.ipynb (318 KB, 20 cells)
+
+===== CELL 1 [0s]: # Cell 1 - environment, GPUs, and the time budget (the whole notebook finishes in about 5 
+MODI-SYNTH notebook 05 | started 2026-10-14 19:40:44 | budget 40 min | rehearsal: True
+python 3.12.2 | torch 2.2.2+cpu | CUDA None | CPUs 12
+GPU 0: pretend T4
+GPU 1: pretend T4
+RAM 15.7 GB | free disk for scratch files: 12 GB
+
+===== CELL 2 [2s]: # Cell 2 - libraries Kaggle does not ship
+libraries installed
+
+===== CELL 3 [2s]: # Cell 3 - find colab_pack.zip anywhere under /kaggle/input and unpack the metadata (as in
+metadata: C:/Users/Omkar/Desktop/Firstprinciples/Final_year_project/FYP-modi-script-code/assets/metadata
+
+===== CELL 4 [2s]: # Cell 4 - MoDeTrans images + our fixed splits and cleaned labels (identical to notebooks 
+splits: train 40 | val 22 = VAL-SEL 12 (picks epochs and settings) + VAL-REP 10 (only reported) | test 10 (scored once, at the end)
+
+===== CELL 5: wrote C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/lr05_code/lr05_lib.py
+
+===== CELL 6: wrote C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/lr05_code/render_pools.py
+
+===== CELL 7: wrote C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/lr05_code/job.py
+
+===== CELL 8: wrote C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/lr05_code/lr05_run.py
+
+===== CELL 9: wrote C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/lr05_code/lr05_final.py
+
+===== CELL 10 [2s]: # Cell 10a - Noto Sans Modi (SIL Open Font License 1.1, notofonts.github.io), embedded so 
+
+===== CELL 11 [2s]: # Cell 10 - the font, a check that Modi text is shaped correctly, and the synthetic-line r
+complex-script shaping (raqm) for the renderer: OK
+[00:00:02] renderer started in the background with 3 processes: pool A = 600 plain lines (text: labels), pool B = 400 realistic lines (text: labels), pool C = 400 plain lines (text: lm)
+
+===== CELL 12 [4s]: # Cell 11 - real line images: each patch's own line pitch -> lines -> tight crop -> 40 px 
+[00:00:10] 234 line images from 72 patches in 6s
+lines per patch: {1: 1, 2: 23, 3: 14, 4: 26, 5: 7, 6: 1}
+lines by split: {'train': 155, 'val': 52, 'test': 27}
+width at 40 px: median 418, 95% 606 | characters per line: median 41 | CTC frames per character (stride 2): median 4.9
+line pitch per patch: 5% 85 | median 118 | 95% 218 px
+
+===== CELL 13 [11s]: # Cell 12 - measure this GPU, then size every job so the whole plan fits the budget
+[bench] JOB BENCH | hypotheses None | 
+[bench]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:32:46
+[bench]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[bench] BENCH small_h40: 11 training lines/s (batch 32, AMP off) | val forward pass 0.9s | 1.071 M params | peak mem cpu
+[bench] BENCH big_h40: 2 training lines/s (batch 32, AMP off) | val forward pass 2.2s | 4.227 M params | peak mem cpu
+[bench] BENCH small_h64: 3 training lines/s (batch 32, AMP off) | val forward pass 2.4s | 1.071 M params | peak mem cpu
+[bench] JOB BENCH OK in 2.04 min
+[00:02:17] GPU throughput (training lines/s): small_h40 11, big_h40 2, small_h64 3
+all experiments need ~47 GPU-min at base size; 49 GPU-min available before the final models -> every budget x 0.92 (all jobs scaled equally, so comparisons stay fair)
+job         P hypothesis    pretrain lines ft epochs est. min  what changes
+PT_A60      1 anchor                   320         0      1.7  shared pretraining: 300 plain synthetic lines (X4 style)
+FT_A0_s0    1 anchor                     0         2      1.6  ANCHOR: PT_A60 -> real lines, proportional line labels, seed 0
+NOPRE       1 H24-GPU                    0         3      1.9  CONTROL: real lines only, no synthetic pretraining, 2x the epochs
+A12         1 N10a                     320         2      2.2  pretrain on only 60 distinct synthetic lines (same steps as the anchor)
+B60         1 N4                       320         2      2.2  pretrain on 300 REALISTIC synthetic lines (no word gaps + continuous headline)
+EM1         1 H9/N8a                     0         2      2.0  anchor + one CTC re-alignment of the line labels after 1/3 of fine-tuning
+FT_A0_s1    1 seeds                      0         2      1.6  anchor, fine-tune seed 1 (measures run-to-run noise)
+A120        2 N10b                     320         2      2.2  pretrain on 450 distinct synthetic lines (same steps)
+C60         2 N12b                     320         2      2.2  pretrain on 300 lines whose TEXT is sampled from a char 4-gram of the training labels
+BIG         2 N11                      320         2      7.3  2x wider CRNN (conv 64-128-256-256-256, BiLSTM 2x256)
+AKS         2 N14                      320         2      2.3  akshara (syllable) targets, pretrain + fine-tune
+NS          2 N5                       320         2      2.2  no spaces in any target, pretrain + fine-tune (spaces put back by the LM afterwards)
+MIX         2 N9                         0         2      2.1  anchor fine-tune with one synthetic batch after every real batch
+AUG         2 N6                         0         2      1.6  anchor fine-tune with augmented real lines
+EM2         2 N8b                        0         2      2.5  anchor + re-alignment after 1/3 and 2/3 of fine-tuning
+FT_A0_s2    2 seeds                      0         2      1.6  anchor, fine-tune seed 2
+H64         3 N7                       320         2      5.2  64-px line images (pretrain + fine-tune)
+FT_LONG     3 H11-line                   0         4      2.1  anchor fine-tune for 3x the epochs
+PRE_LONG    3 N10c                     590         2      2.6  3x longer pretraining on 450 lines
+
+===== CELL 14 [137s]: # Cell 13 - THE RUN: every job, two at a time (one per GPU), highest priority first, strea
+[00:02:17] starting the scheduler; jobs must finish by 20:13:42 (local time of this machine); priority-3 jobs only start if they leave 6 min for the combination and FINAL models
+>>> START PT_A60 on cpu-slot 0 | P1 | shared pretraining: 300 plain synthetic lines (X4 style) | estimated 0:01:39 | 0:30:42 left
+>>> START NOPRE on cpu-slot 1 | P1 | CONTROL: real lines only, no synthetic pretraining, 2x the epochs | estimated 0:01:51 | 0:30:42 left
+[render] renderer: 40 training labels, 3 processes, pools ['A', 'B', 'C']
+[render]   pool A: milestone 60 lines published (2s)
+[render]   pool A: 200/600 lines | 80 lines/s | ETA 0:00:04
+[render]   pool A: milestone 300 lines published (3s)
+[render]   pool A: 400/600 lines | 152 lines/s | ETA 0:00:01
+[render]   pool A: milestone 450 lines published (3s)
+[render]   pool A: 600/600 lines | 225 lines/s | ETA 0:00:00
+[render] POOL A DONE: 600 lines (plain, text=labels) in 3s | width@40 median 471 | chars median 39 | frames/char median 6.2
+[render]   pool B: 200/400 lines | 79 lines/s | ETA 0:00:02
+[render]   pool B: milestone 300 lines published (3s)
+[render]   pool B: 400/400 lines | 157 lines/s | ETA 0:00:00
+[render] POOL B DONE: 400 lines (realistic, text=labels) in 3s | width@40 median 442 | chars median 41 | frames/char median 5.7
+[render]   pool C: 200/400 lines | 81 lines/s | ETA 0:00:02
+[render]   pool C: milestone 300 lines published (2s)
+[render]   pool C: 400/400 lines | 161 lines/s | ETA 0:00:00
+[render] POOL C DONE: 400 lines (plain, text=lm) in 2s | width@40 median 511 | chars median 42 | frames/char median 6.2
+[render] RENDERER FINISHED in 9s
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 19:42:59 | 0:30:42 left before the deadline | done 0 | failed 0 | skipped 0 | running 2 | waiting 17
+   slot 0: PT_A60 running 0:00:00 of ~0:01:39
+   slot 1: NOPRE running 0:00:00 of ~0:01:51
+   queue: FT_A0_s0 (waiting for PT_A60), A12 (ready), B60 (ready), EM1 (waiting for PT_A60), FT_A0_s1 (waiting for PT_A60), A120 (ready), C60 (ready), BIG (ready), AKS (ready), NS (ready), MIX (waiting for PT_A60), AUG (waiting for PT_A60)
+   nvidia-smi unavailable
+   RAM 12.7/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[PT_A60] JOB PT_A60 | hypotheses ['anchor'] | shared pretraining: 300 plain synthetic lines (X4 style)
+[PT_A60]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:59
+[PT_A60]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[PT_A60]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[PT_A60] PRETRAIN on pool A (first 300 lines; style plain, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 38 | CTC frames per target median 6.2
+[NOPRE] JOB NOPRE | hypotheses ['H24-GPU'] | CONTROL: real lines only, no synthetic pretraining, 2x the epochs
+[NOPRE]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:20
+[NOPRE]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[NOPRE]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[NOPRE] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 3 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[PT_A60]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PT_A60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PT_A60]      PRED: 
+[NOPRE] ep   1/3 | train loss 15.092 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  27.6s/epoch | 0:00:32 job time  *BEST*
+[NOPRE]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NOPRE]      PRED: 
+[NOPRE]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[PT_A60]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PT_A60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PT_A60]      PRED: 
+[PT_A60]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PT_A60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PT_A60]      PRED: 
+[NOPRE] ep   2/3 | train loss  3.993 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  21.2s/epoch | 0:00:53 job time
+[PT_A60]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PT_A60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PT_A60]      PRED: 
+[PT_A60] PRETRAIN done: 20 steps, 316 lines in 0:00:55 (6 lines/s), loss ema 19.279
+[PT_A60]   saved C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt
+[PT_A60] ==============================================================================================================
+[PT_A60] FINAL [PT_A60] best checkpoint, greedy decoding
+[PT_A60]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PT_A60]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[PT_A60]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[PT_A60]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[PT_A60]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[PT_A60]   top confusions: []
+[PT_A60]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[PT_A60]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PT_A60]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[PT_A60]    PRED: 
+[PT_A60]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[PT_A60]    PRED: 
+[PT_A60]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[PT_A60]    PRED: 
+[PT_A60]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[PT_A60]   (final evaluation 10s)
+[PT_A60] ==============================================================================================================
+[PT_A60] JOB PT_A60 OK in 1.18 min
+<<< DONE PT_A60 in 0:01:16 (estimated 0:01:39, ratio 0.76) | time estimates now x1.00 (learned from 1 jobs)
+>>> START FT_A0_s0 on cpu-slot 0 | P1 | ANCHOR: PT_A60 -> real lines, proportional line labels, seed 0 | estimated 0:01:35 | 0:29:26 left
+[NOPRE] ep   3/3 | train loss  3.678 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  19.6s/epoch | 0:01:13 job time
+[NOPRE]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NOPRE]      PRED: 
+[NOPRE]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[NOPRE] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:08
+[FT_A0_s0] JOB FT_A0_s0 | hypotheses ['anchor'] | ANCHOR: PT_A60 -> real lines, proportional line labels, seed 0
+[FT_A0_s0]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:51
+[FT_A0_s0]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[FT_A0_s0]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FT_A0_s0]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[FT_A0_s0] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[NOPRE] ==============================================================================================================
+[NOPRE] FINAL [NOPRE] best checkpoint, greedy decoding
+[NOPRE]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NOPRE]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[NOPRE]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[NOPRE]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[NOPRE]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[NOPRE]   top confusions: []
+[NOPRE]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[NOPRE]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NOPRE]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[NOPRE]    PRED: 
+[NOPRE]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[NOPRE]    PRED: 
+[NOPRE]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[NOPRE]    PRED: 
+[NOPRE]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[NOPRE]   (final evaluation 6s)
+[NOPRE] ==============================================================================================================
+[NOPRE] JOB NOPRE OK in 1.32 min
+<<< DONE NOPRE in 0:01:24 (estimated 0:01:51, ratio 0.76) | time estimates now x0.76 (learned from 2 jobs)
+>>> START A12 on cpu-slot 1 | P1 | pretrain on only 60 distinct synthetic lines (same steps as the anchor) | estimated 0:01:41 | 0:29:18 left
+[A12] JOB A12 | hypotheses ['N10a'] | pretrain on only 60 distinct synthetic lines (same steps as the anchor)
+[A12]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:02
+[A12]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[A12]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[A12] PRETRAIN on pool A (first 60 lines; style plain, text labels) | usable 60 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 5.3 passes | targets/line median 41 | CTC frames per target median 6.2
+[FT_A0_s0] ep   1/2 | train loss  3.741 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  16.0s/epoch | 0:00:18 job time  *BEST*
+[FT_A0_s0]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s0]      PRED: 
+[FT_A0_s0]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[A12]   zero-shot REAL val (12 patches) after 76 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[FT_A0_s0] ep   2/2 | train loss  3.548 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  17.2s/epoch | 0:00:35 job time
+[FT_A0_s0]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s0]      PRED: 
+[FT_A0_s0]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s0] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:33
+[A12]   zero-shot REAL val (12 patches) after 148 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[FT_A0_s0] ==============================================================================================================
+[FT_A0_s0] FINAL [FT_A0_s0] best checkpoint, greedy decoding
+[FT_A0_s0]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FT_A0_s0]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s0]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s0]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[FT_A0_s0]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[FT_A0_s0]   top confusions: []
+[FT_A0_s0]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s0]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s0]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[FT_A0_s0]    PRED: 
+[FT_A0_s0]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[FT_A0_s0]    PRED: 
+[FT_A0_s0]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[FT_A0_s0]    PRED: 
+[FT_A0_s0]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[FT_A0_s0]   (final evaluation 7s)
+[FT_A0_s0] ==============================================================================================================
+[FT_A0_s0] JOB FT_A0_s0 OK in 0.71 min
+<<< DONE FT_A0_s0 in 0:00:46 (estimated 0:01:35, ratio 0.49) | time estimates now x0.76 (learned from 3 jobs)
+>>> START B60 on cpu-slot 0 | P1 | pretrain on 300 REALISTIC synthetic lines (no word gaps + continuous headline) | estimated 0:01:40 | 0:28:40 left
+[A12]   zero-shot REAL val (12 patches) after 224 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[B60] JOB B60 | hypotheses ['N4'] | pretrain on 300 REALISTIC synthetic lines (no word gaps + continuous headline)
+[B60]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:00
+[B60]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[B60]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[B60] PRETRAIN on pool B (first 300 lines; style realistic, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 40 | CTC frames per target median 5.7
+[A12]   zero-shot REAL val (12 patches) after 300 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[A12] PRETRAIN done: 20 steps, 300 lines in 0:00:42 (7 lines/s), loss ema 17.664
+[A12] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[B60]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[B60]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[A12] ep   1/2 | train loss  3.717 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  18.0s/epoch | 0:01:03 job time  *BEST*
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[A12]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[B60]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[B60]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[B60] PRETRAIN done: 20 steps, 316 lines in 0:00:40 (8 lines/s), loss ema 17.404
+[B60] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[A12] ep   2/2 | train loss  3.540 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  19.1s/epoch | 0:01:22 job time
+[A12]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A12]      PRED: 
+[A12]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[A12] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:37
+[A12] ==============================================================================================================
+[A12] FINAL [A12] best checkpoint, greedy decoding
+[A12]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A12]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[A12]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[A12]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[A12]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[A12]   top confusions: []
+[A12]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[A12]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A12]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[A12]    PRED: 
+[A12]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[A12]    PRED: 
+[A12]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[A12]    PRED: 
+[A12]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[A12]   (final evaluation 7s)
+[A12] ==============================================================================================================
+[A12] JOB A12 OK in 1.49 min
+<<< DONE A12 in 0:01:34 (estimated 0:01:41, ratio 0.93) | time estimates now x0.76 (learned from 4 jobs)
+>>> START EM1 on cpu-slot 1 | P1 | anchor + one CTC re-alignment of the line labels after 1/3 of fine-tuning | estimated 0:01:32 | 0:27:43 left
+[B60] ep   1/2 | train loss  3.723 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  13.7s/epoch | 0:00:57 job time  *BEST*
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[B60]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM1] JOB EM1 | hypotheses ['H9/N8a'] | anchor + one CTC re-alignment of the line labels after 1/3 of fine-tuning
+[EM1]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:46
+[EM1]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[EM1]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[EM1]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[EM1] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs [1] | select by val CER
+[B60] ep   2/2 | train loss  3.547 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  15.7s/epoch | 0:01:12 job time
+[B60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[B60]      PRED: 
+[B60]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[B60] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:29
+[EM1] ep   1/2 | train loss  3.741 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  15.8s/epoch | 0:00:18 job time  *BEST*
+[EM1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[EM1]      PRED: 
+[EM1]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[B60] ==============================================================================================================
+[B60] FINAL [B60] best checkpoint, greedy decoding
+[B60]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[B60]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[B60]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[B60]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[B60]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[B60]   top confusions: []
+[B60]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[B60]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[B60]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[B60]    PRED: 
+[B60]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[B60]    PRED: 
+[B60]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[B60]    PRED: 
+[B60]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[B60]   (final evaluation 6s)
+[B60] ==============================================================================================================
+[B60] JOB B60 OK in 1.32 min
+<<< DONE B60 in 0:01:24 (estimated 0:01:40, ratio 0.84) | time estimates now x0.71 (learned from 5 jobs)
+>>> START FT_A0_s1 on cpu-slot 0 | P1 | anchor, fine-tune seed 1 (measures run-to-run noise) | estimated 0:01:07 | 0:27:15 left
+[EM1]   RE-ALIGNED line labels (CTC forced alignment): 149/155 changed (96.1%), median |length change| 15 chars, 0 patches skipped | 7.4s
+[FT_A0_s1] JOB FT_A0_s1 | hypotheses ['seeds'] | anchor, fine-tune seed 1 (measures run-to-run noise)
+[FT_A0_s1]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:02
+[FT_A0_s1]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[FT_A0_s1]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FT_A0_s1]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[FT_A0_s1] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[EM1] ep   2/2 | train loss  4.090 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  14.9s/epoch | 0:00:40 job time
+[EM1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[EM1]      PRED: 
+[EM1]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM1] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:38
+[EM1] ==============================================================================================================
+[EM1] FINAL [EM1] best checkpoint, greedy decoding
+[EM1]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[EM1]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[EM1]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[EM1]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[EM1]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[EM1]   top confusions: []
+[EM1]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM1]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM1]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[EM1]    PRED: 
+[EM1]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[EM1]    PRED: 
+[EM1]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[EM1]    PRED: 
+[FT_A0_s1] ep   1/2 | train loss  3.756 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  16.1s/epoch | 0:00:18 job time  *BEST*
+[FT_A0_s1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s1]      PRED: 
+[FT_A0_s1]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM1]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[EM1]   (final evaluation 7s)
+[EM1] ==============================================================================================================
+[EM1] JOB EM1 OK in 0.79 min
+<<< DONE EM1 in 0:00:52 (estimated 0:01:32, ratio 0.57) | time estimates now x0.71 (learned from 6 jobs)
+>>> START A120 on cpu-slot 1 | P2 | pretrain on 450 distinct synthetic lines (same steps) | estimated 0:01:34 | 0:26:51 left
+[A120] JOB A120 | hypotheses ['N10b'] | pretrain on 450 distinct synthetic lines (same steps)
+[A120]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:50
+[A120]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[A120]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[A120] PRETRAIN on pool A (first 450 lines; style plain, text labels) | usable 450 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 0.7 passes | targets/line median 38 | CTC frames per target median 6.2
+[FT_A0_s1] ep   2/2 | train loss  3.548 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  15.0s/epoch | 0:00:33 job time
+[FT_A0_s1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s1]      PRED: 
+[FT_A0_s1]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s1] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:31
+[A120]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[FT_A0_s1] ==============================================================================================================
+[FT_A0_s1] FINAL [FT_A0_s1] best checkpoint, greedy decoding
+[FT_A0_s1]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FT_A0_s1]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s1]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s1]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[FT_A0_s1]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[FT_A0_s1]   top confusions: []
+[FT_A0_s1]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s1]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s1]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[FT_A0_s1]    PRED: 
+[FT_A0_s1]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[FT_A0_s1]    PRED: 
+[FT_A0_s1]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[FT_A0_s1]    PRED: 
+[FT_A0_s1]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[FT_A0_s1]   (final evaluation 7s)
+[FT_A0_s1] ==============================================================================================================
+[FT_A0_s1] JOB FT_A0_s1 OK in 0.68 min
+<<< DONE FT_A0_s1 in 0:00:44 (estimated 0:01:07, ratio 0.65) | time estimates now x0.64 (learned from 7 jobs)
+>>> START C60 on cpu-slot 0 | P2 | pretrain on 300 lines whose TEXT is sampled from a char 4-gram of the training labels | estimated 0:01:24 | 0:26:31 left
+[A120]   zero-shot REAL val (12 patches) after 160 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[C60] JOB C60 | hypotheses ['N12b'] | pretrain on 300 lines whose TEXT is sampled from a char 4-gram of the training labels
+[C60]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:31
+[C60]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[C60]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[C60] PRETRAIN on pool C (first 300 lines; style plain, text lm) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 42 | CTC frames per target median 6.3
+[A120]   zero-shot REAL val (12 patches) after 240 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[C60]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+[A120]   zero-shot REAL val (12 patches) after 320 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[A120] PRETRAIN done: 20 steps, 320 lines in 0:00:34 (9 lines/s), loss ema 20.097
+[A120] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[C60]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 19:48:01 | 0:25:41 left before the deadline | done 7 | failed 0 | skipped 0 | running 2 | waiting 10
+   slot 1: A120 running 0:01:10 of ~0:01:34
+   slot 0: C60 running 0:00:50 of ~0:01:24
+   queue: BIG (ready), AKS (ready), NS (ready), MIX (ready), AUG (ready), EM2 (ready), FT_A0_s2 (ready), H64 (ready), FT_LONG (ready), PRE_LONG (ready)
+   nvidia-smi unavailable
+   RAM 14.1/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[A120] ep   1/2 | train loss  3.744 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  31.4s/epoch | 0:01:08 job time  *BEST*
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[A120]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[C60]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+[C60]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+[C60] PRETRAIN done: 20 steps, 316 lines in 0:01:08 (5 lines/s), loss ema 19.965
+[C60] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[A120] ep   2/2 | train loss  3.545 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  28.8s/epoch | 0:01:37 job time
+[A120]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[A120]      PRED: 
+[A120]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[A120] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:00
+[A120] ==============================================================================================================
+[A120] FINAL [A120] best checkpoint, greedy decoding
+[A120]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[A120]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[A120]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[A120]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[A120]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[A120]   top confusions: []
+[A120]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[A120]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[A120]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[A120]    PRED: 
+[A120]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[A120]    PRED: 
+[A120]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[A120]    PRED: 
+[A120]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[A120]   (final evaluation 14s)
+[A120] ==============================================================================================================
+[A120] JOB A120 OK in 1.85 min
+<<< DONE A120 in 0:01:56 (estimated 0:01:34, ratio 1.24) | time estimates now x0.71 (learned from 8 jobs)
+>>> START BIG on cpu-slot 1 | P2 | 2x wider CRNN (conv 64-128-256-256-256, BiLSTM 2x256) | estimated 0:05:11 | 0:24:54 left
+[BIG] JOB BIG | hypotheses ['N11'] | 2x wider CRNN (conv 64-128-256-256-256, BiLSTM 2x256)
+[BIG]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:12:20
+[BIG]   model big | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[BIG]   4.227 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[BIG] PRETRAIN on pool A (first 300 lines; style plain, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 38 | CTC frames per target median 6.2
+[C60] ep   1/2 | train loss  3.739 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  29.0s/epoch | 0:01:40 job time  *BEST*
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+[C60]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[C60] ep   2/2 | train loss  3.547 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  22.8s/epoch | 0:02:03 job time
+[C60]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[C60]      PRED: 
+[C60]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[C60] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:51
+[C60] ==============================================================================================================
+[C60] FINAL [C60] best checkpoint, greedy decoding
+[C60]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[C60]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[C60]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[C60]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[C60]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[C60]   top confusions: []
+[C60]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[C60]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[C60]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[C60]    PRED: 
+[C60]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[C60]    PRED: 
+[C60]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[C60]    PRED: 
+[C60]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[C60]   (final evaluation 7s)
+[C60] ==============================================================================================================
+[C60] JOB C60 OK in 2.18 min
+<<< DONE C60 in 0:02:14 (estimated 0:01:24, ratio 1.60) | time estimates now x0.71 (learned from 9 jobs)
+>>> START AKS on cpu-slot 0 | P2 | akshara (syllable) targets, pretrain + fine-tune | estimated 0:01:40 | 0:24:16 left
+[BIG]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[AKS] JOB AKS | hypotheses ['N14'] | akshara (syllable) targets, pretrain + fine-tune
+[AKS]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:00
+[AKS]   model small | line height 40 px | targets {'kind': 'akshara', 'no_space': False, 'size': 237} | init random
+[AKS]   1.109 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[AKS] PRETRAIN on pool A (first 300 lines; style plain, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 27 | CTC frames per target median 8.8
+[AKS]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[AKS]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[BIG]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[AKS]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[AKS]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[AKS] PRETRAIN done: 20 steps, 316 lines in 0:00:48 (6 lines/s), loss ema 38.530
+[AKS] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[BIG] [pre     15/20  75%] loss  3.543 (ema 19.843) | lr 1.64e-04 | |g|   4.60 (max   25.4) | blank 100.0% | len   0.0/ 38.7 |      3 lines/s |      236 lines | 0:01:31 el, ETA 0:00:30 | mem cpu
+[BIG]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[AKS] ep   1/2 | train loss  4.710 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  17.3s/epoch | 0:01:09 job time  *BEST*
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[AKS]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[BIG]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[BIG] PRETRAIN done: 20 steps, 316 lines in 0:02:02 (3 lines/s), loss ema 18.283
+[BIG] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[AKS] ep   2/2 | train loss  4.481 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  18.7s/epoch | 0:01:27 job time
+[AKS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AKS]      PRED: 
+[AKS]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[AKS] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:00:36
+[AKS] ==============================================================================================================
+[AKS] FINAL [AKS] best checkpoint, greedy decoding
+[AKS]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AKS]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[AKS]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[AKS]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[AKS]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[AKS]   top confusions: []
+[AKS]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[AKS]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AKS]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[AKS]    PRED: 
+[AKS]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[AKS]    PRED: 
+[AKS]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[AKS]    PRED: 
+[AKS]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[AKS]   (final evaluation 7s)
+[AKS] ==============================================================================================================
+[AKS] JOB AKS OK in 1.58 min
+<<< DONE AKS in 0:01:38 (estimated 0:01:40, ratio 0.98) | time estimates now x0.71 (learned from 10 jobs)
+>>> START NS on cpu-slot 0 | P2 | no spaces in any target, pretrain + fine-tune (spaces put back by the LM afterwards) | estimated 0:01:34 | 0:22:38 left
+[NS] JOB NS | hypotheses ['N5'] | no spaces in any target, pretrain + fine-tune (spaces put back by the LM afterwards)
+[NS]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:50
+[NS]   model small | line height 40 px | targets {'kind': 'char', 'no_space': True, 'size': 89} | init random
+[NS]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[NS] PRETRAIN on pool A (first 300 lines; style plain, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 32 | CTC frames per target median 7.3
+[NS]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[NS]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[NS]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[BIG] ep   1/2 | train loss  3.575 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  52.8s/epoch | 0:03:00 job time  *BEST*
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[BIG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[NS]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[NS] PRETRAIN done: 20 steps, 316 lines in 0:00:47 (7 lines/s), loss ema 22.013
+[NS] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val no-space CER
+[NS] ep   1/2 | train loss  3.858 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  18.6s/epoch | 0:01:09 job time  *BEST*
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[NS]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[BIG] [ft     18/20  90%] loss  3.446 (ema  3.596) | lr 4.40e-05 | |g|   0.75 (max    7.7) | blank 100.0% | len   0.0/ 42.6 |      3 lines/s |      283 lines | 0:01:33 el, ETA 0:00:10 | mem cpu
+[NS] ep   2/2 | train loss  3.651 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  17.9s/epoch | 0:01:27 job time
+[NS]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[NS]      PRED: 
+[NS]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[NS] FINE-TUNE done: best val(sel) no-space CER 100.00 at epoch 1 | 0:00:36
+[NS] ==============================================================================================================
+[NS] FINAL [NS] best checkpoint, greedy decoding
+[NS]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[NS]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[NS]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[NS]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[NS]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[NS]   top confusions: []
+[NS]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[NS]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[NS]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[NS]    PRED: 
+[NS]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[NS]    PRED: 
+[NS]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[NS]    PRED: 
+[BIG] ep   2/2 | train loss  3.516 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  52.5s/epoch | 0:03:52 job time
+[BIG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[BIG]      PRED: 
+[BIG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[BIG] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:45
+[NS]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[NS]   (final evaluation 9s)
+[NS] ==============================================================================================================
+[NS] JOB NS OK in 1.61 min
+<<< DONE NS in 0:01:42 (estimated 0:01:34, ratio 1.08) | time estimates now x0.71 (learned from 11 jobs)
+>>> START MIX on cpu-slot 0 | P2 | anchor fine-tune with one synthetic batch after every real batch | estimated 0:01:28 | 0:20:55 left
+[MIX] JOB MIX | hypotheses ['N9'] | anchor fine-tune with one synthetic batch after every real batch
+[MIX]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:38
+[MIX]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[MIX]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[MIX]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[MIX] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 20 steps (batch 16, +1 synthetic batch per real batch) | augmentation off | re-align after epochs never | select by val CER
+[BIG] ==============================================================================================================
+[BIG] FINAL [BIG] best checkpoint, greedy decoding
+[BIG]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[BIG]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[BIG]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[BIG]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[BIG]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[BIG]   top confusions: []
+[BIG]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[BIG]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[BIG]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[BIG]    PRED: 
+[BIG]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[BIG]    PRED: 
+[BIG]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[BIG]    PRED: 
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 19:53:02 | 0:20:39 left before the deadline | done 11 | failed 0 | skipped 0 | running 2 | waiting 6
+   slot 1: BIG running 0:04:14 of ~0:05:11
+   slot 0: MIX running 0:00:16 of ~0:01:28
+   queue: AUG (ready), EM2 (ready), FT_A0_s2 (ready), H64 (ready), FT_LONG (ready), PRE_LONG (ready)
+   nvidia-smi unavailable
+   RAM 13.8/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[BIG]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[BIG]   (final evaluation 21s)
+[BIG] ==============================================================================================================
+[BIG] JOB BIG OK in 4.23 min
+<<< DONE BIG in 0:04:19 (estimated 0:05:11, ratio 0.83) | time estimates now x0.71 (learned from 12 jobs)
+>>> START AUG on cpu-slot 1 | P2 | anchor fine-tune with augmented real lines | estimated 0:01:07 | 0:20:35 left
+[AUG] JOB AUG | hypotheses ['N6'] | anchor fine-tune with augmented real lines
+[AUG]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:02
+[AUG]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[AUG]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[AUG]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[AUG] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation ON | re-align after epochs never | select by val CER
+[AUG] ep   1/2 | train loss  3.731 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  36.9s/epoch | 0:00:41 job time  *BEST*
+[AUG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AUG]      PRED: 
+[AUG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[MIX] ep   1/2 | train loss  3.628 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  65.7s/epoch | 0:01:10 job time  *BEST*
+[MIX]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[MIX]      PRED: 
+[MIX]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[AUG] ep   2/2 | train loss  3.549 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  36.2s/epoch | 0:01:17 job time
+[AUG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[AUG]      PRED: 
+[AUG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[AUG] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:13
+[MIX] [ft     28/40  70%] loss  3.365 (ema  3.818) | lr 2.22e-04 | |g|   0.81 (max    6.9) | blank 100.0% | len   0.0/ 63.5 |      5 lines/s |      433 lines | 0:01:34 el, ETA 0:00:40 | mem cpu
+[AUG] ==============================================================================================================
+[AUG] FINAL [AUG] best checkpoint, greedy decoding
+[AUG]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[AUG]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[AUG]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[AUG]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[AUG]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[AUG]   top confusions: []
+[AUG]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[AUG]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[AUG]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[AUG]    PRED: 
+[AUG]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[AUG]    PRED: 
+[AUG]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[AUG]    PRED: 
+[AUG]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[AUG]   (final evaluation 15s)
+[AUG] ==============================================================================================================
+[AUG] JOB AUG OK in 1.55 min
+<<< DONE AUG in 0:01:38 (estimated 0:01:07, ratio 1.45) | time estimates now x0.71 (learned from 13 jobs)
+>>> START EM2 on cpu-slot 1 | P2 | anchor + re-alignment after 1/3 and 2/3 of fine-tuning | estimated 0:01:45 | 0:18:57 left
+[EM2] JOB EM2 | hypotheses ['N8b'] | anchor + re-alignment after 1/3 and 2/3 of fine-tuning
+[EM2]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:10
+[EM2]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[EM2]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[EM2]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[EM2] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs [1] | select by val CER
+[MIX] ep   2/2 | train loss  3.493 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  72.0s/epoch | 0:02:22 job time
+[MIX]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[MIX]      PRED: 
+[MIX]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[MIX] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:02:17
+[MIX] ==============================================================================================================
+[MIX] FINAL [MIX] best checkpoint, greedy decoding
+[MIX]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[MIX]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[MIX]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[MIX]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[MIX]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[MIX]   top confusions: []
+[MIX]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[MIX]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[MIX]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[MIX]    PRED: 
+[MIX]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[MIX]    PRED: 
+[MIX]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[MIX]    PRED: 
+[MIX]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[MIX]   (final evaluation 15s)
+[MIX] ==============================================================================================================
+[MIX] JOB MIX OK in 2.63 min
+<<< DONE MIX in 0:02:42 (estimated 0:01:28, ratio 1.84) | time estimates now x0.76 (learned from 14 jobs)
+>>> START FT_A0_s2 on cpu-slot 0 | P2 | anchor, fine-tune seed 2 | estimated 0:01:12 | 0:18:13 left
+[EM2] ep   1/2 | train loss  3.741 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  36.4s/epoch | 0:00:42 job time  *BEST*
+[EM2]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[EM2]      PRED: 
+[EM2]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s2] JOB FT_A0_s2 | hypotheses ['seeds'] | anchor, fine-tune seed 2
+[FT_A0_s2]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:09
+[FT_A0_s2]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[FT_A0_s2]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FT_A0_s2]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[FT_A0_s2] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[EM2]   RE-ALIGNED line labels (CTC forced alignment): 149/155 changed (96.1%), median |length change| 15 chars, 0 patches skipped | 11.5s
+[FT_A0_s2] ep   1/2 | train loss  3.722 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  28.2s/epoch | 0:00:31 job time  *BEST*
+[FT_A0_s2]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s2]      PRED: 
+[FT_A0_s2]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM2] ep   2/2 | train loss  4.090 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  31.0s/epoch | 0:01:24 job time
+[EM2]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[EM2]      PRED: 
+[EM2]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM2] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:19
+[EM2] ==============================================================================================================
+[EM2] FINAL [EM2] best checkpoint, greedy decoding
+[EM2]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[EM2]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[EM2]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[EM2]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[EM2]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[EM2]   top confusions: []
+[EM2]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[EM2]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[EM2]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[EM2]    PRED: 
+[EM2]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[EM2]    PRED: 
+[EM2]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[EM2]    PRED: 
+[EM2]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[EM2]   (final evaluation 14s)
+[EM2] ==============================================================================================================
+[EM2] JOB EM2 OK in 1.65 min
+<<< DONE EM2 in 0:01:44 (estimated 0:01:45, ratio 0.99) | time estimates now x0.71 (learned from 15 jobs)
+>>> START H64 on cpu-slot 1 | P3 | 64-px line images (pretrain + fine-tune) | estimated 0:03:43 | 0:17:12 left
+[H64] JOB H64 | hypotheses ['N7'] | 64-px line images (pretrain + fine-tune)
+[H64]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:09:42
+[H64]   model small | line height 64 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[H64]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[H64] PRETRAIN on pool A (first 300 lines; style plain, text labels) | usable 300 (dropped 0 too long for CTC) | 20 steps x 16 = 320 lines = 1.1 passes | targets/line median 38 | CTC frames per target median 9.9
+[FT_A0_s2] ep   2/2 | train loss  3.538 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  33.2s/epoch | 0:01:04 job time
+[FT_A0_s2]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_A0_s2]      PRED: 
+[FT_A0_s2]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s2] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:01
+[FT_A0_s2] ==============================================================================================================
+[FT_A0_s2] FINAL [FT_A0_s2] best checkpoint, greedy decoding
+[FT_A0_s2]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FT_A0_s2]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s2]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_A0_s2]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[FT_A0_s2]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[FT_A0_s2]   top confusions: []
+[FT_A0_s2]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_A0_s2]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_A0_s2]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[FT_A0_s2]    PRED: 
+[FT_A0_s2]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[FT_A0_s2]    PRED: 
+[FT_A0_s2]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[FT_A0_s2]    PRED: 
+[FT_A0_s2]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[FT_A0_s2]   (final evaluation 14s)
+[FT_A0_s2] ==============================================================================================================
+[FT_A0_s2] JOB FT_A0_s2 OK in 1.31 min
+<<< DONE FT_A0_s2 in 0:01:24 (estimated 0:01:12, ratio 1.17) | time estimates now x0.76 (learned from 16 jobs)
+>>> START FT_LONG on cpu-slot 0 | P3 | anchor fine-tune for 3x the epochs | estimated 0:01:36 | 0:16:48 left
+[FT_LONG] JOB FT_LONG | hypotheses ['H11-line'] | anchor fine-tune for 3x the epochs
+[FT_LONG]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:05:54
+[FT_LONG]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init pre.pt
+[FT_LONG]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FT_LONG]   loaded C:/Users/Omkar/AppData/Local/Temp/claude/c--Users-Omkar-Desktop-Firstprinciples-Final-year-project/223f35c8-77f2-48ec-b0d0-a946d8ff5b79/scratchpad/nb05rehearsal5/out/runs\PT_A60\pre.pt (strict)
+[FT_LONG] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 4 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[H64]   zero-shot REAL val (12 patches) after 80 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[FT_LONG] ep   1/4 | train loss  3.745 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  35.9s/epoch | 0:00:40 job time  *BEST*
+[FT_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_LONG]      PRED: 
+[FT_LONG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 19:58:03 | 0:15:38 left before the deadline | done 16 | failed 0 | skipped 0 | running 2 | waiting 1
+   slot 1: H64 running 0:01:34 of ~0:03:43
+   slot 0: FT_LONG running 0:01:10 of ~0:01:36
+   queue: PRE_LONG (ready)
+   nvidia-smi unavailable
+   RAM 13.3/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[H64] [pre     10/20  50%] loss  7.020 (ema 37.536) | lr 5.10e-04 | |g|  29.87 (max   47.6) | blank 100.0% | len   0.0/ 30.6 |      2 lines/s |      156 lines | 0:01:30 el, ETA 0:01:30 | mem cpu
+[H64]   zero-shot REAL val (12 patches) after 156 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[FT_LONG] ep   2/4 | train loss  3.534 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  36.3s/epoch | 0:01:17 job time
+[FT_LONG] [ft     26/40  65%] loss  3.433 (ema  3.844) | lr 2.88e-04 | |g|   2.42 (max    8.2) | blank 100.0% | len   0.0/ 45.6 |      4 lines/s |      401 lines | 0:01:32 el, ETA 0:00:49 | mem cpu
+[FT_LONG] ep   3/4 | train loss  3.501 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  34.9s/epoch | 0:01:52 job time
+[H64]   zero-shot REAL val (12 patches) after 236 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[FT_LONG] ep   4/4 | train loss  3.479 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  29.1s/epoch | 0:02:21 job time
+[FT_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FT_LONG]      PRED: 
+[FT_LONG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_LONG] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:02:16
+[FT_LONG] ==============================================================================================================
+[FT_LONG] FINAL [FT_LONG] best checkpoint, greedy decoding
+[FT_LONG]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FT_LONG]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_LONG]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[FT_LONG]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[FT_LONG]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[FT_LONG]   top confusions: []
+[FT_LONG]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[FT_LONG]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[FT_LONG]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[FT_LONG]    PRED: 
+[FT_LONG]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[FT_LONG]    PRED: 
+[FT_LONG]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[FT_LONG]    PRED: 
+[FT_LONG]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[FT_LONG]   (final evaluation 8s)
+[FT_LONG] ==============================================================================================================
+[FT_LONG] JOB FT_LONG OK in 2.48 min
+<<< DONE FT_LONG in 0:02:32 (estimated 0:01:36, ratio 1.57) | time estimates now x0.76 (learned from 17 jobs)
+>>> START PRE_LONG on cpu-slot 0 | P3 | 3x longer pretraining on 450 lines | estimated 0:01:59 | 0:14:16 left
+[H64]   zero-shot REAL val (12 patches) after 316 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[H64] PRETRAIN done: 20 steps, 316 lines in 0:02:47 (2 lines/s), loss ema 31.456
+[H64] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[PRE_LONG] JOB PRE_LONG | hypotheses ['N10c'] | 3x longer pretraining on 450 lines
+[PRE_LONG]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:06:34
+[PRE_LONG]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[PRE_LONG]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[PRE_LONG] PRETRAIN on pool A (first 450 lines; style plain, text labels) | usable 450 (dropped 0 too long for CTC) | 36 steps x 16 = 576 lines = 1.3 passes | targets/line median 38 | CTC frames per target median 6.2
+[PRE_LONG]   zero-shot REAL val (12 patches) after 144 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[H64] ep   1/2 | train loss  3.764 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  42.1s/epoch | 0:03:35 job time  *BEST*
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[H64]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[PRE_LONG]   zero-shot REAL val (12 patches) after 288 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[PRE_LONG]   zero-shot REAL val (12 patches) after 418 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[H64] [ft     17/20  85%] loss  3.512 (ema  3.957) | lr 7.34e-05 | |g|   2.32 (max    7.5) | blank 100.0% | len   0.0/ 43.0 |      3 lines/s |      267 lines | 0:01:31 el, ETA 0:00:16 | mem cpu
+[PRE_LONG] [pre     34/36  94%] loss  3.669 (ema 16.074) | lr 2.74e-05 | |g|   3.92 (max   32.4) | blank 100.0% | len   0.0/ 21.7 |      6 lines/s |      530 lines | 0:01:30 el, ETA 0:00:05 | mem cpu
+[PRE_LONG]   zero-shot REAL val (12 patches) after 562 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[PRE_LONG] PRETRAIN done: 36 steps, 562 lines in 0:01:40 (6 lines/s), loss ema 15.576
+[PRE_LONG] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 2 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[H64] ep   2/2 | train loss  3.550 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  77.3s/epoch | 0:04:52 job time
+[H64]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[H64]      PRED: 
+[H64]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[H64] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:59
+[H64] ==============================================================================================================
+[H64] FINAL [H64] best checkpoint, greedy decoding
+[H64]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[H64]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[H64]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[H64]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[H64]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[H64]   top confusions: []
+[H64]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[H64]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[H64]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[H64]    PRED: 
+[H64]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[H64]    PRED: 
+[H64]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[H64]    PRED: 
+[PRE_LONG] ep   1/2 | train loss  3.564 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  35.6s/epoch | 0:02:18 job time  *BEST*
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[PRE_LONG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[H64]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[H64]   (final evaluation 26s)
+[H64] ==============================================================================================================
+[H64] JOB H64 OK in 5.31 min
+<<< DONE H64 in 0:05:25 (estimated 0:03:43, ratio 1.45) | time estimates now x0.76 (learned from 18 jobs)
+[PRE_LONG] ep   2/2 | train loss  3.517 | val CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0% | best 100.0@1 |  36.3s/epoch | 0:02:55 job time
+[PRE_LONG]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[PRE_LONG]      PRED: 
+[PRE_LONG]      errors: deletions 100.0% insertions 0.0% substitutions 0.0% | recall of key marks {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[PRE_LONG] FINE-TUNE done: best val(sel) CER 100.00 at epoch 1 | 0:01:12
+[PRE_LONG] ==============================================================================================================
+[PRE_LONG] FINAL [PRE_LONG] best checkpoint, greedy decoding
+[PRE_LONG]   VAL-SEL (12 patches, used to pick the epoch): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[PRE_LONG]   VAL-REP (10 patches, never used for any choice): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[PRE_LONG]   TRAIN   (10 patches; reading vs memorising): CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/10 | len 0.00x | blank 100.0%
+[PRE_LONG]   errors on all val: 2,367 = deletions 100.0% / insertions 0.0% / substitutions 0.0%
+[PRE_LONG]   most missed: [(' ', 376), ('ा', 256), ('र', 147), ('े', 128), ('ी', 123), ('क', 89), ('म', 82), ('त', 77), ('स', 77), ('्', 76), ('व', 75), ('ल', 64)]
+[PRE_LONG]   top confusions: []
+[PRE_LONG]   recall of key marks: {' ': 0.0, 'ा': 0.0, '्': 0.0, 'र': 0.0, 'ं': 0.0, 'ि': 0.0, 'ी': 0.0, 'ु': 0.0, 'ू': 0.0, 'े': 0.0, 'ो': 0.0}
+[PRE_LONG]   N1/N2 frames_per_char : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]   N1/N2 pitch           : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]   N1/N2 n_lines         : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]   N1/N2 label_len       : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]   N1/N2 ink             : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]   N1/N2 stroke          : Spearman with CER +nan, with deletion rate +nan | CER by quartile {'Q1 low': 100.0, 'Q2': 100.0, 'Q3': 100.0, 'Q4 high': 100.0}
+[PRE_LONG]    GT  : च श्रीमंतास विनंती केली की राा येजमानासमागमे फौज कमी आहे आणि आपण दाहा पंधरा वर्षे याच अन्न भक्षिले याजमुले अवं
+[PRE_LONG]    PRED: 
+[PRE_LONG]    GT  : स्वामीचे कामावरी येक्षियार होऊन भुजवलगडीचे कामाबदल वडउपर व मोपव रावरी नागणगौडा पाठविले होते त्यास वाटेस तोरगलक
+[PRE_LONG]    PRED: 
+[PRE_LONG]    GT  : सबैना कारण स्वामी तुमचे परगणियाचा काही खंडणी अगर पैका घेत नाही तुम्हास माफ केले असे तुम्ही साहेबांचे तर्फेने क
+[PRE_LONG]    PRED: 
+[PRE_LONG]   inside the network: 0 characters emitted on 4 val lines, mean confidence 0.00 -> inside_alignment.png
+[PRE_LONG]   (final evaluation 17s)
+[PRE_LONG] ==============================================================================================================
+[PRE_LONG] JOB PRE_LONG OK in 3.2 min
+<<< DONE PRE_LONG in 0:03:16 (estimated 0:01:59, ratio 1.65) | time estimates now x0.76 (learned from 19 jobs)
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 20:02:42 | 0:10:59 left before the deadline | done 19 | failed 0 | skipped 0 | running 0 | waiting 0
+   nvidia-smi unavailable
+   RAM 13.2/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[00:22:00] main phase finished: {'ok': ['PT_A60', 'FT_A0_s0', 'NOPRE', 'A12', 'B60', 'EM1', 'FT_A0_s1', 'A120', 'C60', 'BIG', 'AKS', 'NS', 'MIX', 'AUG', 'EM2', 'FT_A0_s2', 'H64', 'FT_LONG', 'PRE_LONG']}
+
+===== CELL 15 [1320s]: # Cell 14 - the COMBINATION and the FINAL models, built automatically from the results abo
+[00:22:00] anchor seeds on VAL-SEL: [100.0, 100.0, 100.0] -> a change must win by more than 1.00 CER points
+   pool A120: val-sel CER 100.0
+   pool A60: val-sel CER 100.0
+   pool B60: val-sel CER 100.0
+   pool C60: val-sel CER 100.0
+   BIG: val-sel 100.0 vs anchor 100.00
+   AKS: val-sel 100.0 vs anchor 100.00
+   H64: val-sel 100.0 vs anchor 100.00
+   MIX: val-sel 100.0 vs anchor 100.00
+   AUG: val-sel 100.0 vs anchor 100.00
+   EM1: val-sel 100.0 vs anchor 100.00
+   EM2: val-sel 100.0 vs anchor 100.00
+   winning changes (better than the anchor by > 1.00 CER on val-sel): none
+  FINAL_s0: 6,563 synthetic lines of pretraining, 5 real epochs -> about 10 min (11 min left before the final phase)
+  FINAL_s1: 6,563 synthetic lines of pretraining, 5 real epochs -> about 10 min (11 min left before the final phase)
+>>> START FINAL_s0 on cpu-slot 0 | P4 | FINAL model, seed 0: the anchor recipe on the whole A pool (600 lines), trained as long as the time allows | estimated 0:09:40 | 0:10:59 left
+>>> START FINAL_s1 on cpu-slot 1 | P4 | FINAL model, seed 1: the anchor recipe on the whole A pool (600 lines), trained as long as the time allows | estimated 0:09:40 | 0:10:59 left
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 20:02:42 | 0:10:59 left before the deadline | done 0 | failed 0 | skipped 0 | running 2 | waiting 0
+   slot 0: FINAL_s0 running 0:00:00 of ~0:09:40
+   slot 1: FINAL_s1 running 0:00:00 of ~0:09:40
+   nvidia-smi unavailable
+   RAM 13.2/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[FINAL_s0] JOB FINAL_s0 | hypotheses ['FINAL'] | FINAL model, seed 0: the anchor recipe on the whole A pool (600 lines), trained as long as the time allows
+[FINAL_s0]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:10:56
+[FINAL_s0]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[FINAL_s0]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FINAL_s0] PRETRAIN on pool A (first 600 lines; style plain, text labels) | usable 600 (dropped 0 too long for CTC) | 410 steps x 16 = 6,560 lines = 10.9 passes | targets/line median 39 | CTC frames per target median 6.2
+[FINAL_s1] JOB FINAL_s1 | hypotheses ['FINAL'] | FINAL model, seed 1: the anchor recipe on the whole A pool (600 lines), trained as long as the time allows
+[FINAL_s1]   device cpu (cpu) | torch 2.2.2+cpu | AMP off | deadline in 0:10:56
+[FINAL_s1]   model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+[FINAL_s1]   1.071 M parameters | 155 real training lines in 40 patches | val-sel 12 / val-rep 10 patches
+[FINAL_s1] PRETRAIN on pool A (first 600 lines; style plain, text labels) | usable 600 (dropped 0 too long for CTC) | 410 steps x 16 = 6,560 lines = 10.9 passes | targets/line median 39 | CTC frames per target median 6.2
+[FINAL_s0] [pre     46/410  11%] loss  3.436 (ema 14.414) | lr 9.70e-04 | |g|   1.23 (max   31.5) | blank 100.0% | len   0.0/ 42.5 |      8 lines/s |      728 lines | 0:01:31 el, ETA 0:12:01 | mem cpu
+[FINAL_s1] [pre     47/410  11%] loss  3.468 (ema 14.643) | lr 9.69e-04 | |g|   2.44 (max   29.0) | blank 100.0% | len   0.0/ 24.7 |      8 lines/s |      744 lines | 0:01:30 el, ETA 0:11:36 | mem cpu
+[FINAL_s0] [pre    100/410  24%] loss  3.408 (ema  7.130) | lr 8.63e-04 | |g|   1.22 (max   31.5) | blank 100.0% | len   0.0/ 57.4 |     10 lines/s |    1,584 lines | 0:02:59 el, ETA 0:09:14 | mem cpu
+[FINAL_s1] [pre     98/410  24%] loss  3.392 (ema  7.431) | lr 8.68e-04 | |g|   1.65 (max   29.0) | blank 100.0% | len   0.0/ 39.8 |      9 lines/s |    1,552 lines | 0:03:00 el, ETA 0:09:33 | mem cpu
+[FINAL_s1] [pre    100/410  24%] loss  3.519 (ema  7.276) | lr 8.63e-04 | |g|   1.35 (max   29.0) | blank 100.0% | len   0.0/ 53.0 |     10 lines/s |    1,584 lines | 0:03:03 el, ETA 0:09:28 | mem cpu
+[FINAL_s0]   zero-shot REAL val (12 patches) after 1,608 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FINAL_s0]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FINAL_s0]      PRED: 
+[FINAL_s1]   zero-shot REAL val (12 patches) after 1,616 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FINAL_s1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FINAL_s1]      PRED: 
+[FINAL_s0] [pre    149/410  36%] loss  3.395 (ema  4.802) | lr 7.14e-04 | |g|   1.02 (max   31.5) | blank 100.0% | len   0.0/ 35.4 |      9 lines/s |    2,352 lines | 0:04:29 el, ETA 0:07:51 | mem cpu
+[FINAL_s1] [pre    152/410  37%] loss  3.386 (ema  4.781) | lr 7.04e-04 | |g|   0.64 (max   29.0) | blank 100.0% | len   0.0/ 55.3 |      9 lines/s |    2,400 lines | 0:04:35 el, ETA 0:07:47 | mem cpu
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 20:07:43 | 0:05:59 left before the deadline | done 0 | failed 0 | skipped 0 | running 2 | waiting 0
+   slot 0: FINAL_s0 running 0:05:00 of ~0:09:40
+   slot 1: FINAL_s1 running 0:05:00 of ~0:09:40
+   nvidia-smi unavailable
+   RAM 13.5/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[FINAL_s0] [pre    196/410  48%] loss  3.359 (ema  3.952) | lr 5.44e-04 | |g|   1.36 (max   31.5) | blank 100.0% | len   0.0/ 47.3 |      8 lines/s |    3,096 lines | 0:05:59 el, ETA 0:06:32 | mem cpu
+[FINAL_s1] [pre    200/410  49%] loss  3.399 (ema  3.949) | lr 5.29e-04 | |g|   0.62 (max   29.0) | blank 100.0% | len   0.0/ 35.4 |      9 lines/s |    3,160 lines | 0:06:03 el, ETA 0:06:21 | mem cpu
+[FINAL_s0] [pre    200/410  49%] loss  3.334 (ema  3.913) | lr 5.29e-04 | |g|   1.83 (max   31.5) | blank 100.0% | len   0.0/ 59.8 |     13 lines/s |    3,160 lines | 0:06:04 el, ETA 0:06:22 | mem cpu
+[FINAL_s0]   zero-shot REAL val (12 patches) after 3,240 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FINAL_s0]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FINAL_s0]      PRED: 
+[FINAL_s1]   zero-shot REAL val (12 patches) after 3,240 synthetic lines: CER 100.0 | no-space 100.0 | WER 100.0 | BLEU  0.00 | chrF++   0.0 | median patch 100.0 | <50%: 0/12 | len 0.00x | blank 100.0%
+[FINAL_s1]      GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+[FINAL_s1]      PRED: 
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 20:13:42 | 0:00:00 left before the deadline | done 0 | failed 0 | skipped 0 | running 2 | waiting 0
+   slot 0: FINAL_s0 running 0:10:59 of ~0:09:40
+   slot 1: FINAL_s1 running 0:10:59 of ~0:09:40
+   nvidia-smi unavailable
+   RAM 11.6/15.7 GB
+--------------------------------------------------------------------------------------------------------------
+[FINAL_s0] [pre    216/410  53%] loss  3.493 (ema  3.779) | lr 4.69e-04 | |g|   1.42 (max   31.5) | blank 100.0% | len   0.0/ 53.0 |      1 lines/s |    3,408 lines | 0:10:53 el, ETA 0:09:46 | mem cpu
+[FINAL_s0]   TIME CAP: pretraining stopped at step 216/410 (53% of plan)
+[FINAL_s0] PRETRAIN done: 216 steps, 3,408 lines in 0:10:53 (5 lines/s), loss ema 3.779
+[FINAL_s0] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 5 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+[FINAL_s1] [pre    218/410  53%] loss  3.403 (ema  3.784) | lr 4.61e-04 | |g|   0.48 (max   29.0) | blank 100.0% | len   0.0/ 42.2 |      1 lines/s |    3,448 lines | 0:10:56 el, ETA 0:09:38 | mem cpu
+[FINAL_s1]   TIME CAP: pretraining stopped at step 218/410 (53% of plan)
+[FINAL_s1] PRETRAIN done: 218 steps, 3,448 lines in 0:10:56 (5 lines/s), loss ema 3.784
+[FINAL_s1] FINE-TUNE on real lines: 155 usable training lines (dropped 0) | 5 epochs x 10 steps (batch 16) | augmentation off | re-align after epochs never | select by val CER
+--------------------------------------------------------------------------------------------------------------
+DASHBOARD 21:50:18 | 0:00:00 left before the deadline | done 0 | failed 0 | skipped 0 | running 2 | waiting 0
+   slot 0: FINAL_s0 running 1:47:35 of ~0:09:40
+   slot 1: FINAL_s1 running 1:47:35 of ~0:09:40
+   nvidia-smi unavailable
+   RAM 12.0/15.7 GB
+--------------------------------------------------------------------------------------------------------------

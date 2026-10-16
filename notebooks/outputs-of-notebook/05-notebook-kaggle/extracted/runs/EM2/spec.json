@@ -1,0 +1,35 @@
+{
+  "tag": "EM2",
+  "priority": 2,
+  "hyp": [
+    "N8b"
+  ],
+  "desc": "anchor + re-alignment after 1/3 and 2/3 of fine-tuning",
+  "size": "small",
+  "H": 40,
+  "vocab": "char",
+  "no_space": false,
+  "init": "/kaggle/working/runs/PT_A60/pre.pt",
+  "pretrain": null,
+  "finetune": {
+    "epochs": 57,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.0,
+    "seed": 0,
+    "realign_at": [
+      19,
+      38
+    ]
+  },
+  "save_pre": false,
+  "after": [
+    "PT_A60"
+  ],
+  "pools": [],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/EM2",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 854.3200997293151
+}

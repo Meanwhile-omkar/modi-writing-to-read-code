@@ -1,0 +1,1153 @@
+6.3s 1 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.3s 2 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.3s 3 0.00s - to python to disable frozen modules.
+6.3s 4 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+6.9s 5 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.9s 6 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.9s 7 0.00s - to python to disable frozen modules.
+6.9s 8 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+13.7s 9 torch 2.11.0+cu128 | CUDA True
+13.7s 10 GPU: Tesla T4
+13.7s 11 budget: 11.0 h of training, then it stops and saves whatever it has
+13.7s 12 fresh start (no previous run attached as an input)
+13.7s 13 strip height 64 px, width per batch (cap 8192) | run dir: /kaggle/working/runs/B1_seed42
+13.7s 14 stops at: 600 epochs, or 30 epochs with no gain, or 11.0 h
+18.9s 15 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 4.2 MB/s eta 0:00:00
+19.0s 16 installed
+19.0s 17 metadata: /kaggle/input/datasets/meanwhileomkar/colab-packet-forv2/metadata ['charset.json', 'folder18_labels.csv', 'hhdoc_manifest.csv', 'modetrans_docs.csv', 'modetrans_text.csv', 'splits.json']
+24.1s 18 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+24.1s 19 
+24.1s 20 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+29.7s 21 splits: {'train': 1430, 'val': 307, 'test': 306}
+30.0s 22 89 classes, longest label 452 characters
+53.1s 23 typical line height, measured over 300 patches: 56 px
+186.1s 24 lines per patch: {1: 6, 2: 100, 3: 306, 4: 660, 5: 496, 6: 289, 7: 135, 8: 50, 9: 1}
+186.1s 25 skew corrected: 1349/2043 patches, median |angle| 1.0 deg
+186.8s 26 widened 142 strips that were too cramped for their own label (target: at least 3.2 output slots per character)
+187.2s 27 strip width used: median 3,888 px, mean 4,349, 90th pct 7,968 | hit the 8,192 cap: 190 patches
+187.2s 28 blank inside the strip itself     : 67%  (the spaces between words and lines)
+187.2s 29 blank if padded to a fixed 8,192  : 82%  <-- what v1 fed the model
+187.2s 30 blank with per-batch padding (v2) : about 67% plus a small ragged edge
+187.2s 31 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2360 (\N{DEVANAGARI LETTER SA}) missing from font(s) DejaVu Sans.
+187.2s 32 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 33 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Matplotlib currently does not support Devanagari natively.
+187.2s 34 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 35 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2381 (\N{DEVANAGARI SIGN VIRAMA}) missing from font(s) DejaVu Sans.
+187.2s 36 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 37 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2357 (\N{DEVANAGARI LETTER VA}) missing from font(s) DejaVu Sans.
+187.2s 38 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 39 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2366 (\N{DEVANAGARI VOWEL SIGN AA}) missing from font(s) DejaVu Sans.
+187.2s 40 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 41 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2344 (\N{DEVANAGARI LETTER NA}) missing from font(s) DejaVu Sans.
+187.2s 42 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 43 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2367 (\N{DEVANAGARI VOWEL SIGN I}) missing from font(s) DejaVu Sans.
+187.2s 44 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 45 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2343 (\N{DEVANAGARI LETTER DHA}) missing from font(s) DejaVu Sans.
+187.2s 46 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 47 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2368 (\N{DEVANAGARI VOWEL SIGN II}) missing from font(s) DejaVu Sans.
+187.2s 48 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 49 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2352 (\N{DEVANAGARI LETTER RA}) missing from font(s) DejaVu Sans.
+187.2s 50 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 51 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2332 (\N{DEVANAGARI LETTER JA}) missing from font(s) DejaVu Sans.
+187.2s 52 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 53 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2350 (\N{DEVANAGARI LETTER MA}) missing from font(s) DejaVu Sans.
+187.2s 54 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 55 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2351 (\N{DEVANAGARI LETTER YA}) missing from font(s) DejaVu Sans.
+187.2s 56 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 57 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2358 (\N{DEVANAGARI LETTER SHA}) missing from font(s) DejaVu Sans.
+187.2s 58 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 59 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2346 (\N{DEVANAGARI LETTER PA}) missing from font(s) DejaVu Sans.
+187.2s 60 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 61 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2306 (\N{DEVANAGARI SIGN ANUSVARA}) missing from font(s) DejaVu Sans.
+187.2s 62 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 63 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2337 (\N{DEVANAGARI LETTER DDA}) missing from font(s) DejaVu Sans.
+187.2s 64 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 65 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2340 (\N{DEVANAGARI LETTER TA}) missing from font(s) DejaVu Sans.
+187.2s 66 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 67 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2379 (\N{DEVANAGARI VOWEL SIGN O}) missing from font(s) DejaVu Sans.
+187.2s 68 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 69 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2325 (\N{DEVANAGARI LETTER KA}) missing from font(s) DejaVu Sans.
+187.2s 70 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 71 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2342 (\N{DEVANAGARI LETTER DA}) missing from font(s) DejaVu Sans.
+187.2s 72 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 73 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2380 (\N{DEVANAGARI VOWEL SIGN AU}) missing from font(s) DejaVu Sans.
+187.2s 74 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 75 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2375 (\N{DEVANAGARI VOWEL SIGN E}) missing from font(s) DejaVu Sans.
+187.2s 76 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 77 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2336 (\N{DEVANAGARI LETTER TTHA}) missing from font(s) DejaVu Sans.
+187.2s 78 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 79 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2347 (\N{DEVANAGARI LETTER PHA}) missing from font(s) DejaVu Sans.
+187.2s 80 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 81 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2354 (\N{DEVANAGARI LETTER LA}) missing from font(s) DejaVu Sans.
+187.2s 82 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 83 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2335 (\N{DEVANAGARI LETTER TTA}) missing from font(s) DejaVu Sans.
+187.2s 84 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 85 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2339 (\N{DEVANAGARI LETTER NNA}) missing from font(s) DejaVu Sans.
+187.2s 86 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 87 
+187.2s 88 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2360 (\N{DEVANAGARI LETTER SA}) missing from font(s) DejaVu Sans.
+187.2s 89 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 90 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Matplotlib currently does not support Devanagari natively.
+187.2s 91 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 92 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2381 (\N{DEVANAGARI SIGN VIRAMA}) missing from font(s) DejaVu Sans.
+187.2s 93 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 94 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2357 (\N{DEVANAGARI LETTER VA}) missing from font(s) DejaVu Sans.
+187.2s 95 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 96 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2366 (\N{DEVANAGARI VOWEL SIGN AA}) missing from font(s) DejaVu Sans.
+187.2s 97 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 98 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2344 (\N{DEVANAGARI LETTER NA}) missing from font(s) DejaVu Sans.
+187.2s 99 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 100 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2367 (\N{DEVANAGARI VOWEL SIGN I}) missing from font(s) DejaVu Sans.
+187.2s 101 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 102 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2343 (\N{DEVANAGARI LETTER DHA}) missing from font(s) DejaVu Sans.
+187.2s 103 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 104 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2368 (\N{DEVANAGARI VOWEL SIGN II}) missing from font(s) DejaVu Sans.
+187.2s 105 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 106 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2352 (\N{DEVANAGARI LETTER RA}) missing from font(s) DejaVu Sans.
+187.2s 107 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 108 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2332 (\N{DEVANAGARI LETTER JA}) missing from font(s) DejaVu Sans.
+187.2s 109 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 110 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2350 (\N{DEVANAGARI LETTER MA}) missing from font(s) DejaVu Sans.
+187.2s 111 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 112 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2351 (\N{DEVANAGARI LETTER YA}) missing from font(s) DejaVu Sans.
+187.2s 113 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 114 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2358 (\N{DEVANAGARI LETTER SHA}) missing from font(s) DejaVu Sans.
+187.2s 115 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 116 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2346 (\N{DEVANAGARI LETTER PA}) missing from font(s) DejaVu Sans.
+187.2s 117 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 118 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2306 (\N{DEVANAGARI SIGN ANUSVARA}) missing from font(s) DejaVu Sans.
+187.2s 119 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 120 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2337 (\N{DEVANAGARI LETTER DDA}) missing from font(s) DejaVu Sans.
+187.2s 121 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 122 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2340 (\N{DEVANAGARI LETTER TA}) missing from font(s) DejaVu Sans.
+187.2s 123 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 124 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2379 (\N{DEVANAGARI VOWEL SIGN O}) missing from font(s) DejaVu Sans.
+187.2s 125 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 126 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2325 (\N{DEVANAGARI LETTER KA}) missing from font(s) DejaVu Sans.
+187.2s 127 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 128 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2342 (\N{DEVANAGARI LETTER DA}) missing from font(s) DejaVu Sans.
+187.2s 129 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 130 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2380 (\N{DEVANAGARI VOWEL SIGN AU}) missing from font(s) DejaVu Sans.
+187.2s 131 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 132 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2375 (\N{DEVANAGARI VOWEL SIGN E}) missing from font(s) DejaVu Sans.
+187.2s 133 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 134 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2336 (\N{DEVANAGARI LETTER TTHA}) missing from font(s) DejaVu Sans.
+187.2s 135 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 136 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2347 (\N{DEVANAGARI LETTER PHA}) missing from font(s) DejaVu Sans.
+187.2s 137 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 138 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2354 (\N{DEVANAGARI LETTER LA}) missing from font(s) DejaVu Sans.
+187.2s 139 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 140 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2335 (\N{DEVANAGARI LETTER TTA}) missing from font(s) DejaVu Sans.
+187.2s 141 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 142 /usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2339 (\N{DEVANAGARI LETTER NNA}) missing from font(s) DejaVu Sans.
+187.2s 143 fig.canvas.print_figure(bytes_io, **kw)
+187.2s 144 cached (2043, 64, 8192) 1.07 GB
+187.3s 145 padding added by width-bucketed batching: 0.3% of each batch
+187.3s 146 padding added by v1 fixed-8192 padding : 51%
+187.3s 147 mean padded batch width: 4,033 px vs v1 always 8,192 px -> 2.0x less pixel area per batch, so epochs run faster too
+187.4s 148 data pipeline ready
+187.6s 149 check                         flagged   meaning
+187.6s 150 strip_hit_the_width_cap           190   squeezed horizontally to fit the cap
+187.6s 151 too_few_slots_for_label             0   CTC cannot align; it returns ZERO loss, silently
+187.6s 152 slots_per_char_below_3              0   below the healthy 3-12 slots per character
+187.6s 153 slots_per_char_above_20           258   very sparse; harmless for CTC, just more blanks
+187.6s 154 detected_as_single_line             6   the line finder may have merged the whole page
+190.7s 155 
+190.7s 156 wrote 9 images + checks.csv + stats.csv to /kaggle/working/image-processing-audit
+192.1s 157 params 6.9 M
+192.1s 158 grid: 1 row, one output slot per 4 px of width
+192.2s 159 label length: median 98 chars, max 452
+192.2s 160 slots per patch: median 972, min 90 | slots per character: median 9.6x  (healthy is 3-12x)
+192.2s 161 every patch has room for its label  |  model OK
+192.3s 162 metrics self-test: {'CER': np.float64(14.29), 'WER': np.float64(50.0), 'median_CER': 14.29, 'catastrophic_pct': 0.0, 'chrF_pp': 61.08, 'BLEU': 0.0}
+192.3s 163 ready
+203.3s 164 ep   1 | loss 37.679 | CER 143.77 (med 132.6, bad  100%) | WER 181.74 | chrF   2.0 | best 143.77@1   | blank 60.9% | len 235.6/143 | lr 2.2e-04 | g  99.1 w     81 | w 5174px |    5s |  0.1h/11h  *BEST*
+203.3s 165 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+203.3s 166 PRED:  ॅ षऐ ऐ ॉऐख ३ॉथख प जऔःथत‌:तखतखॉख तःतआः०त-त‌थतःत:ौत ईैष आ-आत‌र:तथेथ:तथतखथख-त०तथतथत१त१
+207.5s 167 ep   2 | loss 26.669 | CER  96.84 (med  96.9, bad  100%) | WER 100.00 | chrF   0.0 | best  96.84@2   | blank 96.7% | len   4.5/143 | lr 4.2e-04 | g  83.3 w     81 | w 5174px |    4s |  0.1h/11h  *BEST*
+207.5s 168 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+207.5s 169 PRED:
+306.1s 170 ep  25 | loss  3.457 | CER 100.00 (med 100.0, bad  100%) | WER 100.00 | chrF   0.0 | best  96.84@2   | blank 100.0% | len   0.0/143 | lr 1.0e-03 | g  10.5 w     83 | w 5174px |    4s |  0.1h/11h  (0/500 stale)
+306.1s 171 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+306.1s 172 PRED:
+418.6s 173 ep  50 | loss  3.406 | CER  99.93 (med 100.0, bad  100%) | WER 100.00 | chrF   0.1 | best  96.84@2   | blank 100.0% | len   0.1/143 | lr 1.0e-03 | g   5.1 w     84 | w 5174px |    5s |  0.1h/11h  (0/500 stale)
+418.6s 174 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+418.6s 175 PRED:
+499.6s 176 ep  68 | loss  3.296 | CER  89.97 (med  90.3, bad  100%) | WER 100.00 | chrF   0.1 | best  89.97@68  | blank 97.6% | len  14.4/143 | lr 1.0e-03 | g   4.4 w     85 | w 5174px |    5s |  0.1h/11h  *BEST*
+499.6s 177 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+499.6s 178 PRED: अ
+504.1s 179 ep  69 | loss  3.254 | CER  87.62 (med  88.1, bad  100%) | WER 100.00 | chrF   0.1 | best  87.62@69  | blank 97.4% | len  18.4/143 | lr 1.0e-03 | g   3.7 w     85 | w 5174px |    5s |  0.1h/11h  *BEST*
+504.1s 180 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+504.1s 181 PRED: अ
+522.1s 182 ep  73 | loss  3.432 | CER  87.48 (med  87.6, bad  100%) | WER 100.00 | chrF   0.1 | best  87.48@73  | blank 97.0% | len  19.7/143 | lr 1.0e-03 | g  17.3 w     86 | w 5174px |    5s |  0.1h/11h  *BEST*
+522.1s 183 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+522.1s 184 PRED: प
+526.7s 185 ep  74 | loss  3.361 | CER  86.25 (med  86.0, bad  100%) | WER 100.00 | chrF   0.1 | best  86.25@74  | blank 97.5% | len  21.9/143 | lr 1.0e-03 | g   5.5 w     86 | w 5174px |    5s |  0.1h/11h  *BEST*
+526.7s 186 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+526.7s 187 PRED: उ
+531.2s 188 ep  75 | loss  3.285 | CER  88.81 (med  89.2, bad  100%) | WER 100.00 | chrF   0.1 | best  86.25@74  | blank 98.0% | len  16.6/143 | lr 1.0e-03 | g   5.5 w     86 | w 5174px |    5s |  0.1h/11h  (0/500 stale)
+531.2s 189 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+531.2s 190 PRED: अ
+535.7s 191 ep  76 | loss  3.329 | CER  85.83 (med  85.0, bad  100%) | WER 100.00 | chrF   0.2 | best  85.83@76  | blank 97.5% | len  22.0/143 | lr 1.0e-03 | g  11.4 w     86 | w 5174px |    5s |  0.1h/11h  *BEST*
+535.7s 192 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+535.7s 193 PRED: अ
+549.3s 194 ep  79 | loss  3.228 | CER  85.23 (med  85.6, bad  100%) | WER 100.00 | chrF   0.2 | best  85.23@79  | blank 95.5% | len  24.9/143 | lr 1.0e-03 | g   4.9 w     87 | w 5174px |    5s |  0.2h/11h  *BEST*
+549.3s 195 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+549.3s 196 PRED: भ
+558.3s 197 ep  81 | loss  3.226 | CER  84.74 (med  84.7, bad  100%) | WER 100.00 | chrF   0.2 | best  84.74@81  | blank 96.5% | len  25.6/143 | lr 1.0e-03 | g   9.0 w     87 | w 5174px |    5s |  0.2h/11h  *BEST*
+558.3s 198 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+558.3s 199 PRED: भ
+580.8s 200 ep  86 | loss  3.198 | CER  84.29 (med  84.6, bad  100%) | WER 100.00 | chrF   0.2 | best  84.29@86  | blank 96.1% | len  25.2/143 | lr 1.0e-03 | g   6.2 w     88 | w 5174px |    5s |  0.2h/11h  *BEST*
+580.8s 201 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+580.8s 202 PRED: अं
+612.3s 203 ep  93 | loss  3.138 | CER  83.65 (med  83.4, bad  100%) | WER 100.00 | chrF   0.4 | best  83.65@93  | blank 96.0% | len  27.4/143 | lr 1.0e-03 | g   3.9 w     89 | w 5174px |    5s |  0.2h/11h  *BEST*
+612.3s 204 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+612.3s 205 PRED: अं
+630.3s 206 ep  97 | loss  3.135 | CER  83.34 (med  83.7, bad  100%) | WER  99.79 | chrF   0.4 | best  83.34@97  | blank 96.0% | len  28.9/143 | lr 1.0e-03 | g   5.2 w     89 | w 5174px |    5s |  0.2h/11h  *BEST*
+630.3s 207 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+630.3s 208 PRED: अलं
+643.8s 209 ep 100 | loss  3.145 | CER  83.34 (med  82.9, bad  100%) | WER 100.00 | chrF   0.3 | best  83.34@97  | blank 95.9% | len  28.1/143 | lr 1.0e-03 | g   4.1 w     89 | w 5174px |    4s |  0.2h/11h  (0/500 stale)
+643.8s 210 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+643.8s 211 PRED: अल
+657.4s 212 ep 103 | loss  3.062 | CER  82.92 (med  82.7, bad  100%) | WER 100.00 | chrF   0.9 | best  82.92@103 | blank 96.2% | len  28.2/143 | lr 1.0e-03 | g   3.5 w     90 | w 5174px |    5s |  0.2h/11h  *BEST*
+657.4s 213 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+657.4s 214 PRED: भ स क  स     क   क
+670.9s 215 ep 106 | loss  3.048 | CER  81.76 (med  80.9, bad  100%) | WER 100.00 | chrF   1.2 | best  81.76@106 | blank 95.7% | len  33.2/143 | lr 1.0e-03 | g   3.8 w     90 | w 5174px |    5s |  0.2h/11h  *BEST*
+670.9s 216 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+670.9s 217 PRED: अलं   आ स   क  े  क   य
+679.9s 218 ep 108 | loss  3.008 | CER  81.45 (med  81.6, bad  100%) | WER 100.00 | chrF   1.4 | best  81.45@108 | blank 95.7% | len  34.4/143 | lr 1.0e-03 | g   6.5 w     90 | w 5174px |    5s |  0.2h/11h  *BEST*
+679.9s 219 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+679.9s 220 PRED: अलं म आ  स क  क स  य
+684.4s 221 ep 109 | loss  2.953 | CER  80.43 (med  80.9, bad  100%) | WER  99.79 | chrF   1.8 | best  80.43@109 | blank 95.1% | len  37.4/143 | lr 1.0e-03 | g   3.6 w     91 | w 5174px |    5s |  0.2h/11h  *BEST*
+684.4s 222 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+684.4s 223 PRED: इखं   आ  स े स क  आ य
+693.5s 224 ep 111 | loss  2.973 | CER  79.66 (med  79.3, bad  100%) | WER 100.41 | chrF   1.9 | best  79.66@111 | blank 94.7% | len  40.6/143 | lr 1.0e-03 | g   4.0 w     91 | w 5174px |    5s |  0.2h/11h  *BEST*
+693.5s 225 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+693.5s 226 PRED: इलं क क प आ स से क क आ आ य
+711.5s 227 ep 115 | loss  2.878 | CER  77.97 (med  78.1, bad  100%) | WER 101.04 | chrF   2.7 | best  77.97@115 | blank 93.6% | len  47.7/143 | lr 1.0e-03 | g   3.8 w     91 | w 5174px |    5s |  0.2h/11h  *BEST*
+711.5s 228 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+711.5s 229 PRED: इलं  क आ स  आ स े की क आ अी भ
+725.0s 230 ep 118 | loss  2.875 | CER  76.96 (med  77.3, bad  100%) | WER 101.87 | chrF   2.8 | best  76.96@118 | blank 93.6% | len  50.5/143 | lr 1.0e-03 | g   4.2 w     92 | w 5174px |    5s |  0.2h/11h  *BEST*
+725.0s 231 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+725.0s 232 PRED: अखं क क य स प से क आ य आ
+756.5s 233 ep 125 | loss  2.792 | CER  77.38 (med  77.7, bad  100%) | WER 101.66 | chrF   3.0 | best  76.96@118 | blank 93.9% | len  48.1/143 | lr 1.0e-03 | g   3.4 w     93 | w 5174px |    4s |  0.2h/11h  (1/500 stale)
+756.5s 234 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+756.5s 235 PRED: इलं यी प  भोे स स य क यी य य
+761.0s 236 ep 126 | loss  2.796 | CER  75.69 (med  75.3, bad  100%) | WER 102.28 | chrF   3.8 | best  75.69@126 | blank 93.1% | len  53.3/143 | lr 1.0e-03 | g   4.1 w     94 | w 5174px |    5s |  0.2h/11h  *BEST*
+761.0s 237 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+761.0s 238 PRED: अखं ती आ पी भ  स  य उी उी यी युी पु
+774.5s 239 ep 129 | loss  2.765 | CER  74.18 (med  74.6, bad  100%) | WER 100.83 | chrF   4.3 | best  74.18@129 | blank 92.9% | len  57.8/143 | lr 1.0e-03 | g   4.1 w     94 | w 5174px |    5s |  0.2h/11h  *BEST*
+774.5s 240 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+774.5s 241 PRED: अखं आाी त पी भो स सी ती यन भाी उी भाी ुी ु
+792.5s 242 ep 133 | loss  2.790 | CER  73.45 (med  72.9, bad  100%) | WER 102.70 | chrF   4.7 | best  73.45@133 | blank 93.1% | len  59.2/143 | lr 1.0e-03 | g   3.5 w     95 | w 5174px |    5s |  0.2h/11h  *BEST*
+792.5s 243 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+792.5s 244 PRED: अलं त आा प पी भोी से सा ती य काी यी येी प प
+806.0s 245 ep 136 | loss  2.640 | CER  71.17 (med  71.3, bad  100%) | WER 104.15 | chrF   5.5 | best  71.17@136 | blank 91.9% | len  66.7/143 | lr 1.0e-03 | g   3.2 w     96 | w 5174px |    5s |  0.2h/11h  *BEST*
+806.0s 246 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+806.0s 247 PRED: अखंड क क् आाी प् पी भो से सा  य क उी का प प
+828.5s 248 ep 141 | loss  2.573 | CER  69.76 (med  69.8, bad  100%) | WER 102.90 | chrF   6.1 | best  69.76@141 | blank 92.4% | len  64.2/143 | lr 1.0e-03 | g   9.7 w     97 | w 5174px |    5s |  0.2h/11h  *BEST*
+828.5s 249 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+828.5s 250 PRED: अखंड क् आाी रा पाी भोे से साी प य यिी उुी येल पु पु
+837.5s 251 ep 143 | loss  2.477 | CER  67.63 (med  67.6, bad  100%) | WER 103.32 | chrF   7.3 | best  67.63@143 | blank 91.1% | len  72.3/143 | lr 1.0e-03 | g   3.4 w     97 | w 5174px |    5s |  0.2h/11h  *BEST*
+837.5s 252 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+837.5s 253 PRED: अखंडक् आाी आा दाी भोे से सा स य यी उु येी कुी पु
+864.5s 254 ep 149 | loss  2.412 | CER  67.13 (med  68.7, bad  100%) | WER 100.41 | chrF   7.4 | best  67.13@149 | blank 91.5% | len  68.5/143 | lr 1.0e-03 | g   3.5 w     99 | w 5174px |    5s |  0.2h/11h  *BEST*
+864.5s 255 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+864.5s 256 PRED: अखंडतत ्ी आाीे पा ोी भोे सन सा स ये यी उा येल पु ज
+869.1s 257 ep 150 | loss  2.378 | CER  66.78 (med  66.7, bad  100%) | WER 101.24 | chrF   7.5 | best  66.78@150 | blank 91.3% | len  70.8/143 | lr 1.0e-03 | g   3.5 w     99 | w 5174px |    5s |  0.2h/11h  *BEST*
+869.1s 258 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+869.1s 259 PRED: अखंडत  क्ी आांी प् ी भोे से सा पाी ता याी उा येल पु पु
+873.6s 260 ep 151 | loss  2.328 | CER  66.12 (med  67.0, bad  100%) | WER 101.24 | chrF   8.0 | best  66.12@151 | blank 91.2% | len  71.7/143 | lr 1.0e-03 | g   3.9 w     99 | w 5174px |    5s |  0.2h/11h  *BEST*
+873.6s 261 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+873.6s 262 PRED: अखंडत्ी आाी पाी भोे सााे पा या या जु येल पुी
+878.1s 263 ep 152 | loss  2.373 | CER  65.91 (med  66.8, bad  100%) | WER 100.83 | chrF   7.3 | best  65.91@152 | blank 91.2% | len  68.7/143 | lr 1.0e-03 | g   4.1 w     99 | w 5174px |    5s |  0.2h/11h  *BEST*
+878.1s 264 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+878.1s 265 PRED: अखंडत्ी आसंी पा नी भोे से साे सुी तां प उुी केल पुी ज
+891.6s 266 ep 155 | loss  2.299 | CER  65.56 (med  66.3, bad  100%) | WER 103.94 | chrF   7.3 | best  65.56@155 | blank 91.2% | len  70.5/143 | lr 1.0e-03 | g   4.0 w    100 | w 5174px |    5s |  0.2h/11h  *BEST*
+891.6s 267 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+891.6s 268 PRED: अखंडत्ी आेी पानी भोे स सा सुी रा का प येल पुल पु
+896.2s 269 ep 156 | loss  2.293 | CER  62.93 (med  62.9, bad  100%) | WER 100.21 | chrF   9.1 | best  62.93@156 | blank 90.2% | len  78.0/143 | lr 1.0e-03 | g   3.7 w    100 | w 5174px |    5s |  0.2h/11h  *BEST*
+896.2s 270 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+896.2s 271 PRED: अखंड््ी आांृी ता न्ोी भोे से सा सुी तं याी उुी येील पुल पु
+909.7s 272 ep 159 | loss  2.246 | CER  61.45 (med  61.7, bad   95%) | WER 100.41 | chrF   9.3 | best  61.45@159 | blank 90.1% | len  78.8/143 | lr 1.0e-03 | g   4.6 w    101 | w 5174px |    5s |  0.3h/11h  *BEST*
+909.7s 273 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+909.7s 274 PRED: अखंडत्ी आेंृी पा नाी भोसे से साे सु दं यिी जुी येल पु जाघोी
+914.2s 275 ep 160 | loss  2.146 | CER  60.08 (med  60.3, bad   90%) | WER 100.83 | chrF   9.8 | best  60.08@160 | blank 89.5% | len  84.0/143 | lr 1.0e-03 | g   3.8 w    101 | w 5174px |    5s |  0.3h/11h  *BEST*
+914.2s 276 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+914.2s 277 PRED: अखंडतले क््ी आेंृी पा नाोी भोले सेसाे सुी वं पिंी पुी येथल पुल पुी
+927.7s 278 ep 163 | loss  2.239 | CER  58.40 (med  59.3, bad   85%) | WER 106.43 | chrF  11.2 | best  58.40@163 | blank 87.9% | len  97.8/143 | lr 1.0e-03 | g   5.0 w    102 | w 5174px |    5s |  0.3h/11h  *BEST*
+927.7s 279 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+927.7s 280 PRED: अखंडत ल क्षी आेंृत पा नाोजी भोे सेसाते पुा तांन याी पुी येल पुी जुी
+941.2s 281 ep 166 | loss  2.019 | CER  56.47 (med  56.5, bad   75%) | WER 103.53 | chrF  11.6 | best  56.47@166 | blank 88.8% | len  91.7/143 | lr 1.0e-03 | g   3.5 w    103 | w 5174px |    5s |  0.3h/11h  *BEST*
+941.2s 282 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+941.2s 283 PRED: अखंडतक्षी आेृत रा नाोजी भोसे सेसाले पुा का याी उपी येल पुल पु
+954.7s 284 ep 169 | loss  1.945 | CER  56.37 (med  56.8, bad   80%) | WER  98.96 | chrF  11.6 | best  56.37@169 | blank 89.2% | len  83.2/143 | lr 1.0e-03 | g   3.5 w    104 | w 5174px |    5s |  0.3h/11h  *BEST*
+954.7s 285 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+954.7s 286 PRED: अखंडत् आोंृते रा न्जी भोे से सा सु र्ं यिंी उपी येल पुल जा
+959.3s 287 ep 170 | loss  1.903 | CER  55.77 (med  55.8, bad   75%) | WER 100.21 | chrF  11.9 | best  55.77@170 | blank 88.6% | len  85.5/143 | lr 1.0e-03 | g   3.7 w    104 | w 5174px |    5s |  0.3h/11h  *BEST*
+959.3s 288 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+959.3s 289 PRED: अखंडत लक्षी आोंृत रा न्ोजी भोे से सा सुा तं यिंी उपी येल पुजा
+977.3s 290 ep 174 | loss  1.828 | CER  52.86 (med  51.2, bad   60%) | WER  97.93 | chrF  12.8 | best  52.86@174 | blank 88.0% | len  88.5/143 | lr 1.0e-03 | g   3.8 w    105 | w 5174px |    5s |  0.3h/11h  *BEST*
+977.3s 291 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+977.3s 292 PRED: अखंडत लक्षी आलंृी राा न्योजी भोले सेसा सुभा तंत यिंी उपी येल पुल जुघो
+981.7s 293 ep 175 | loss  1.805 | CER  54.19 (med  51.9, bad   55%) | WER  98.34 | chrF  12.3 | best  52.86@174 | blank 89.0% | len  84.7/143 | lr 1.0e-03 | g   3.6 w    105 | w 5174px |    4s |  0.3h/11h  (1/500 stale)
+981.7s 294 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+981.7s 295 PRED: अखंडतल््ी आलंृत आाानाोजी भोले सेसाे सुा दं यिंी उप येल पु ज्ी
+990.8s 296 ep 177 | loss  1.723 | CER  50.26 (med  47.4, bad   40%) | WER  97.51 | chrF  14.4 | best  50.26@177 | blank 87.3% | len  92.5/143 | lr 1.0e-03 | g   3.6 w    106 | w 5174px |    5s |  0.3h/11h  *BEST*
+990.8s 297 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+990.8s 298 PRED: अखंडतलक्ष्ी आलृी रा न्योजी भोसे से साे सुा दंत यिनंी उपी येथील पुी नाघो
+999.8s 299 ep 179 | loss  1.747 | CER  48.97 (med  47.1, bad   40%) | WER  96.89 | chrF  14.7 | best  48.97@179 | blank 88.0% | len  89.8/143 | lr 1.0e-03 | g   3.9 w    106 | w 5174px |    5s |  0.3h/11h  *BEST*
+999.8s 300 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+999.8s 301 PRED: अखंडतलक्षी आलृत राा न्ोजी भोसले सेसाबे सुभा तंत येंी उपी येील कुल नप
+1013.3s 302 ep 182 | loss  1.680 | CER  45.88 (med  43.1, bad   25%) | WER  95.44 | chrF  17.3 | best  45.88@182 | blank 86.6% | len  95.8/143 | lr 1.0e-03 | g   4.9 w    107 | w 5174px |    5s |  0.3h/11h  *BEST*
+1013.3s 303 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1013.3s 304 PRED: अखंडते लक्ष्ी आलंृी तारान्योजी भोसले सेासाे सुभा दंा विनंी उपी येंथील पुल जा
+1022.4s 305 ep 184 | loss  1.519 | CER  43.07 (med  38.6, bad   25%) | WER  93.98 | chrF  19.2 | best  43.07@184 | blank 86.0% | len 101.5/143 | lr 1.0e-03 | g   3.8 w    108 | w 5174px |    5s |  0.3h/11h  *BEST*
+1022.4s 306 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1022.4s 307 PRED: अखंडत लक्ष्ी आलंृी राजा न्योजी भोसले सेसाबे सुभा दंत विंी उपी येील कुल जा
+1035.9s 308 ep 187 | loss  1.458 | CER  41.39 (med  37.7, bad   20%) | WER  91.29 | chrF  21.0 | best  41.39@187 | blank 85.8% | len 101.0/143 | lr 1.0e-03 | g   3.9 w    108 | w 5174px |    5s |  0.3h/11h  *BEST*
+1035.9s 309 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1035.9s 310 PRED: अखंडतलक्षी आलंृी रा न्योी भोसले सेसाे सुा दंत विनंी उपी येथील कुल जाो
+1049.4s 311 ep 190 | loss  1.407 | CER  39.46 (med  36.7, bad   15%) | WER  90.66 | chrF  21.7 | best  39.46@190 | blank 85.5% | len 102.5/143 | lr 1.0e-03 | g   3.7 w    109 | w 5174px |    5s |  0.3h/11h  *BEST*
+1049.4s 312 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1049.4s 313 PRED: अखंडतलक्ष्ी आलंृत राजमा न्योजी भोसले सेसाे सुभा दंत विनंी उपी येथील कुल जाो
+1067.4s 314 ep 194 | loss  1.251 | CER  38.41 (med  37.4, bad   10%) | WER  92.74 | chrF  22.3 | best  38.41@194 | blank 85.3% | len 104.6/143 | lr 1.0e-03 | g   3.9 w    110 | w 5174px |    5s |  0.3h/11h  *BEST*
+1067.4s 315 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1067.4s 316 PRED: अखंडतलक्ष्ी आलंकृत रान्योजी भोसले सेसाब सुा दंत विनंी उपी येथील कुल या
+1080.9s 317 ep 197 | loss  1.188 | CER  34.27 (med  31.5, bad    0%) | WER  86.31 | chrF  27.6 | best  34.27@197 | blank 84.3% | len 110.6/143 | lr 1.0e-03 | g   3.9 w    111 | w 5174px |    5s |  0.3h/11h  *BEST*
+1080.9s 318 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1080.9s 319 PRED: अखंडित लक्षी आलंृत राा न्योजी भोसले सेसाेबे सुभा दंत विनंी उपरी येथील कुल जाणोी
+1094.4s 320 ep 200 | loss  1.148 | CER  31.39 (med  26.2, bad    5%) | WER  80.91 | chrF  29.9 | best  31.39@200 | blank 84.1% | len 108.3/143 | lr 1.0e-03 | g   3.9 w    112 | w 5174px |    5s |  0.3h/11h  *BEST*
+1094.4s 321 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1094.4s 322 PRED: अखंडत लक्ष्ी आलंकृत राजान्योजी भोसले सेासाेबे सुभा दंत विनंी उपी येथी कुल जाो
+1103.4s 323 ep 202 | loss  1.020 | CER  30.48 (med  27.7, bad    0%) | WER  81.12 | chrF  30.8 | best  30.48@202 | blank 84.1% | len 109.3/143 | lr 1.0e-03 | g   3.3 w    112 | w 5174px |    5s |  0.3h/11h  *BEST*
+1103.4s 324 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1103.4s 325 PRED: अखंडतलक्ी आलंृी राजा न्घोजी भोसले सेासाब सुभा दंत विनंी उपी ेथील कुल जु
+1108.0s 326 ep 203 | loss  1.021 | CER  30.31 (med  26.9, bad    0%) | WER  81.54 | chrF  31.4 | best  30.31@203 | blank 84.2% | len 109.8/143 | lr 1.0e-03 | g   3.2 w    112 | w 5174px |    5s |  0.3h/11h  *BEST*
+1108.0s 327 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1108.0s 328 PRED: अखंडित लक्ष्मी आलंृत राजान्ोजी भोसले सेासाब सुभा दंत वंी उपी येथील कुल जाो
+1112.5s 329 ep 204 | loss  0.993 | CER  29.08 (med  26.0, bad    0%) | WER  80.08 | chrF  32.5 | best  29.08@204 | blank 84.0% | len 111.2/143 | lr 1.0e-03 | g   3.5 w    113 | w 5174px |    5s |  0.3h/11h  *BEST*
+1112.5s 330 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1112.5s 331 PRED: अखंडतलक्ष्ी आलंृत राजा न्योजी भोसले सेनासाब सुभा दंत विनंी उपी येथी कुल जाजो
+1121.5s 332 ep 206 | loss  0.961 | CER  27.11 (med  22.8, bad    0%) | WER  76.76 | chrF  34.3 | best  27.11@206 | blank 83.4% | len 113.5/143 | lr 1.0e-03 | g   3.6 w    113 | w 5174px |    5s |  0.3h/11h  *BEST*
+1121.5s 333 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1121.5s 334 PRED: अखंडत लक्ष्मी आलंकृत राजमान्योजी भोसले सेसाेबे सुभा दंत विनंी उपरी येथील कुल जाो
+1130.6s 335 ep 208 | loss  0.941 | CER  24.73 (med  20.9, bad    0%) | WER  71.78 | chrF  39.1 | best  24.73@208 | blank 82.9% | len 116.5/143 | lr 1.0e-03 | g   4.0 w    113 | w 5174px |    5s |  0.3h/11h  *BEST*
+1130.6s 336 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1130.6s 337 PRED: अखंडित लक्ष्मी आलंकृत राजमान्योजी भोसले सेासाहब सुभा दंडत विनंी उपरी येथील कुल जाणो
+1144.1s 338 ep 211 | loss  0.876 | CER  23.29 (med  20.1, bad    0%) | WER  69.92 | chrF  40.3 | best  23.29@211 | blank 82.8% | len 117.1/143 | lr 1.0e-03 | g   3.8 w    114 | w 5174px |    5s |  0.3h/11h  *BEST*
+1144.1s 339 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1144.1s 340 PRED: अखंडित लक्ष्मी आलंकृत राजान्यघोजी भोसले सेनासाेब सुभा दंडत विनंी उपरी येथील कुल जाणो
+1148.6s 341 ep 212 | loss  0.847 | CER  22.13 (med  18.9, bad    0%) | WER  69.92 | chrF  43.0 | best  22.13@212 | blank 81.2% | len 122.5/143 | lr 1.0e-03 | g   3.9 w    114 | w 5174px |    5s |  0.3h/11h  *BEST*
+1148.6s 342 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1148.6s 343 PRED: अखंडित लक्ष्मी आलंकृत राजान्यघोजी भोसले सेनासाेब सुभा दंडत विनंी उपरी येथील कुल जाो
+1162.1s 344 ep 215 | loss  0.782 | CER  19.43 (med  16.7, bad    0%) | WER  62.24 | chrF  47.9 | best  19.43@215 | blank 82.2% | len 121.0/143 | lr 1.0e-03 | g   3.9 w    115 | w 5174px |    5s |  0.3h/11h  *BEST*
+1162.1s 345 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1162.1s 346 PRED: अखंडित लक्ष्ी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुशल जा
+1166.7s 347 ep 216 | loss  0.744 | CER  18.94 (med  15.7, bad    0%) | WER  61.00 | chrF  47.4 | best  18.94@216 | blank 82.0% | len 120.2/143 | lr 1.0e-03 | g   3.5 w    115 | w 5174px |    5s |  0.3h/11h  *BEST*
+1166.7s 348 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1166.7s 349 PRED: अखंडित लक्ष्ी आलंकृत राजमान्यघोजी भोसले सेासाहेब सुभा दंडत विनंी उपरी येथील कुल जाणो
+1171.2s 350 ep 217 | loss  0.725 | CER  18.59 (med  19.4, bad    0%) | WER  61.20 | chrF  47.7 | best  18.59@217 | blank 81.8% | len 121.7/143 | lr 1.0e-03 | g   3.6 w    115 | w 5174px |    5s |  0.3h/11h  *BEST*
+1171.2s 351 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1171.2s 352 PRED: अखंडित लक्ष्ी आलंकृत राजमा न्यघोजी भोसले सेनसाहेब सुभा दंडवत विनंी उपरी येथील कुल जाण
+1180.2s 353 ep 219 | loss  0.683 | CER  16.10 (med  13.8, bad    0%) | WER  55.81 | chrF  52.2 | best  16.10@219 | blank 81.1% | len 124.8/143 | lr 1.0e-03 | g   4.0 w    116 | w 5174px |    5s |  0.3h/11h  *BEST*
+1180.2s 354 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1180.2s 355 PRED: अखंडितलक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुल जा
+1193.7s 356 ep 222 | loss  0.613 | CER  15.54 (med  12.4, bad    0%) | WER  53.73 | chrF  54.8 | best  15.54@222 | blank 81.1% | len 125.3/143 | lr 1.0e-03 | g   4.1 w    116 | w 5174px |    5s |  0.3h/11h  *BEST*
+1193.7s 357 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1193.7s 358 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुल जा
+1198.3s 359 ep 223 | loss  0.594 | CER  14.73 (med  12.4, bad    0%) | WER  51.45 | chrF  55.6 | best  14.73@223 | blank 81.2% | len 125.2/143 | lr 1.0e-03 | g   3.7 w    116 | w 5174px |    5s |  0.3h/11h  *BEST*
+1198.3s 360 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1198.3s 361 PRED: अखंडित लक्ष्ी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दिंडवत विनंी उपरी येथील कुल जा
+1202.8s 362 ep 224 | loss  0.561 | CER  13.54 (med  11.3, bad    0%) | WER  49.38 | chrF  57.9 | best  13.54@224 | blank 80.8% | len 126.5/143 | lr 1.0e-03 | g   3.8 w    116 | w 5174px |    5s |  0.3h/11h  *BEST*
+1202.8s 363 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1202.8s 364 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुल जा
+1207.3s 365 ep 225 | loss  0.551 | CER  11.54 (med  10.9, bad    0%) | WER  43.57 | chrF  62.9 | best  11.54@225 | blank 80.3% | len 129.2/143 | lr 1.0e-03 | g   3.6 w    117 | w 5174px |    5s |  0.3h/11h  *BEST*
+1207.3s 366 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1207.3s 367 PRED: अखंडित लक्ष्ी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुल जाण
+1220.8s 368 ep 228 | loss  0.534 | CER  11.26 (med  10.1, bad    0%) | WER  42.95 | chrF  63.4 | best  11.26@228 | blank 80.1% | len 128.9/143 | lr 1.0e-03 | g   3.7 w    117 | w 5174px |    5s |  0.3h/11h  *BEST*
+1220.8s 369 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1220.8s 370 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुशल
+1229.9s 371 ep 230 | loss  0.491 | CER  10.59 (med   9.1, bad    0%) | WER  40.66 | chrF  65.5 | best  10.59@230 | blank 79.9% | len 130.3/143 | lr 1.0e-03 | g   3.8 w    117 | w 5174px |    5s |  0.3h/11h  *BEST*
+1229.9s 372 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1229.9s 373 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुशल ज
+1234.4s 374 ep 231 | loss  0.483 | CER   9.68 (med   9.1, bad    0%) | WER  39.63 | chrF  66.6 | best   9.68@231 | blank 80.2% | len 130.3/143 | lr 1.0e-03 | g   3.5 w    117 | w 5174px |    5s |  0.3h/11h  *BEST*
+1234.4s 375 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1234.4s 376 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुल ज
+1243.4s 377 ep 233 | loss  0.427 | CER   9.22 (med   7.8, bad    0%) | WER  36.93 | chrF  68.7 | best   9.22@233 | blank 79.2% | len 131.0/143 | lr 1.0e-03 | g   3.3 w    118 | w 5174px |    5s |  0.3h/11h  *BEST*
+1243.4s 378 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1243.4s 379 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुशल
+1247.9s 380 ep 234 | loss  0.445 | CER   8.14 (med   7.5, bad    0%) | WER  33.40 | chrF  71.5 | best   8.14@234 | blank 80.4% | len 131.8/143 | lr 1.0e-03 | g   3.9 w    118 | w 5174px |    5s |  0.3h/11h  *BEST*
+1247.9s 381 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1247.9s 382 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुल जा
+1257.0s 383 ep 236 | loss  0.401 | CER   7.68 (med   6.5, bad    0%) | WER  32.57 | chrF  72.0 | best   7.68@236 | blank 80.1% | len 132.2/143 | lr 1.0e-03 | g   3.5 w    118 | w 5174px |    5s |  0.3h/11h  *BEST*
+1257.0s 384 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1257.0s 385 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंी उपरी येथील कुल जा
+1261.5s 386 ep 237 | loss  0.382 | CER   6.80 (med   5.9, bad    0%) | WER  28.01 | chrF  75.3 | best   6.80@237 | blank 79.4% | len 134.0/143 | lr 1.0e-03 | g   3.8 w    118 | w 5174px |    5s |  0.3h/11h  *BEST*
+1261.5s 387 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1261.5s 388 PRED: अखंडित लक्ष्मी आलंकृत राजमान्यघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुल ज
+1266.0s 389 ep 238 | loss  0.377 | CER   6.56 (med   6.1, bad    0%) | WER  28.01 | chrF  76.2 | best   6.56@238 | blank 79.1% | len 133.7/143 | lr 1.0e-03 | g   3.8 w    118 | w 5174px |    5s |  0.3h/11h  *BEST*
+1266.0s 390 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1266.0s 391 PRED: अखंडित लक्ष्मी आलंकृत राजमान्य घोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुशल
+1279.5s 392 ep 241 | loss  0.342 | CER   5.58 (med   5.4, bad    0%) | WER  25.52 | chrF  78.6 | best   5.58@241 | blank 79.2% | len 135.1/143 | lr 1.0e-03 | g   3.6 w    118 | w 5174px |    5s |  0.4h/11h  *BEST*
+1279.5s 393 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1279.5s 394 PRED: अखंडित लक्ष्मी आलंकृत राजमान्य घोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुल
+1284.0s 395 ep 242 | loss  0.343 | CER   5.40 (med   5.3, bad    0%) | WER  23.44 | chrF  79.7 | best   5.40@242 | blank 79.1% | len 135.2/143 | lr 1.0e-03 | g   3.6 w    119 | w 5174px |    5s |  0.4h/11h  *BEST*
+1284.0s 396 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1284.0s 397 PRED: अखंडित लक्ष्मी आलंकृत राजमान्य घोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुशल
+1288.4s 398 ep 243 | loss  0.312 | CER   4.67 (med   4.1, bad    0%) | WER  20.54 | chrF  82.3 | best   4.67@243 | blank 78.7% | len 136.1/143 | lr 1.0e-03 | g   3.8 w    119 | w 5174px |    5s |  0.4h/11h  *BEST*
+1288.4s 399 GT  : अखंडित लक्ष्मी आलंकृत राजमान्य रघोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुश
+1288.4s 400 PRED: अखंडित लक्ष्मी आलंकृत राजमान्य घोजी भोसले सेनासाहेब सुभा दंडवत विनंती उपरी येथील कुशल
+1288.4s 401 reached CER 4.67, moving on
+1288.4s 402 done (stopped early): 243 epochs, best val CER 4.67 at epoch 243
+1288.4s 403 smoke test: best CER 4.67 after 243 epochs (pass if <= 10.0, or <= 60 and still falling; last 60 epochs gained 34.8 CER)
+1288.4s 404 smoke test passed - the pipeline can learn. Starting the long run.
+1288.5s 405 Stage A: 879 of 1430 patches with 5-15 slots per character (61% of the training set)
+1397.9s 406 ep   1 | loss  8.543 | CER 100.00 (med 100.0, bad  100%) | WER 100.00 | chrF   0.0 | best 100.00@1   | blank 100.0% | len   0.0/107 | lr 1.0e-03 | g 567.2 w     82 | w 3923px |  109s |  0.4h/11h  *BEST*
+1397.9s 407 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1397.9s 408 PRED:
+1506.0s 409 ep   2 | loss  3.573 | CER 100.00 (med 100.0, bad  100%) | WER 100.00 | chrF   0.0 | best 100.00@1   | blank 100.0% | len   0.0/107 | lr 1.0e-03 | g   8.1 w     82 | w 3923px |  108s |  0.4h/11h  (0/60 stale)
+1506.0s 410 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1506.0s 411 PRED:
+1613.9s 412 ep   3 | loss  3.565 | CER 100.00 (med 100.0, bad  100%) | WER 100.00 | chrF   0.0 | best 100.00@1   | blank 100.0% | len   0.0/107 | lr 1.0e-03 | g   9.7 w     82 | w 3923px |  108s |  0.4h/11h  (0/60 stale)
+1613.9s 413 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1613.9s 414 PRED:
+1721.7s 415 ep   4 | loss  3.560 | CER 100.00 (med 100.0, bad  100%) | WER 100.00 | chrF   0.0 | best 100.00@1   | blank 100.0% | len   0.0/107 | lr 1.0e-03 | g   7.0 w     83 | w 3923px |  108s |  0.5h/11h  (0/60 stale)
+1721.7s 416 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1721.7s 417 PRED:
+1829.5s 418 ep   5 | loss  3.484 | CER  86.37 (med  86.0, bad  100%) | WER 100.00 | chrF   0.0 | best  86.37@5   | blank 98.2% | len  19.1/107 | lr 1.0e-03 | g   8.1 w     86 | w 3923px |  108s |  0.5h/11h  *BEST*
+1829.5s 419 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1829.5s 420 PRED:
+1937.4s 421 ep   6 | loss  3.387 | CER  81.12 (med  80.9, bad  100%) | WER 124.64 | chrF   1.1 | best  81.12@6   | blank 96.1% | len  42.8/107 | lr 1.0e-03 | g   8.7 w     91 | w 3923px |  108s |  0.5h/11h  *BEST*
+1937.4s 422 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+1937.4s 423 PRED: स क स स स  स स स स
+2045.1s 424 ep   7 | loss  3.318 | CER  82.03 (med  81.9, bad  100%) | WER 128.44 | chrF   1.0 | best  81.12@6   | blank 95.9% | len  44.8/107 | lr 1.0e-03 | g   8.3 w     95 | w 3923px |  108s |  0.6h/11h  (0/60 stale)
+2045.1s 425 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2045.1s 426 PRED: प क प क क क  क क स
+2152.6s 427 ep   8 | loss  3.286 | CER  82.10 (med  81.9, bad  100%) | WER 121.06 | chrF   1.1 | best  81.12@6   | blank 96.0% | len  44.1/107 | lr 1.0e-03 | g  16.2 w     99 | w 3923px |  108s |  0.6h/11h  (0/60 stale)
+2152.6s 428 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2152.6s 429 PRED: त कक क क क क क क
+2260.0s 430 ep   9 | loss  3.254 | CER  82.71 (med  82.8, bad  100%) | WER 120.79 | chrF   0.9 | best  81.12@6   | blank 96.3% | len  40.8/107 | lr 1.0e-03 | g   7.2 w    102 | w 3923px |  107s |  0.6h/11h  (0/60 stale)
+2260.0s 431 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2260.0s 432 PRED: प क क क र क क क क
+2367.2s 433 ep  10 | loss  3.264 | CER  83.40 (med  82.8, bad  100%) | WER 114.15 | chrF   0.7 | best  81.12@6   | blank 96.6% | len  36.4/107 | lr 1.0e-03 | g  19.7 w    109 | w 3923px |  107s |  0.7h/11h  (0/60 stale)
+2367.2s 434 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2367.2s 435 PRED: क क कय क क क कस
+2474.2s 436 ep  11 | loss  3.228 | CER  82.62 (med  82.0, bad  100%) | WER 127.01 | chrF   0.8 | best  81.12@6   | blank 96.1% | len  43.2/107 | lr 1.0e-03 | g   9.3 w    113 | w 3923px |  107s |  0.7h/11h  (0/60 stale)
+2474.2s 437 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2474.2s 438 PRED: स क क क क
+2581.0s 439 ep  12 | loss  3.232 | CER  81.70 (med  81.3, bad  100%) | WER 118.01 | chrF   1.7 | best  81.12@6   | blank 96.4% | len  38.6/107 | lr 1.0e-03 | g  11.0 w    118 | w 3923px |  107s |  0.7h/11h  (0/60 stale)
+2581.0s 440 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2581.0s 441 PRED: र क क प पत प पा स स
+2687.8s 442 ep  13 | loss  3.227 | CER  80.46 (med  79.8, bad  100%) | WER 121.80 | chrF   1.6 | best  80.46@13  | blank 96.0% | len  42.0/107 | lr 1.0e-03 | g   8.6 w    120 | w 3923px |  107s |  0.7h/11h  *BEST*
+2687.8s 443 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2687.8s 444 PRED: प स स स सत प स स
+2794.5s 445 ep  14 | loss  3.205 | CER  81.98 (med  81.8, bad  100%) | WER 112.05 | chrF   1.3 | best  80.46@13  | blank 96.5% | len  36.6/107 | lr 1.0e-03 | g   4.4 w    122 | w 3923px |  107s |  0.8h/11h  (0/60 stale)
+2794.5s 446 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2794.5s 447 PRED: पक स   प
+2901.2s 448 ep  15 | loss  3.186 | CER  82.21 (med  82.4, bad  100%) | WER 121.94 | chrF   0.7 | best  80.46@13  | blank 96.1% | len  41.6/107 | lr 1.0e-03 | g   5.4 w    124 | w 3923px |  107s |  0.8h/11h  (0/60 stale)
+2901.2s 449 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+2901.2s 450 PRED: त क क क  क क
+3007.9s 451 ep  16 | loss  3.176 | CER  81.48 (med  81.5, bad  100%) | WER 119.09 | chrF   1.1 | best  80.46@13  | blank 96.1% | len  40.7/107 | lr 1.0e-03 | g   4.4 w    125 | w 3923px |  107s |  0.8h/11h  (0/60 stale)
+3007.9s 452 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3007.9s 453 PRED: स क क क क स स स
+3114.6s 454 ep  17 | loss  3.170 | CER  82.20 (med  82.1, bad  100%) | WER 117.40 | chrF   0.9 | best  80.46@13  | blank 96.3% | len  38.9/107 | lr 1.0e-03 | g   4.6 w    127 | w 3923px |  107s |  0.9h/11h  (0/60 stale)
+3114.6s 455 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3114.6s 456 PRED: स क क क प क स
+3221.4s 457 ep  18 | loss  3.195 | CER  82.43 (med  81.6, bad  100%) | WER 113.13 | chrF   1.3 | best  80.46@13  | blank 96.7% | len  35.7/107 | lr 1.0e-03 | g   4.8 w    129 | w 3923px |  107s |  0.9h/11h  (0/60 stale)
+3221.4s 458 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3221.4s 459 PRED: प स प  प प प य क
+3328.2s 460 ep  19 | loss  3.173 | CER  81.45 (med  81.3, bad  100%) | WER 105.55 | chrF   2.0 | best  80.46@13  | blank 96.9% | len  31.9/107 | lr 1.0e-03 | g   4.8 w    131 | w 3923px |  107s |  0.9h/11h  (0/60 stale)
+3328.2s 461 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3328.2s 462 PRED: प स क स का सा प का स
+3434.8s 463 ep  20 | loss  3.157 | CER  78.70 (med  78.2, bad  100%) | WER 113.13 | chrF   2.5 | best  78.70@20  | blank 96.0% | len  41.6/107 | lr 1.0e-03 | g   6.8 w    133 | w 3923px |  107s |  1.0h/11h  *BEST*
+3434.8s 464 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3434.8s 465 PRED: का क पा क पा  कस
+3541.5s 466 ep  21 | loss  3.170 | CER  80.21 (med  80.2, bad  100%) | WER 112.73 | chrF   1.8 | best  78.70@20  | blank 96.2% | len  38.7/107 | lr 1.0e-03 | g   4.7 w    135 | w 3923px |  107s |  1.0h/11h  (0/60 stale)
+3541.5s 467 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3541.5s 468 PRED: प का पा पा क  प
+3648.3s 469 ep  22 | loss  3.155 | CER  78.16 (med  77.9, bad  100%) | WER 115.10 | chrF   2.6 | best  78.16@22  | blank 95.8% | len  43.6/107 | lr 1.0e-03 | g   6.8 w    137 | w 3923px |  107s |  1.0h/11h  *BEST*
+3648.3s 470 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3648.3s 471 PRED: करा का क का प क क पा
+3755.0s 472 ep  23 | loss  3.160 | CER  76.05 (med  75.6, bad  100%) | WER 118.82 | chrF   3.7 | best  76.05@23  | blank 94.9% | len  51.7/107 | lr 1.0e-03 | g   4.0 w    139 | w 3923px |  107s |  1.0h/11h  *BEST*
+3755.0s 473 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3755.0s 474 PRED: सा पा प प का ा पा प
+3861.5s 475 ep  24 | loss  3.141 | CER  77.84 (med  77.8, bad  100%) | WER 107.79 | chrF   2.8 | best  76.05@23  | blank 96.0% | len  41.0/107 | lr 1.0e-03 | g  11.0 w    140 | w 3923px |  107s |  1.1h/11h  (0/60 stale)
+3861.5s 476 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3861.5s 477 PRED: सरा ससरा सा सा स
+3968.2s 478 ep  25 | loss  3.128 | CER  78.76 (med  78.2, bad  100%) | WER 114.90 | chrF   2.4 | best  76.05@23  | blank 95.8% | len  42.8/107 | lr 1.0e-03 | g   3.8 w    141 | w 3923px |  107s |  1.1h/11h  (0/60 stale)
+3968.2s 479 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+3968.2s 480 PRED: सरा सा का सा का सा सा क
+4074.8s 481 ep  26 | loss  3.124 | CER  74.67 (med  74.2, bad  100%) | WER 122.55 | chrF   4.3 | best  74.67@26  | blank 94.6% | len  56.6/107 | lr 1.0e-03 | g   3.8 w    143 | w 3923px |  107s |  1.1h/11h  *BEST*
+4074.8s 482 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4074.8s 483 PRED: रारा परा पा रा पा ासा
+4181.4s 484 ep  27 | loss  3.136 | CER  76.61 (med  76.4, bad  100%) | WER 118.14 | chrF   3.2 | best  74.67@26  | blank 95.3% | len  48.8/107 | lr 1.0e-03 | g   4.2 w    145 | w 3923px |  107s |  1.2h/11h  (0/60 stale)
+4181.4s 485 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4181.4s 486 PRED: पा पा प प पा पा प आा य
+4287.9s 487 ep  28 | loss  3.128 | CER  76.77 (med  76.0, bad  100%) | WER 110.36 | chrF   3.1 | best  74.67@26  | blank 95.6% | len  44.2/107 | lr 1.0e-03 | g  22.6 w    146 | w 3923px |  107s |  1.2h/11h  (0/60 stale)
+4287.9s 488 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4287.9s 489 PRED: पा क स सा पा पा पा स
+4394.6s 490 ep  29 | loss  3.129 | CER  81.41 (med  81.2, bad  100%) | WER 105.08 | chrF   2.1 | best  74.67@26  | blank 96.9% | len  32.5/107 | lr 1.0e-03 | g   6.8 w    148 | w 3923px |  107s |  1.2h/11h  (0/60 stale)
+4394.6s 491 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4394.6s 492 PRED: रा सा स सा प प  स
+4501.2s 493 ep  30 | loss  3.133 | CER  81.62 (med  81.4, bad  100%) | WER 105.89 | chrF   1.9 | best  74.67@26  | blank 96.8% | len  33.3/107 | lr 1.0e-03 | g   4.3 w    149 | w 3923px |  107s |  1.2h/11h  (0/60 stale)
+4501.2s 494 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4501.2s 495 PRED: पा प क पा प क
+4608.0s 496 ep  31 | loss  3.135 | CER  76.16 (med  75.4, bad  100%) | WER 115.17 | chrF   3.1 | best  74.67@26  | blank 95.2% | len  48.6/107 | lr 1.0e-03 | g   4.4 w    151 | w 3923px |  107s |  1.3h/11h  (0/60 stale)
+4608.0s 497 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4608.0s 498 PRED: रा करा का का करा का का क व
+4714.8s 499 ep  32 | loss  3.125 | CER  75.16 (med  74.8, bad  100%) | WER 114.35 | chrF   3.9 | best  74.67@26  | blank 94.8% | len  53.7/107 | lr 1.0e-03 | g   4.3 w    153 | w 3923px |  107s |  1.3h/11h  (0/60 stale)
+4714.8s 500 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4714.8s 501 PRED: स रा क का कया का का का स
+4821.4s 502 ep  33 | loss  3.116 | CER  79.55 (med  79.3, bad  100%) | WER 107.38 | chrF   2.0 | best  74.67@26  | blank 96.2% | len  38.7/107 | lr 1.0e-03 | g   4.5 w    155 | w 3923px |  107s |  1.3h/11h  (0/60 stale)
+4821.4s 503 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4821.4s 504 PRED: का करा प पा क प व
+4927.9s 505 ep  34 | loss  3.108 | CER  79.21 (med  78.8, bad  100%) | WER 111.65 | chrF   2.3 | best  74.67@26  | blank 95.7% | len  43.1/107 | lr 1.0e-03 | g   3.8 w    156 | w 3923px |  107s |  1.4h/11h  (0/60 stale)
+4927.9s 506 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+4927.9s 507 PRED: प ा पा प क प प प स
+5034.4s 508 ep  35 | loss  3.106 | CER  74.67 (med  74.0, bad  100%) | WER 125.05 | chrF   5.1 | best  74.67@26  | blank 94.0% | len  61.6/107 | lr 1.0e-03 | g   4.4 w    158 | w 3923px |  106s |  1.4h/11h  (0/60 stale)
+5034.4s 509 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5034.4s 510 PRED: परा आरा का करा का क आा व व
+5140.8s 511 ep  36 | loss  3.104 | CER  76.44 (med  76.3, bad  100%) | WER 110.49 | chrF   3.5 | best  74.67@26  | blank 95.6% | len  44.8/107 | lr 1.0e-03 | g 229.2 w    159 | w 3923px |  106s |  1.4h/11h  (0/60 stale)
+5140.8s 512 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5140.8s 513 PRED: सरा पा का पा का पया सा
+5247.4s 514 ep  37 | loss  3.096 | CER  78.86 (med  78.6, bad  100%) | WER 107.85 | chrF   2.7 | best  74.67@26  | blank 96.1% | len  39.7/107 | lr 1.0e-03 | g   4.2 w    160 | w 3923px |  107s |  1.5h/11h  (0/60 stale)
+5247.4s 515 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5247.4s 516 PRED: शरा सा सा सा स सय
+5353.9s 517 ep  38 | loss  3.098 | CER  75.84 (med  74.6, bad  100%) | WER 123.36 | chrF   4.2 | best  74.67@26  | blank 94.7% | len  55.2/107 | lr 1.0e-03 | g   4.0 w    162 | w 3923px |  107s |  1.5h/11h  (0/60 stale)
+5353.9s 518 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5353.9s 519 PRED: परा सारा सरा सा सा साा साा
+5460.4s 520 ep  39 | loss  3.104 | CER  76.38 (med  76.0, bad  100%) | WER 118.69 | chrF   3.6 | best  74.67@26  | blank 95.2% | len  50.1/107 | lr 1.0e-03 | g   4.5 w    165 | w 3923px |  106s |  1.5h/11h  (0/60 stale)
+5460.4s 521 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5460.4s 522 PRED: ररा परा पा पा पा या प य
+5566.8s 523 ep  40 | loss  3.095 | CER  75.72 (med  75.4, bad  100%) | WER 121.87 | chrF   4.1 | best  74.67@26  | blank 94.7% | len  54.3/107 | lr 1.0e-03 | g   4.0 w    165 | w 3923px |  106s |  1.5h/11h  (0/60 stale)
+5566.8s 524 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5566.8s 525 PRED: र रा परा सरा प परा प या स
+5673.3s 526 ep  41 | loss  3.079 | CER  75.91 (med  75.8, bad  100%) | WER 113.47 | chrF   4.0 | best  74.67@26  | blank 95.0% | len  50.5/107 | lr 1.0e-03 | g   4.0 w    167 | w 3923px |  106s |  1.6h/11h  (0/60 stale)
+5673.3s 527 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5673.3s 528 PRED: श करा सरा करा का स  परा स
+5779.8s 529 ep  42 | loss  3.094 | CER  74.80 (med  74.2, bad  100%) | WER 118.55 | chrF   4.7 | best  74.67@26  | blank 94.4% | len  57.2/107 | lr 1.0e-03 | g  14.2 w    169 | w 3923px |  106s |  1.6h/11h  (0/60 stale)
+5779.8s 530 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5779.8s 531 PRED: सारा सारा परा पा का परा पा सा ा ा
+5886.1s 532 ep  43 | loss  3.089 | CER  79.90 (med  80.1, bad  100%) | WER 112.12 | chrF   2.3 | best  74.67@26  | blank 96.1% | len  39.9/107 | lr 1.0e-03 | g   4.2 w    171 | w 3923px |  106s |  1.6h/11h  (0/60 stale)
+5886.1s 533 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5886.1s 534 PRED: करा सरा स स स ससा
+5992.5s 535 ep  44 | loss  3.091 | CER  75.43 (med  74.7, bad  100%) | WER 116.79 | chrF   4.4 | best  74.67@26  | blank 94.7% | len  54.9/107 | lr 1.0e-03 | g   7.1 w    173 | w 3923px |  106s |  1.7h/11h  (0/60 stale)
+5992.5s 536 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+5992.5s 537 PRED: शर परा परा परा पा परा पा पा सा ा
+6098.8s 538 ep  45 | loss  3.090 | CER  76.06 (med  75.7, bad  100%) | WER 110.97 | chrF   4.4 | best  74.67@26  | blank 95.3% | len  47.7/107 | lr 1.0e-03 | g  13.6 w    176 | w 3923px |  106s |  1.7h/11h  (0/60 stale)
+6098.8s 539 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6098.8s 540 PRED: तरी पा परा पा पा प रा पवा
+6205.0s 541 ep  46 | loss  3.104 | CER  76.66 (med  75.8, bad  100%) | WER 109.07 | chrF   3.5 | best  74.67@26  | blank 95.5% | len  45.0/107 | lr 1.0e-03 | g   6.0 w    178 | w 3923px |  106s |  1.7h/11h  (0/60 stale)
+6205.0s 542 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6205.0s 543 PRED: त  का स का क ाता
+6311.4s 544 ep  47 | loss  3.104 | CER  75.84 (med  75.1, bad  100%) | WER 122.07 | chrF   4.1 | best  74.67@26  | blank 94.9% | len  53.0/107 | lr 1.0e-03 | g  10.9 w    179 | w 3923px |  106s |  1.8h/11h  (0/60 stale)
+6311.4s 545 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6311.4s 546 PRED: श सरा प ा पा सा पा प सस
+6417.8s 547 ep  48 | loss  3.104 | CER  77.29 (med  76.9, bad  100%) | WER 112.25 | chrF   3.4 | best  74.67@26  | blank 95.5% | len  45.3/107 | lr 1.0e-03 | g  10.9 w    180 | w 3923px |  106s |  1.8h/11h  (0/60 stale)
+6417.8s 548 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6417.8s 549 PRED: पारा परा पा प ा स
+6524.2s 550 ep  49 | loss  3.091 | CER  77.17 (med  77.0, bad  100%) | WER 113.34 | chrF   3.2 | best  74.67@26  | blank 95.4% | len  46.0/107 | lr 1.0e-03 | g   4.4 w    181 | w 3923px |  106s |  1.8h/11h  (0/60 stale)
+6524.2s 551 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6524.2s 552 PRED: पारा परा पा प करा क ा स
+6630.7s 553 ep  50 | loss  3.087 | CER  76.53 (med  75.9, bad  100%) | WER 110.36 | chrF   3.8 | best  74.67@26  | blank 95.5% | len  46.4/107 | lr 1.0e-03 | g   8.7 w    182 | w 3923px |  106s |  1.8h/11h  (0/60 stale)
+6630.7s 554 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6630.7s 555 PRED: पर परा प सरा पसा
+6737.2s 556 ep  51 | loss  3.083 | CER  77.67 (med  76.7, bad  100%) | WER 124.64 | chrF   3.8 | best  74.67@26  | blank 95.1% | len  52.0/107 | lr 1.0e-03 | g   4.1 w    185 | w 3923px |  107s |  1.9h/11h  (0/60 stale)
+6737.2s 557 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6737.2s 558 PRED: शरी सरा परा सा स सरा प ससी
+6843.7s 559 ep  52 | loss  3.116 | CER  77.75 (med  77.2, bad  100%) | WER 118.62 | chrF   3.4 | best  74.67@26  | blank 95.6% | len  46.4/107 | lr 1.0e-03 | g   7.4 w    188 | w 3923px |  106s |  1.9h/11h  (0/60 stale)
+6843.7s 560 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6843.7s 561 PRED: आ करा पा स क करा सस
+6950.4s 562 ep  53 | loss  3.110 | CER  79.97 (med  79.5, bad  100%) | WER 113.41 | chrF   2.5 | best  74.67@26  | blank 96.2% | len  39.6/107 | lr 1.0e-03 | g   4.7 w    190 | w 3923px |  107s |  1.9h/11h  (0/60 stale)
+6950.4s 563 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+6950.4s 564 PRED: प रा प स प पा पसी
+7056.9s 565 ep  54 | loss  3.115 | CER  77.37 (med  76.8, bad  100%) | WER 111.85 | chrF   3.6 | best  74.67@26  | blank 95.7% | len  44.7/107 | lr 1.0e-03 | g   7.5 w    192 | w 3923px |  107s |  2.0h/11h  (0/60 stale)
+7056.9s 566 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7056.9s 567 PRED: पर प पा करा प स
+7163.4s 568 ep  55 | loss  3.090 | CER  76.40 (med  75.9, bad  100%) | WER 110.02 | chrF   3.8 | best  74.67@26  | blank 95.1% | len  50.4/107 | lr 1.0e-03 | g  33.6 w    194 | w 3923px |  106s |  2.0h/11h  (0/60 stale)
+7163.4s 569 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7163.4s 570 PRED: ररा पा   या परा सस
+7269.7s 571 ep  56 | loss  3.089 | CER  78.45 (med  78.1, bad  100%) | WER 115.91 | chrF   2.6 | best  74.67@26  | blank 95.7% | len  45.1/107 | lr 1.0e-03 | g   4.1 w    196 | w 3923px |  106s |  2.0h/11h  (0/60 stale)
+7269.7s 572 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7269.7s 573 PRED: परी स सरा क सा स स क स स
+7376.1s 574 ep  57 | loss  3.092 | CER  77.40 (med  76.9, bad  100%) | WER 107.92 | chrF   3.6 | best  74.67@26  | blank 95.7% | len  42.9/107 | lr 1.0e-03 | g  12.5 w    197 | w 3923px |  106s |  2.0h/11h  (0/60 stale)
+7376.1s 575 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7376.1s 576 PRED: ररा परा सा स ससा
+7482.3s 577 ep  58 | loss  3.093 | CER  76.19 (med  75.8, bad  100%) | WER 109.95 | chrF   4.2 | best  74.67@26  | blank 95.2% | len  48.1/107 | lr 1.0e-03 | g   4.0 w    198 | w 3923px |  106s |  2.1h/11h  (0/60 stale)
+7482.3s 578 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7482.3s 579 PRED: र सरा परा पया स सरा
+7588.6s 580 ep  59 | loss  3.100 | CER  77.17 (med  76.8, bad  100%) | WER 108.12 | chrF   3.8 | best  74.67@26  | blank 95.5% | len  44.0/107 | lr 1.0e-03 | g   4.5 w    200 | w 3923px |  106s |  2.1h/11h  (0/60 stale)
+7588.6s 581 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7588.6s 582 PRED: ररी सरा सर पर प करा स
+7694.8s 583 ep  60 | loss  3.078 | CER  75.89 (med  76.1, bad  100%) | WER 109.88 | chrF   4.4 | best  74.67@26  | blank 95.2% | len  47.1/107 | lr 1.0e-03 | g   3.9 w    201 | w 3923px |  106s |  2.1h/11h  (0/60 stale)
+7694.8s 584 GT  : श्रीमंत माहाराज मातुश्री आईसाहेबाचे शेवेसी
+7694.8s 585 PRED: रारी ररा पा पा करा स स स
+7694.8s 586 done (reached max_epochs): 60 epochs, best val CER 74.67 at epoch 26
+7694.8s 587 Stage A finished at best val CER 74.67 after 60 epochs (must be <= 78.0 to go on)
+7694.8s 588 Stage A is reading. Starting Stage B on the full training set.
+7694.8s 589 warm-started (its val CER 74.67)
+7874.8s 590 ep   1 | loss  3.451 | CER  85.16 (med  83.1, bad  100%) | WER 100.87 | chrF   1.5 | best  85.16@1   | blank 96.6% | len  36.7/173 | lr 1.1e-04 | g  18.7 w    143 | w 4034px |  180s |  2.2h/11h  *BEST*
+7874.8s 591 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+7874.8s 592 PRED: या सा सा सा स स स
+8054.0s 593 ep   2 | loss  3.369 | CER  84.38 (med  83.1, bad  100%) | WER 100.91 | chrF   1.5 | best  84.38@2   | blank 96.3% | len  38.2/173 | lr 2.1e-04 | g  18.6 w    143 | w 4034px |  179s |  2.2h/11h  *BEST*
+8054.0s 594 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8054.0s 595 PRED: या प  का सा का स
+8233.0s 596 ep   3 | loss  3.333 | CER  84.64 (med  83.5, bad  100%) | WER 100.26 | chrF   1.3 | best  84.38@2   | blank 96.4% | len  37.4/173 | lr 3.0e-04 | g  13.0 w    144 | w 4034px |  179s |  2.3h/11h  (0/30 stale)
+8233.0s 597 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8233.0s 598 PRED: या क  ा का प ा प  स
+8412.1s 599 ep   4 | loss  3.323 | CER  83.14 (med  82.4, bad  100%) | WER 100.43 | chrF   1.7 | best  83.14@4   | blank 96.0% | len  41.5/173 | lr 3.0e-04 | g   9.7 w    144 | w 4034px |  179s |  2.3h/11h  *BEST*
+8412.1s 600 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8412.1s 601 PRED: प पा पा पा प ा प स
+8591.2s 602 ep   5 | loss  3.311 | CER  82.08 (med  81.3, bad  100%) | WER 100.96 | chrF   1.7 | best  82.08@5   | blank 95.6% | len  45.1/173 | lr 3.0e-04 | g  40.0 w    145 | w 4034px |  179s |  2.4h/11h  *BEST*
+8591.2s 603 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8591.2s 604 PRED: या का का क का ा स ा ा क
+8770.5s 605 ep   6 | loss  3.295 | CER  81.96 (med  81.2, bad  100%) | WER 101.01 | chrF   1.8 | best  81.96@6   | blank 95.6% | len  44.2/173 | lr 3.0e-04 | g  10.5 w    145 | w 4034px |  179s |  2.4h/11h  *BEST*
+8770.5s 606 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8770.5s 607 PRED: स ा सा पा का प पा प प
+8949.7s 608 ep   7 | loss  3.283 | CER  81.15 (med  80.4, bad  100%) | WER 100.63 | chrF   2.0 | best  81.15@7   | blank 95.4% | len  46.2/173 | lr 3.0e-04 | g   9.8 w    146 | w 4034px |  179s |  2.5h/11h  *BEST*
+8949.7s 609 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+8949.7s 610 PRED: रा का का प ा पा ा ा प स
+9128.7s 611 ep   8 | loss  3.269 | CER  80.00 (med  79.2, bad  100%) | WER 101.49 | chrF   2.4 | best  80.00@8   | blank 95.1% | len  50.3/173 | lr 3.0e-04 | g  13.6 w    146 | w 4034px |  179s |  2.5h/11h  *BEST*
+9128.7s 612 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+9128.7s 613 PRED: ाल क ा कावा का सा का स
+9307.8s 614 ep   9 | loss  3.260 | CER  82.45 (med  81.9, bad  100%) | WER 100.31 | chrF   2.0 | best  80.00@8   | blank 96.0% | len  40.5/173 | lr 3.0e-04 | g  11.3 w    147 | w 4034px |  179s |  2.6h/11h  (0/30 stale)
+9307.8s 615 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+9307.8s 616 PRED: ल क ा क ा का क स
+9486.9s 617 ep  10 | loss  3.249 | CER  81.35 (med  81.1, bad  100%) | WER 100.36 | chrF   2.3 | best  80.00@8   | blank 95.6% | len  44.7/173 | lr 3.0e-04 | g  12.5 w    147 | w 4034px |  179s |  2.6h/11h  (0/30 stale)
+9486.9s 618 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+9486.9s 619 PRED: ूचे करा पा क ा पा पा का  स
+9666.1s 620 ep  11 | loss  3.237 | CER  80.22 (med  80.6, bad  100%) | WER 100.96 | chrF   2.5 | best  80.00@8   | blank 95.0% | len  50.2/173 | lr 3.0e-04 | g   8.0 w    148 | w 4034px |  179s |  2.7h/11h  (0/30 stale)
+9666.1s 621 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+9666.1s 622 PRED: रा या  का प ा क स
+9845.3s 623 ep  12 | loss  3.228 | CER  81.01 (med  80.6, bad  100%) | WER 101.18 | chrF   1.9 | best  80.00@8   | blank 95.3% | len  48.3/173 | lr 3.0e-04 | g   9.8 w    148 | w 4034px |  179s |  2.7h/11h  (0/30 stale)
+9845.3s 624 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+9845.3s 625 PRED: रा ा का का का का ा पा  स
+10024.5s 626 ep  13 | loss  3.214 | CER  77.67 (med  77.2, bad  100%) | WER 101.71 | chrF   3.4 | best  77.67@13  | blank 94.3% | len  59.1/173 | lr 3.0e-04 | g   6.8 w    149 | w 4034px |  179s |  2.8h/11h  *BEST*
+10024.5s 627 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10024.5s 628 PRED: ूऊचे क क या सा ा पा सा  या स स
+10203.6s 629 ep  14 | loss  3.212 | CER  79.74 (med  79.5, bad  100%) | WER 100.82 | chrF   2.7 | best  77.67@13  | blank 95.1% | len  50.6/173 | lr 3.0e-04 | g  10.5 w    149 | w 4034px |  179s |  2.8h/11h  (0/30 stale)
+10203.6s 630 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10203.6s 631 PRED: ाऊचे क ा का प
+10383.0s 632 ep  15 | loss  3.209 | CER  80.08 (med  80.2, bad  100%) | WER 100.46 | chrF   2.2 | best  77.67@13  | blank 95.1% | len  50.7/173 | lr 3.0e-04 | g   7.0 w    150 | w 4034px |  179s |  2.9h/11h  (0/30 stale)
+10383.0s 633 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10383.0s 634 PRED: सरा क ा क ा क क
+10562.3s 635 ep  16 | loss  3.200 | CER  80.76 (med  81.5, bad  100%) | WER 100.19 | chrF   2.6 | best  77.67@13  | blank 95.6% | len  46.9/173 | lr 3.0e-04 | g  17.6 w    150 | w 4034px |  179s |  2.9h/11h  (0/30 stale)
+10562.3s 636 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10562.3s 637 PRED: र रा क ा सा सा स  स
+10741.7s 638 ep  17 | loss  3.201 | CER  76.54 (med  76.6, bad  100%) | WER 103.23 | chrF   3.6 | best  76.54@17  | blank 93.6% | len  66.2/173 | lr 3.0e-04 | g  36.0 w    150 | w 4034px |  179s |  3.0h/11h  *BEST*
+10741.7s 639 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10741.7s 640 PRED: सारा करा पा ा का प स
+10921.0s 641 ep  18 | loss  3.204 | CER  77.75 (med  77.8, bad  100%) | WER 100.89 | chrF   3.5 | best  76.54@17  | blank 94.4% | len  58.9/173 | lr 3.0e-04 | g  10.7 w    151 | w 4034px |  179s |  3.0h/11h  (0/30 stale)
+10921.0s 642 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+10921.0s 643 PRED: स या प रा पा रा प
+11100.2s 644 ep  19 | loss  3.192 | CER  77.31 (med  77.6, bad  100%) | WER 102.21 | chrF   3.5 | best  76.54@17  | blank 94.1% | len  62.8/173 | lr 3.0e-04 | g  11.1 w    151 | w 4034px |  179s |  3.1h/11h  (0/30 stale)
+11100.2s 645 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11100.2s 646 PRED: सा रा प पा पा पा स  प स
+11279.5s 647 ep  20 | loss  3.186 | CER  78.64 (med  78.6, bad  100%) | WER 100.84 | chrF   2.7 | best  76.54@17  | blank 94.8% | len  55.3/173 | lr 3.0e-04 | g  24.0 w    151 | w 4034px |  179s |  3.1h/11h  (0/30 stale)
+11279.5s 648 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11279.5s 649 PRED: का क करा का सा का का स
+11458.9s 650 ep  21 | loss  3.202 | CER  81.76 (med  81.8, bad  100%) | WER 100.12 | chrF   2.2 | best  76.54@17  | blank 95.9% | len  43.2/173 | lr 3.0e-04 | g  36.9 w    152 | w 4034px |  179s |  3.2h/11h  (0/30 stale)
+11458.9s 651 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11458.9s 652 PRED: स  क ा प
+11638.3s 653 ep  22 | loss  3.173 | CER  76.14 (med  76.4, bad  100%) | WER 104.21 | chrF   3.4 | best  76.14@22  | blank 93.3% | len  69.9/173 | lr 3.0e-04 | g   9.6 w    152 | w 4034px |  179s |  3.2h/11h  *BEST*
+11638.3s 654 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11638.3s 655 PRED: सा का कया का सा का क
+11817.7s 656 ep  23 | loss  3.165 | CER  79.61 (med  80.0, bad  100%) | WER 100.12 | chrF   2.8 | best  76.14@22  | blank 95.1% | len  52.4/173 | lr 3.0e-04 | g   7.2 w    153 | w 4034px |  179s |  3.3h/11h  (0/30 stale)
+11817.7s 657 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11817.7s 658 PRED: स   का क क सा स  क
+11997.0s 659 ep  24 | loss  3.163 | CER  75.87 (med  75.9, bad  100%) | WER 102.96 | chrF   4.1 | best  75.87@24  | blank 93.5% | len  68.6/173 | lr 3.0e-04 | g   6.0 w    153 | w 4034px |  179s |  3.3h/11h  *BEST*
+11997.0s 660 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+11997.0s 661 PRED: स  करा क स ा स  सा स स
+12176.3s 662 ep  25 | loss  3.162 | CER  74.91 (med  75.0, bad  100%) | WER 107.01 | chrF   3.7 | best  74.91@25  | blank 92.7% | len  78.1/173 | lr 3.0e-04 | g   6.4 w    153 | w 4034px |  179s |  3.4h/11h  *BEST*
+12176.3s 663 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+12176.3s 664 PRED: का रा क करा का का करा का ा क क स
+12355.7s 665 ep  26 | loss  3.167 | CER  77.50 (med  78.1, bad  100%) | WER 101.25 | chrF   3.7 | best  74.91@25  | blank 94.2% | len  61.0/173 | lr 3.0e-04 | g  12.1 w    154 | w 4034px |  179s |  3.4h/11h  (0/30 stale)
+12355.7s 666 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+12355.7s 667 PRED: सरा ा सया पा करा प  रा स
+12534.9s 668 ep  27 | loss  3.154 | CER  80.51 (med  81.1, bad  100%) | WER 100.12 | chrF   2.7 | best  74.91@25  | blank 95.5% | len  48.9/173 | lr 3.0e-04 | g   9.0 w    154 | w 4034px |  179s |  3.5h/11h  (0/30 stale)
+12534.9s 669 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+12534.9s 670 PRED: करा पया क रा परा प
+12714.3s 671 ep  28 | loss  3.157 | CER  76.75 (med  76.9, bad  100%) | WER 101.23 | chrF   3.7 | best  74.91@25  | blank 94.0% | len  63.5/173 | lr 3.0e-04 | g  10.5 w    154 | w 4034px |  179s |  3.5h/11h  (0/30 stale)
+12714.3s 672 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+12714.3s 673 PRED: सरा रा क का का क
+12893.5s 674 ep  29 | loss  3.146 | CER  76.81 (med  77.2, bad  100%) | WER 102.05 | chrF   3.6 | best  74.91@25  | blank 93.8% | len  65.0/173 | lr 3.0e-04 | g  15.4 w    154 | w 4034px |  179s |  3.6h/11h  (0/30 stale)
+12893.5s 675 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+12893.5s 676 PRED: र का क  का क रा प  क साव
+13072.8s 677 ep  30 | loss  3.150 | CER  75.62 (med  76.0, bad  100%) | WER 104.07 | chrF   3.8 | best  74.91@25  | blank 93.1% | len  71.9/173 | lr 3.0e-04 | g  27.6 w    155 | w 4034px |  179s |  3.6h/11h  (0/30 stale)
+13072.8s 678 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13072.8s 679 PRED: रया का क ा पा करा पया रा क स स
+13252.0s 680 ep  31 | loss  3.149 | CER  78.92 (med  79.6, bad  100%) | WER 100.67 | chrF   3.1 | best  74.91@25  | blank 94.7% | len  56.7/173 | lr 3.0e-04 | g  12.8 w    156 | w 4034px |  179s |  3.7h/11h  (0/30 stale)
+13252.0s 681 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13252.0s 682 PRED: पर  ा पा रा प रा प सव
+13431.3s 683 ep  32 | loss  3.155 | CER  77.57 (med  77.9, bad  100%) | WER 101.13 | chrF   3.4 | best  74.91@25  | blank 94.2% | len  62.6/173 | lr 3.0e-04 | g   5.4 w    156 | w 4034px |  179s |  3.7h/11h  (0/30 stale)
+13431.3s 684 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13431.3s 685 PRED: रा्रा सरा का रा प ा क क
+13610.5s 686 ep  33 | loss  3.139 | CER  75.74 (med  76.0, bad  100%) | WER 103.42 | chrF   4.3 | best  74.91@25  | blank 93.3% | len  71.4/173 | lr 3.0e-04 | g  11.6 w    156 | w 4034px |  179s |  3.8h/11h  (0/30 stale)
+13610.5s 687 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13610.5s 688 PRED: सा  रा करा करा परा स व
+13789.8s 689 ep  34 | loss  3.141 | CER  75.68 (med  75.8, bad  100%) | WER 103.85 | chrF   4.1 | best  74.91@25  | blank 93.1% | len  73.2/173 | lr 3.0e-04 | g   6.5 w    156 | w 4034px |  179s |  3.8h/11h  (0/30 stale)
+13789.8s 690 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13789.8s 691 PRED: परा ा करा करा करा प  रा क
+13969.0s 692 ep  35 | loss  3.121 | CER  76.82 (med  77.6, bad  100%) | WER 102.34 | chrF   3.6 | best  74.91@25  | blank 93.7% | len  66.7/173 | lr 3.0e-04 | g   8.0 w    157 | w 4034px |  179s |  3.9h/11h  (0/30 stale)
+13969.0s 693 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+13969.0s 694 PRED: सरा ा रा करा करा क या प
+14148.1s 695 ep  36 | loss  3.128 | CER  75.47 (med  75.5, bad  100%) | WER 104.48 | chrF   4.3 | best  74.91@25  | blank 92.9% | len  74.8/173 | lr 3.0e-04 | g   9.0 w    157 | w 4034px |  179s |  3.9h/11h  (0/30 stale)
+14148.1s 696 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+14148.1s 697 PRED: सरा सया क ा कारा परा प या सा स स
+14327.2s 698 ep  37 | loss  3.128 | CER  76.42 (med  77.1, bad  100%) | WER 102.96 | chrF   3.6 | best  74.91@25  | blank 93.5% | len  68.3/173 | lr 3.0e-04 | g   9.1 w    157 | w 4034px |  179s |  4.0h/11h  (0/30 stale)
+14327.2s 699 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+14327.2s 700 PRED: का    रा करा करा करा का वया स
+14506.6s 701 ep  38 | loss  3.129 | CER  76.55 (med  76.8, bad  100%) | WER 102.07 | chrF   4.2 | best  74.91@25  | blank 93.5% | len  67.5/173 | lr 3.0e-04 | g  11.2 w    157 | w 4034px |  179s |  4.0h/11h  (0/30 stale)
+14506.6s 702 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+14506.6s 703 PRED: पा स रा परा या करा प या प या स स
+14686.0s 704 ep  39 | loss  3.136 | CER  77.05 (med  77.4, bad  100%) | WER 101.61 | chrF   3.9 | best  74.91@25  | blank 93.9% | len  64.5/173 | lr 3.0e-04 | g  10.7 w    157 | w 4034px |  179s |  4.1h/11h  (0/30 stale)
+14686.0s 705 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+14686.0s 706 PRED: प करा का सा क  सा स
+14865.4s 707 ep  40 | loss  3.157 | CER  75.75 (med  75.9, bad  100%) | WER 104.53 | chrF   3.9 | best  74.91@25  | blank 93.0% | len  74.6/173 | lr 3.0e-04 | g   9.5 w    158 | w 4034px |  179s |  4.1h/11h  (0/30 stale)
+14865.4s 708 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+14865.4s 709 PRED: सा  र कया क सा कार प  या क सस
+15044.9s 710 ep  41 | loss  3.115 | CER  74.96 (med  75.1, bad  100%) | WER 104.31 | chrF   4.2 | best  74.91@25  | blank 92.5% | len  80.1/173 | lr 3.0e-04 | g   5.4 w    158 | w 4034px |  179s |  4.2h/11h  (0/30 stale)
+15044.9s 711 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15044.9s 712 PRED: सरा पा स या पा प रा याा प स स
+15224.3s 713 ep  42 | loss  3.111 | CER  76.54 (med  76.6, bad  100%) | WER 101.73 | chrF   4.0 | best  74.91@25  | blank 93.8% | len  66.9/173 | lr 3.0e-04 | g  18.6 w    158 | w 4034px |  179s |  4.2h/11h  (0/30 stale)
+15224.3s 714 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15224.3s 715 PRED: स ा स य रा पा क  क स स
+15403.8s 716 ep  43 | loss  3.114 | CER  76.40 (med  76.2, bad  100%) | WER 103.13 | chrF   3.6 | best  74.91@25  | blank 93.5% | len  68.9/173 | lr 3.0e-04 | g   6.8 w    158 | w 4034px |  179s |  4.3h/11h  (0/30 stale)
+15403.8s 717 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15403.8s 718 PRED: स  रा परा सरा क ा स स
+15583.2s 719 ep  44 | loss  3.128 | CER  75.43 (med  75.7, bad  100%) | WER 104.91 | chrF   3.7 | best  74.91@25  | blank 92.9% | len  75.2/173 | lr 3.0e-04 | g  13.8 w    159 | w 4034px |  179s |  4.3h/11h  (0/30 stale)
+15583.2s 720 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15583.2s 721 PRED: पा परा करा सरा प  या सा स स
+15762.6s 722 ep  45 | loss  3.134 | CER  76.24 (med  76.2, bad  100%) | WER 100.82 | chrF   4.1 | best  74.91@25  | blank 93.8% | len  66.2/173 | lr 3.0e-04 | g  10.5 w    159 | w 4034px |  179s |  4.4h/11h  (0/30 stale)
+15762.6s 723 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15762.6s 724 PRED: स ा का  या करा सरा क रा स
+15942.2s 725 ep  46 | loss  3.122 | CER  75.59 (med  75.5, bad  100%) | WER 103.78 | chrF   4.3 | best  74.91@25  | blank 93.2% | len  72.8/173 | lr 3.0e-04 | g  10.2 w    159 | w 4034px |  180s |  4.4h/11h  (0/30 stale)
+15942.2s 726 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+15942.2s 727 PRED: र ा पर प क रा स रा का स
+16121.8s 728 ep  47 | loss  3.134 | CER  75.38 (med  75.2, bad  100%) | WER 103.25 | chrF   4.6 | best  74.91@25  | blank 93.2% | len  71.4/173 | lr 3.0e-04 | g  15.7 w    160 | w 4034px |  180s |  4.5h/11h  (0/30 stale)
+16121.8s 729 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+16121.8s 730 PRED: सा रा क सा सा स सरा सा सा सा
+16301.4s 731 ep  48 | loss  3.107 | CER  75.08 (med  75.0, bad  100%) | WER 101.73 | chrF   4.7 | best  74.91@25  | blank 93.0% | len  74.0/173 | lr 3.0e-04 | g   5.8 w    160 | w 4034px |  180s |  4.5h/11h  (0/30 stale)
+16301.4s 732 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+16301.4s 733 PRED: र ा का करा करा क    रा स
+16481.2s 734 ep  49 | loss  3.109 | CER  75.65 (med  76.0, bad  100%) | WER 104.74 | chrF   4.5 | best  74.91@25  | blank 92.7% | len  74.2/173 | lr 3.0e-04 | g  48.6 w    160 | w 4034px |  180s |  4.6h/11h  (0/30 stale)
+16481.2s 735 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+16481.2s 736 PRED: ररी प  रा प परा प क   रा स  स
+16660.8s 737 ep  50 | loss  3.108 | CER  75.85 (med  75.9, bad  100%) | WER 102.58 | chrF   4.0 | best  74.91@25  | blank 93.2% | len  71.2/173 | lr 3.0e-04 | g   8.5 w    161 | w 4034px |  180s |  4.6h/11h  (0/30 stale)
+16660.8s 738 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+16660.8s 739 PRED: रर का क पया सरा का का कया स स
+16840.4s 740 ep  51 | loss  3.101 | CER  76.14 (med  75.9, bad  100%) | WER 102.67 | chrF   4.0 | best  74.91@25  | blank 93.1% | len  71.7/173 | lr 3.0e-04 | g  14.2 w    161 | w 4034px |  180s |  4.7h/11h  (0/30 stale)
+16840.4s 741 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+16840.4s 742 PRED: र प का प रा सर प  का पा प स
+17019.9s 743 ep  52 | loss  3.107 | CER  77.34 (med  77.8, bad  100%) | WER 100.91 | chrF   3.4 | best  74.91@25  | blank 94.1% | len  62.9/173 | lr 3.0e-04 | g  10.7 w    161 | w 4034px |  180s |  4.7h/11h  (0/30 stale)
+17019.9s 744 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17019.9s 745 PRED: रा   क करा क  सा स  स
+17199.6s 746 ep  53 | loss  3.105 | CER  74.22 (med  74.7, bad  100%) | WER 104.33 | chrF   5.3 | best  74.22@53  | blank 92.4% | len  79.4/173 | lr 2.9e-04 | g  14.6 w    162 | w 4034px |  180s |  4.8h/11h  *BEST*
+17199.6s 747 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17199.6s 748 PRED: रारा परा पा प परा स रा सा स  स
+17379.0s 749 ep  54 | loss  3.102 | CER  76.76 (med  77.0, bad  100%) | WER 102.09 | chrF   3.9 | best  74.22@53  | blank 93.6% | len  67.3/173 | lr 2.9e-04 | g  20.3 w    162 | w 4034px |  179s |  4.8h/11h  (0/30 stale)
+17379.0s 750 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17379.0s 751 PRED: रा  क क कर स  क स  स
+17558.5s 752 ep  55 | loss  3.097 | CER  76.63 (med  76.6, bad  100%) | WER 101.49 | chrF   3.8 | best  74.22@53  | blank 93.6% | len  67.2/173 | lr 2.9e-04 | g  27.2 w    162 | w 4034px |  179s |  4.9h/11h  (0/30 stale)
+17558.5s 753 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17558.5s 754 PRED: सरा स ा का करा रा सरा का क क
+17738.1s 755 ep  56 | loss  3.098 | CER  77.32 (med  77.6, bad  100%) | WER 101.40 | chrF   3.7 | best  74.22@53  | blank 94.1% | len  62.6/173 | lr 2.9e-04 | g   9.7 w    163 | w 4034px |  180s |  4.9h/11h  (0/30 stale)
+17738.1s 756 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17738.1s 757 PRED: सा का का क परा परा प   ा स
+17917.6s 758 ep  57 | loss  3.099 | CER  77.99 (med  78.4, bad  100%) | WER 100.72 | chrF   3.6 | best  74.22@53  | blank 94.2% | len  60.7/173 | lr 2.9e-04 | g   8.7 w    163 | w 4034px |  180s |  5.0h/11h  (0/30 stale)
+17917.6s 759 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+17917.6s 760 PRED: ररा पा स सरा स ा स स स
+18097.1s 761 ep  58 | loss  3.088 | CER  74.39 (med  74.3, bad  100%) | WER 103.56 | chrF   4.4 | best  74.22@53  | blank 92.5% | len  80.0/173 | lr 2.9e-04 | g   7.7 w    163 | w 4034px |  179s |  5.0h/11h  (0/30 stale)
+18097.1s 762 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18097.1s 763 PRED: रारा रा क परा परा पा रा स  ा स
+18276.6s 764 ep  59 | loss  3.088 | CER  74.88 (med  74.8, bad  100%) | WER 104.65 | chrF   4.6 | best  74.22@53  | blank 92.6% | len  76.8/173 | lr 2.9e-04 | g   7.2 w    163 | w 4034px |  179s |  5.1h/11h  (0/30 stale)
+18276.6s 765 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18276.6s 766 PRED: साा क  रा प परा सरा सरा स ा का स
+18456.0s 767 ep  60 | loss  3.079 | CER  74.07 (med  74.2, bad  100%) | WER 104.09 | chrF   5.2 | best  74.07@60  | blank 92.2% | len  83.1/173 | lr 2.9e-04 | g   8.7 w    164 | w 4034px |  179s |  5.1h/11h  *BEST*
+18456.0s 768 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18456.0s 769 PRED: रा करा क करा प स स  ा स
+18635.4s 770 ep  61 | loss  3.090 | CER  77.15 (med  77.6, bad  100%) | WER 101.83 | chrF   4.2 | best  74.07@60  | blank 93.5% | len  67.7/173 | lr 2.9e-04 | g  49.5 w    164 | w 4034px |  179s |  5.2h/11h  (0/30 stale)
+18635.4s 771 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18635.4s 772 PRED: सरा प  क क करा पर परा प ा प स
+18814.7s 773 ep  62 | loss  3.089 | CER  75.59 (med  75.4, bad  100%) | WER 102.84 | chrF   4.8 | best  74.07@60  | blank 93.1% | len  72.0/173 | lr 2.9e-04 | g  28.6 w    164 | w 4034px |  179s |  5.2h/11h  (0/30 stale)
+18814.7s 774 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18814.7s 775 PRED: सरा प  क ा परा सा सरा क क स स
+18994.1s 776 ep  63 | loss  3.082 | CER  77.79 (med  78.1, bad  100%) | WER 101.40 | chrF   3.5 | best  74.07@60  | blank 93.8% | len  65.0/173 | lr 2.9e-04 | g  11.0 w    164 | w 4034px |  179s |  5.3h/11h  (0/30 stale)
+18994.1s 777 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+18994.1s 778 PRED: सरा सर क पर पर पा सरा प ा प स
+19173.4s 779 ep  64 | loss  3.079 | CER  74.71 (med  75.0, bad  100%) | WER 104.67 | chrF   4.8 | best  74.07@60  | blank 92.4% | len  79.4/173 | lr 2.9e-04 | g   7.9 w    164 | w 4034px |  179s |  5.3h/11h  (0/30 stale)
+19173.4s 780 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+19173.4s 781 PRED: स    करा परा स स रा स   सा
+19352.7s 782 ep  65 | loss  3.080 | CER  74.50 (med  74.7, bad  100%) | WER 106.62 | chrF   4.7 | best  74.07@60  | blank 92.2% | len  83.3/173 | lr 2.9e-04 | g   9.4 w    165 | w 4034px |  179s |  5.4h/11h  (0/30 stale)
+19352.7s 783 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+19352.7s 784 PRED: सरा स  र क का रा कया सया सहा स क स
+19532.3s 785 ep  66 | loss  3.090 | CER  75.02 (med  74.7, bad  100%) | WER 104.31 | chrF   4.9 | best  74.07@60  | blank 92.8% | len  76.9/173 | lr 2.9e-04 | g  48.7 w    165 | w 4034px |  180s |  5.4h/11h  (0/30 stale)
+19532.3s 786 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+19532.3s 787 PRED: सा सा स करा परा स सा स  ा का स
+19711.7s 788 ep  67 | loss  3.075 | CER  74.78 (med  74.6, bad  100%) | WER 102.99 | chrF   4.8 | best  74.07@60  | blank 92.7% | len  77.2/173 | lr 2.9e-04 | g  18.8 w    165 | w 4034px |  179s |  5.5h/11h  (0/30 stale)
+19711.7s 789 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+19711.7s 790 PRED: स का क क परा सा स सया का क स
+19891.2s 791 ep  68 | loss  3.071 | CER  74.69 (med  74.9, bad  100%) | WER 104.50 | chrF   5.0 | best  74.07@60  | blank 92.5% | len  79.6/173 | lr 2.9e-04 | g   5.4 w    166 | w 4034px |  179s |  5.5h/11h  (0/30 stale)
+19891.2s 792 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+19891.2s 793 PRED: स ा क क कर परा परा स  सा स क स
+20070.6s 794 ep  69 | loss  3.067 | CER  75.13 (med  75.2, bad  100%) | WER 103.85 | chrF   4.1 | best  74.07@60  | blank 92.8% | len  75.2/173 | lr 2.9e-04 | g   6.4 w    166 | w 4034px |  179s |  5.6h/11h  (0/30 stale)
+20070.6s 795 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20070.6s 796 PRED: सरा का का क का करा पा सा स  स  ा क
+20250.1s 797 ep  70 | loss  3.069 | CER  74.84 (med  74.9, bad  100%) | WER 106.91 | chrF   4.8 | best  74.07@60  | blank 92.4% | len  80.6/173 | lr 2.9e-04 | g  13.8 w    166 | w 4034px |  180s |  5.6h/11h  (0/30 stale)
+20250.1s 798 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20250.1s 799 PRED: स  क ा क करा पर सा स ा ाा स
+20429.6s 800 ep  71 | loss  3.075 | CER  74.88 (med  75.3, bad  100%) | WER 104.16 | chrF   4.8 | best  74.07@60  | blank 92.4% | len  80.6/173 | lr 2.9e-04 | g   6.8 w    166 | w 4034px |  179s |  5.7h/11h  (0/30 stale)
+20429.6s 801 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20429.6s 802 PRED: ररा पा क क रा परा सा पही स का स
+20609.0s 803 ep  72 | loss  3.071 | CER  73.49 (med  73.6, bad  100%) | WER 111.03 | chrF   4.9 | best  73.49@72  | blank 91.2% | len  93.3/173 | lr 2.9e-04 | g  16.1 w    167 | w 4034px |  179s |  5.7h/11h  *BEST*
+20609.0s 804 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20609.0s 805 PRED: स रा करा क करा करा स स  क क का क
+20788.4s 806 ep  73 | loss  3.064 | CER  74.62 (med  75.2, bad  100%) | WER 105.54 | chrF   4.5 | best  73.49@72  | blank 92.5% | len  79.6/173 | lr 2.9e-04 | g   7.7 w    167 | w 4034px |  179s |  5.8h/11h  (0/30 stale)
+20788.4s 807 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20788.4s 808 PRED: सरी करा क करा क करा परा स करा करा क क क क
+20967.7s 809 ep  74 | loss  3.072 | CER  75.35 (med  75.8, bad  100%) | WER 104.21 | chrF   4.9 | best  73.49@72  | blank 92.9% | len  75.3/173 | lr 2.9e-04 | g  34.0 w    167 | w 4034px |  179s |  5.8h/11h  (0/30 stale)
+20967.7s 810 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+20967.7s 811 PRED: राररा प  क पर परा स ी क सा का क क य
+21147.2s 812 ep  75 | loss  3.073 | CER  77.20 (med  77.6, bad  100%) | WER 102.17 | chrF   3.9 | best  73.49@72  | blank 93.8% | len  65.7/173 | lr 2.9e-04 | g  10.8 w    167 | w 4034px |  179s |  5.9h/11h  (0/30 stale)
+21147.2s 813 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+21147.2s 814 PRED: रार  करा क कर सरा स क स स क कक
+21326.7s 815 ep  76 | loss  3.072 | CER  73.38 (med  73.6, bad  100%) | WER 107.78 | chrF   5.5 | best  73.38@76  | blank 91.8% | len  86.1/173 | lr 2.9e-04 | g   7.2 w    167 | w 4034px |  179s |  5.9h/11h  *BEST*
+21326.7s 816 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+21326.7s 817 PRED: राज ा करा का पा सा स रा सरा स क स स
+21506.1s 818 ep  77 | loss  3.072 | CER  76.09 (med  76.2, bad  100%) | WER 103.30 | chrF   4.1 | best  73.38@76  | blank 93.3% | len  71.3/173 | lr 2.9e-04 | g   5.0 w    168 | w 4034px |  179s |  6.0h/11h  (0/30 stale)
+21506.1s 819 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+21506.1s 820 PRED: र का कर कर क या स ा का का स  स
+21685.5s 821 ep  78 | loss  3.060 | CER  75.19 (med  75.4, bad  100%) | WER 103.42 | chrF   4.7 | best  73.38@76  | blank 93.2% | len  72.6/173 | lr 2.9e-04 | g   9.9 w    168 | w 4034px |  179s |  6.0h/11h  (0/30 stale)
+21685.5s 822 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+21685.5s 823 PRED: सरा क सरा क करा स सरा स रा सस
+21864.9s 824 ep  79 | loss  3.064 | CER  73.60 (med  73.8, bad  100%) | WER 107.87 | chrF   5.3 | best  73.38@76  | blank 91.8% | len  87.8/173 | lr 2.9e-04 | g   8.6 w    168 | w 4034px |  179s |  6.1h/11h  (0/30 stale)
+21864.9s 825 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+21864.9s 826 PRED: स स स  रा स रा सहा स सहे का सरा स स स
+22044.2s 827 ep  80 | loss  3.052 | CER  74.84 (med  74.8, bad  100%) | WER 104.65 | chrF   4.7 | best  73.38@76  | blank 92.3% | len  81.5/173 | lr 2.9e-04 | g   6.8 w    168 | w 4034px |  179s |  6.1h/11h  (0/30 stale)
+22044.2s 828 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22044.2s 829 PRED: स सर करा सया स स   रा स व
+22223.4s 830 ep  81 | loss  3.054 | CER  73.99 (med  74.3, bad  100%) | WER 104.36 | chrF   5.4 | best  73.38@76  | blank 92.4% | len  80.9/173 | lr 2.9e-04 | g   5.4 w    169 | w 4034px |  179s |  6.2h/11h  (0/30 stale)
+22223.4s 831 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22223.4s 832 PRED: सरा स क रा क सर सहा स सा स रा स सा
+22402.8s 833 ep  82 | loss  3.055 | CER  75.47 (med  75.6, bad  100%) | WER 101.44 | chrF   4.9 | best  73.38@76  | blank 93.1% | len  73.3/173 | lr 2.9e-04 | g   9.9 w    169 | w 4034px |  179s |  6.2h/11h  (0/30 stale)
+22402.8s 834 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22402.8s 835 PRED: ररा कर क करा सह स सल सर स क व
+22582.3s 836 ep  83 | loss  3.050 | CER  75.01 (med  75.2, bad  100%) | WER 106.16 | chrF   4.8 | best  73.38@76  | blank 92.4% | len  80.9/173 | lr 2.9e-04 | g  47.4 w    169 | w 4034px |  179s |  6.3h/11h  (0/30 stale)
+22582.3s 837 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22582.3s 838 PRED: स क स रा स स स स सहा सरा स स व
+22761.8s 839 ep  84 | loss  3.058 | CER  74.54 (med  74.6, bad  100%) | WER 103.51 | chrF   4.6 | best  73.38@76  | blank 92.7% | len  77.8/173 | lr 2.9e-04 | g 133.4 w    169 | w 4034px |  179s |  6.3h/11h  (0/30 stale)
+22761.8s 840 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22761.8s 841 PRED: स  क करा क करा पर स या क स क व
+22941.3s 842 ep  85 | loss  3.058 | CER  75.37 (med  75.4, bad  100%) | WER 102.99 | chrF   4.8 | best  73.38@76  | blank 93.2% | len  72.1/173 | lr 2.9e-04 | g   6.8 w    170 | w 4034px |  180s |  6.4h/11h  (0/30 stale)
+22941.3s 843 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+22941.3s 844 PRED: स रा क सरा क का स स क सा स स य
+23120.6s 845 ep  86 | loss  3.053 | CER  75.40 (med  75.6, bad  100%) | WER 102.12 | chrF   4.7 | best  73.38@76  | blank 92.9% | len  74.9/173 | lr 2.9e-04 | g  33.9 w    170 | w 4034px |  179s |  6.4h/11h  (0/30 stale)
+23120.6s 846 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+23120.6s 847 PRED: सरा क रा क करा स स र सा स क व
+23299.9s 848 ep  87 | loss  3.068 | CER  76.44 (med  76.5, bad  100%) | WER 101.40 | chrF   4.1 | best  73.38@76  | blank 93.7% | len  66.5/173 | lr 2.9e-04 | g  10.6 w    170 | w 4034px |  179s |  6.5h/11h  (0/30 stale)
+23299.9s 849 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+23299.9s 850 PRED: स  करा क क स स    स स
+23479.3s 851 ep  88 | loss  3.055 | CER  74.46 (med  75.1, bad  100%) | WER 106.93 | chrF   4.8 | best  73.38@76  | blank 92.1% | len  83.9/173 | lr 2.9e-04 | g   8.6 w    170 | w 4034px |  179s |  6.5h/11h  (0/30 stale)
+23479.3s 852 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+23479.3s 853 PRED: सर प  करा क सा सरा स  या स रा स स य
+23658.6s 854 ep  89 | loss  3.058 | CER  73.99 (med  74.1, bad  100%) | WER 109.77 | chrF   4.8 | best  73.38@76  | blank 91.9% | len  87.5/173 | lr 2.8e-04 | g  14.7 w    171 | w 4034px |  179s |  6.6h/11h  (0/30 stale)
+23658.6s 855 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+23658.6s 856 PRED: सर स स क क का क क क  क  स य
+23838.0s 857 ep  90 | loss  3.059 | CER  74.95 (med  75.6, bad  100%) | WER 103.39 | chrF   5.1 | best  73.38@76  | blank 92.8% | len  76.6/173 | lr 2.8e-04 | g  34.4 w    171 | w 4034px |  179s |  6.6h/11h  (0/30 stale)
+23838.0s 858 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+23838.0s 859 PRED: राजरी प सरा क परा स या प स क क या
+24017.3s 860 ep  91 | loss  3.072 | CER  74.44 (med  74.7, bad  100%) | WER 105.61 | chrF   4.4 | best  73.38@76  | blank 92.4% | len  81.6/173 | lr 2.8e-04 | g   9.4 w    171 | w 4034px |  179s |  6.7h/11h  (0/30 stale)
+24017.3s 861 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24017.3s 862 PRED: स  क ा प प  स क ा स क या
+24196.6s 863 ep  92 | loss  3.057 | CER  74.65 (med  74.6, bad  100%) | WER 104.33 | chrF   4.6 | best  73.38@76  | blank 92.3% | len  80.7/173 | lr 2.8e-04 | g  29.8 w    172 | w 4034px |  179s |  6.7h/11h  (0/30 stale)
+24196.6s 864 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24196.6s 865 PRED: सर क करा क  रा सया करा करा का क क
+24376.0s 866 ep  93 | loss  3.069 | CER  73.66 (med  73.8, bad  100%) | WER 107.05 | chrF   5.2 | best  73.38@76  | blank 92.0% | len  85.4/173 | lr 2.8e-04 | g  51.0 w    172 | w 4034px |  179s |  6.8h/11h  (0/30 stale)
+24376.0s 867 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24376.0s 868 PRED: सर  स रा का स या स का सा सहा सहा स य
+24555.3s 869 ep  94 | loss  3.051 | CER  74.97 (med  75.3, bad  100%) | WER 104.14 | chrF   4.7 | best  73.38@76  | blank 93.0% | len  75.7/173 | lr 2.8e-04 | g  30.1 w    172 | w 4034px |  179s |  6.8h/11h  (0/30 stale)
+24555.3s 870 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24555.3s 871 PRED: सर प र क क पर  करा क स  स य
+24734.6s 872 ep  95 | loss  3.052 | CER  73.47 (med  73.7, bad  100%) | WER 106.62 | chrF   5.4 | best  73.38@76  | blank 91.6% | len  88.5/173 | lr 2.8e-04 | g  20.5 w    172 | w 4034px |  179s |  6.9h/11h  (0/30 stale)
+24734.6s 873 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24734.6s 874 PRED: सरा प रा क क करा स या क सा क  क य
+24913.8s 875 ep  96 | loss  3.053 | CER  74.44 (med  74.8, bad  100%) | WER 104.07 | chrF   4.9 | best  73.38@76  | blank 92.3% | len  81.7/173 | lr 2.8e-04 | g   9.5 w    173 | w 4034px |  179s |  6.9h/11h  (0/30 stale)
+24913.8s 876 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+24913.8s 877 PRED: र रा पर प पा परा प या परा सरा सा य
+25093.0s 878 ep  97 | loss  3.052 | CER  76.19 (med  77.0, bad  100%) | WER 103.88 | chrF   4.0 | best  73.38@76  | blank 93.3% | len  71.8/173 | lr 2.8e-04 | g 210.6 w    173 | w 4034px |  179s |  7.0h/11h  (0/30 stale)
+25093.0s 879 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25093.0s 880 PRED: रा क र क क करा सया क करा क का य
+25272.3s 881 ep  98 | loss  3.052 | CER  74.72 (med  74.9, bad  100%) | WER 104.00 | chrF   4.9 | best  73.38@76  | blank 92.4% | len  80.0/173 | lr 2.8e-04 | g 424.9 w    173 | w 4034px |  179s |  7.0h/11h  (0/30 stale)
+25272.3s 882 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25272.3s 883 PRED: रा कर क र करा सरा सया स  क स य
+25451.5s 884 ep  99 | loss  3.036 | CER  73.58 (med  73.8, bad  100%) | WER 108.18 | chrF   5.0 | best  73.38@76  | blank 91.3% | len  93.1/173 | lr 2.8e-04 | g  18.5 w    173 | w 4034px |  179s |  7.1h/11h  (0/30 stale)
+25451.5s 885 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25451.5s 886 PRED: रा रा क रा क करा परा क या करा सरे री सा य
+25630.7s 887 ep 100 | loss  3.055 | CER  73.51 (med  73.7, bad  100%) | WER 108.16 | chrF   5.3 | best  73.38@76  | blank 91.5% | len  90.7/173 | lr 2.8e-04 | g  21.1 w    173 | w 4034px |  179s |  7.1h/11h  (0/30 stale)
+25630.7s 888 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25630.7s 889 PRED: ररा करा सर क कर करा क क या करा सर क य
+25809.9s 890 ep 101 | loss  3.057 | CER  75.54 (med  76.4, bad  100%) | WER 106.04 | chrF   4.5 | best  73.38@76  | blank 92.9% | len  77.1/173 | lr 2.8e-04 | g  73.1 w    174 | w 4034px |  179s |  7.2h/11h  (0/30 stale)
+25809.9s 891 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25809.9s 892 PRED: रार क स क  क प सरा स स स स य
+25989.1s 893 ep 102 | loss  3.050 | CER  73.58 (med  73.5, bad  100%) | WER 107.66 | chrF   5.0 | best  73.38@76  | blank 91.6% | len  88.6/173 | lr 2.8e-04 | g 246.5 w    174 | w 4034px |  179s |  7.2h/11h  (0/30 stale)
+25989.1s 894 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+25989.1s 895 PRED: रा करा क रा का करा करा प या करा सरा स स य
+26168.3s 896 ep 103 | loss  3.043 | CER  74.16 (med  74.2, bad  100%) | WER 105.68 | chrF   4.7 | best  73.38@76  | blank 91.9% | len  86.4/173 | lr 2.8e-04 | g  11.8 w    174 | w 4034px |  179s |  7.3h/11h  (0/30 stale)
+26168.3s 897 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+26168.3s 898 PRED: र करा करा का का कया क या स  करा स ा क
+26347.6s 899 ep 104 | loss  3.059 | CER  75.32 (med  75.6, bad  100%) | WER 103.44 | chrF   5.0 | best  73.38@76  | blank 92.7% | len  77.2/173 | lr 2.8e-04 | g 658.9 w    174 | w 4034px |  179s |  7.3h/11h  (0/30 stale)
+26347.6s 900 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+26347.6s 901 PRED: रर पर स क करा सरा करा करा स क क य
+26526.8s 902 ep 105 | loss  3.056 | CER  74.20 (med  74.3, bad  100%) | WER 104.33 | chrF   4.8 | best  73.38@76  | blank 91.9% | len  85.4/173 | lr 2.8e-04 | g  41.1 w    175 | w 4034px |  179s |  7.4h/11h  (0/30 stale)
+26526.8s 903 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+26526.8s 904 PRED: रारी करा प करा करा करा करा कर करी क क य
+26706.0s 905 ep 106 | loss  3.047 | CER  74.28 (med  74.3, bad  100%) | WER 104.33 | chrF   4.9 | best  73.38@76  | blank 92.0% | len  85.2/173 | lr 2.8e-04 | g  57.2 w    175 | w 4034px |  179s |  7.4h/11h  (0/30 stale)
+26706.0s 906 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+26706.0s 907 PRED: र सर स कर क रा स ी स क क स या
+26885.4s 908 ep 107 | loss  3.042 | CER  75.00 (med  75.4, bad  100%) | WER 104.55 | chrF   4.7 | best  73.38@76  | blank 92.4% | len  80.9/173 | lr 2.8e-04 | g   9.9 w    175 | w 4034px |  179s |  7.5h/11h  (0/30 stale)
+26885.4s 909 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+26885.4s 910 PRED: रर कर क  क क करा क या क स स य
+27064.5s 911 ep 108 | loss  3.036 | CER  74.63 (med  74.9, bad  100%) | WER 103.76 | chrF   5.0 | best  73.38@76  | blank 92.4% | len  80.5/173 | lr 2.8e-04 | g  25.0 w    175 | w 4034px |  179s |  7.5h/11h  (0/30 stale)
+27064.5s 912 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27064.5s 913 PRED: सर करा पा क का सरा स सरा स स क य
+27243.8s 914 ep 109 | loss  3.042 | CER  75.64 (med  76.0, bad  100%) | WER 102.99 | chrF   4.4 | best  73.38@76  | blank 92.8% | len  76.1/173 | lr 2.8e-04 | g  78.5 w    175 | w 4034px |  179s |  7.6h/11h  (0/30 stale)
+27243.8s 915 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27243.8s 916 PRED: सरा क करा क कर करा सया करी स   य
+27423.0s 917 ep 110 | loss  3.039 | CER  74.18 (med  74.4, bad  100%) | WER 106.36 | chrF   5.2 | best  73.38@76  | blank 92.1% | len  84.3/173 | lr 2.8e-04 | g  45.9 w    175 | w 4034px |  179s |  7.6h/11h  (0/30 stale)
+27423.0s 918 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27423.0s 919 PRED: क  करा क  क का सरा क कया सा स  क या
+27602.3s 920 ep 111 | loss  3.036 | CER  74.23 (med  74.4, bad  100%) | WER 107.58 | chrF   5.3 | best  73.38@76  | blank 92.1% | len  83.7/173 | lr 2.8e-04 | g 195.7 w    175 | w 4034px |  179s |  7.7h/11h  (0/30 stale)
+27602.3s 921 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27602.3s 922 PRED: रर सर क क क करा सरा स ी सर परा स  स य
+27781.5s 923 ep 112 | loss  3.038 | CER  74.00 (med  74.1, bad  100%) | WER 106.16 | chrF   5.0 | best  73.38@76  | blank 92.0% | len  85.0/173 | lr 2.8e-04 | g  69.8 w    176 | w 4034px |  179s |  7.7h/11h  (0/30 stale)
+27781.5s 924 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27781.5s 925 PRED: र क क सरा क का सा स सहा सरा स  स य
+27960.7s 926 ep 113 | loss  3.041 | CER  74.47 (med  74.5, bad  100%) | WER 104.12 | chrF   5.1 | best  73.38@76  | blank 92.5% | len  79.9/173 | lr 2.8e-04 | g  25.3 w    176 | w 4034px |  179s |  7.8h/11h  (0/30 stale)
+27960.7s 927 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+27960.7s 928 PRED: रर क ा क का का प ा क क स  क या
+28139.8s 929 ep 114 | loss  3.045 | CER  73.33 (med  73.4, bad  100%) | WER 106.93 | chrF   5.6 | best  73.38@76  | blank 91.6% | len  89.5/173 | lr 2.8e-04 | g  67.1 w    176 | w 4034px |  179s |  7.8h/11h  (0/30 stale)
+28139.8s 930 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+28139.8s 931 PRED: रर का क  करा का कया स हा स ी  ा का या
+28319.1s 932 ep 115 | loss  3.040 | CER  74.04 (med  74.3, bad  100%) | WER 104.16 | chrF   5.3 | best  73.38@76  | blank 92.3% | len  82.5/173 | lr 2.7e-04 | g  45.3 w    176 | w 4034px |  179s |  7.9h/11h  (0/30 stale)
+28319.1s 933 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+28319.1s 934 PRED: स स  ा कर प ा पा सरी स क य
+28498.3s 935 ep 116 | loss  3.058 | CER  75.77 (med  75.5, bad  100%) | WER 102.34 | chrF   4.4 | best  73.38@76  | blank 93.2% | len  70.9/173 | lr 2.7e-04 | g  77.2 w    176 | w 4034px |  179s |  7.9h/11h  (0/30 stale)
+28498.3s 936 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+28498.3s 937 PRED: सरा क रा स सरा सरा स स य
+28677.6s 938 ep 117 | loss  3.053 | CER  74.52 (med  74.9, bad  100%) | WER 104.65 | chrF   4.8 | best  73.38@76  | blank 92.0% | len  83.9/173 | lr 2.7e-04 | g  38.6 w    177 | w 4034px |  179s |  8.0h/11h  (0/30 stale)
+28677.6s 939 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+28677.6s 940 PRED: सर सरा कर करा सर क क या स व
+28856.9s 941 ep 118 | loss  3.040 | CER  74.22 (med  74.3, bad  100%) | WER 105.44 | chrF   5.1 | best  73.38@76  | blank 91.8% | len  87.3/173 | lr 2.7e-04 | g  38.2 w    177 | w 4034px |  179s |  8.0h/11h  (0/30 stale)
+28856.9s 942 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+28856.9s 943 PRED: रर प प क पा प परा की स क व
+29035.9s 944 ep 119 | loss  3.039 | CER  74.12 (med  74.4, bad  100%) | WER 106.64 | chrF   4.4 | best  73.38@76  | blank 92.0% | len  85.2/173 | lr 2.7e-04 | g  20.4 w    177 | w 4034px |  179s |  8.1h/11h  (0/30 stale)
+29035.9s 945 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29035.9s 946 PRED: रारा क  ा का कया स का करा का क य
+29215.0s 947 ep 120 | loss  3.032 | CER  74.67 (med  74.9, bad  100%) | WER 105.08 | chrF   4.7 | best  73.38@76  | blank 91.9% | len  86.0/173 | lr 2.7e-04 | g  23.8 w    177 | w 4034px |  179s |  8.1h/11h  (0/30 stale)
+29215.0s 948 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29215.0s 949 PRED: सर क क र कर परा स  कया स ा स य
+29394.3s 950 ep 121 | loss  3.035 | CER  74.24 (med  74.6, bad  100%) | WER 106.48 | chrF   4.7 | best  73.38@76  | blank 91.9% | len  86.8/173 | lr 2.7e-04 | g  20.1 w    177 | w 4034px |  179s |  8.2h/11h  (0/30 stale)
+29394.3s 951 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29394.3s 952 PRED: सा क रा क का कया क से सा स रा स स य
+29573.4s 953 ep 122 | loss  3.037 | CER  73.35 (med  73.5, bad  100%) | WER 107.61 | chrF   5.7 | best  73.38@76  | blank 91.2% | len  93.0/173 | lr 2.7e-04 | g  58.6 w    177 | w 4034px |  179s |  8.2h/11h  (0/30 stale)
+29573.4s 954 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29573.4s 955 PRED: सरा स रा का कररा सरा स स सा सहा सरा
+29752.6s 956 ep 123 | loss  3.038 | CER  74.19 (med  74.3, bad  100%) | WER 108.64 | chrF   4.7 | best  73.38@76  | blank 91.9% | len  86.5/173 | lr 2.7e-04 | g  94.5 w    178 | w 4034px |  179s |  8.3h/11h  (0/30 stale)
+29752.6s 957 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29752.6s 958 PRED: सरा सर क रा का सया स ा क सया क का य
+29931.9s 959 ep 124 | loss  3.053 | CER  75.22 (med  75.5, bad  100%) | WER 104.77 | chrF   4.5 | best  73.38@76  | blank 92.6% | len  77.7/173 | lr 2.7e-04 | g 761.5 w    178 | w 4034px |  179s |  8.3h/11h  (0/30 stale)
+29931.9s 960 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+29931.9s 961 PRED: ररा स क ा का सा करा क कहा क का य
+30111.1s 962 ep 125 | loss  3.060 | CER  74.94 (med  75.2, bad  100%) | WER 106.69 | chrF   4.5 | best  73.38@76  | blank 92.6% | len  79.7/173 | lr 2.7e-04 | g  19.1 w    178 | w 4034px |  179s |  8.4h/11h  (0/30 stale)
+30111.1s 963 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+30111.1s 964 PRED: सरा प  क करा करा स क स स का य
+30290.5s 965 ep 126 | loss  3.041 | CER  73.77 (med  73.8, bad  100%) | WER 107.90 | chrF   4.9 | best  73.38@76  | blank 91.7% | len  87.8/173 | lr 2.7e-04 | g  25.0 w    179 | w 4034px |  179s |  8.4h/11h  (0/30 stale)
+30290.5s 966 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+30290.5s 967 PRED: सर रा क क  करा परा का प सरा स सा य
+30469.9s 968 ep 127 | loss  3.037 | CER  74.43 (med  74.4, bad  100%) | WER 105.03 | chrF   5.2 | best  73.38@76  | blank 92.2% | len  82.6/173 | lr 2.7e-04 | g  39.8 w    179 | w 4034px |  179s |  8.5h/11h  (0/30 stale)
+30469.9s 969 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+30469.9s 970 PRED: करा प ा रा करा  स ल सहा स स
+30649.4s 971 ep 128 | loss  3.060 | CER  75.75 (med  76.1, bad  100%) | WER 104.91 | chrF   4.4 | best  73.38@76  | blank 92.7% | len  76.6/173 | lr 2.7e-04 | g  27.2 w    179 | w 4034px |  179s |  8.5h/11h  (0/30 stale)
+30649.4s 972 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+30649.4s 973 PRED: करा प क करा करा स हा सहा स स या
+30828.7s 974 ep 129 | loss  3.054 | CER  73.97 (med  74.2, bad  100%) | WER 105.58 | chrF   5.4 | best  73.38@76  | blank 91.9% | len  85.5/173 | lr 2.7e-04 | g  64.9 w    179 | w 4034px |  179s |  8.6h/11h  (0/30 stale)
+30828.7s 975 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+30828.7s 976 PRED: करा पा परा करा करा सरा स  का या
+31008.3s 977 ep 130 | loss  3.048 | CER  74.71 (med  75.0, bad  100%) | WER 105.97 | chrF   4.9 | best  73.38@76  | blank 92.6% | len  78.5/173 | lr 2.7e-04 | g 185.1 w    180 | w 4034px |  180s |  8.6h/11h  (0/30 stale)
+31008.3s 978 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31008.3s 979 PRED: सरा प प रा का परा प  परा स स य
+31187.8s 980 ep 131 | loss  3.042 | CER  74.76 (med  74.6, bad  100%) | WER 103.76 | chrF   4.7 | best  73.38@76  | blank 92.6% | len  77.7/173 | lr 2.7e-04 | g  71.6 w    180 | w 4034px |  180s |  8.7h/11h  (0/30 stale)
+31187.8s 981 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31187.8s 982 PRED: सरा प रा स करा करा सा क सा स या
+31367.3s 983 ep 132 | loss  3.032 | CER  73.81 (med  74.0, bad  100%) | WER 106.57 | chrF   5.3 | best  73.38@76  | blank 91.7% | len  87.2/173 | lr 2.7e-04 | g  41.0 w    180 | w 4034px |  180s |  8.7h/11h  (0/30 stale)
+31367.3s 984 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31367.3s 985 PRED: सरा प रा का क रा सरा स ा सा या
+31546.8s 986 ep 133 | loss  3.028 | CER  73.64 (med  73.8, bad  100%) | WER 108.96 | chrF   5.0 | best  73.38@76  | blank 91.5% | len  89.8/173 | lr 2.7e-04 | g  42.8 w    180 | w 4034px |  179s |  8.8h/11h  (0/30 stale)
+31546.8s 987 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31546.8s 988 PRED: करा पा सा करा सरा स ा सरा स सा य
+31726.2s 989 ep 134 | loss  3.034 | CER  75.18 (med  75.4, bad  100%) | WER 104.00 | chrF   5.0 | best  73.38@76  | blank 92.6% | len  76.9/173 | lr 2.7e-04 | g 150.8 w    180 | w 4034px |  179s |  8.8h/11h  (0/30 stale)
+31726.2s 990 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31726.2s 991 PRED: सरा परा पर या ा स स  सा य
+31905.7s 992 ep 135 | loss  3.040 | CER  74.64 (med  74.6, bad  100%) | WER 102.82 | chrF   5.4 | best  73.38@76  | blank 92.6% | len  78.2/173 | lr 2.7e-04 | g   8.4 w    180 | w 4034px |  179s |  8.9h/11h  (0/30 stale)
+31905.7s 993 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+31905.7s 994 PRED: करा प रा करा करा सरा सरा स  ा य
+32085.2s 995 ep 136 | loss  3.049 | CER  73.19 (med  73.2, bad  100%) | WER 109.00 | chrF   5.5 | best  73.19@136 | blank 91.1% | len  94.0/173 | lr 2.6e-04 | g  87.5 w    180 | w 4034px |  179s |  8.9h/11h  *BEST*
+32085.2s 996 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32085.2s 997 PRED: करा प ा परा सरा सरा सर सरा सा या
+32264.6s 998 ep 137 | loss  3.026 | CER  74.31 (med  74.3, bad  100%) | WER 105.37 | chrF   5.0 | best  73.19@136 | blank 92.0% | len  84.2/173 | lr 2.6e-04 | g  25.2 w    180 | w 4034px |  179s |  9.0h/11h  (0/30 stale)
+32264.6s 999 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32264.6s 1000 PRED: करा परा परा परा सरा स पहा सा सा य
+32444.2s 1001 ep 138 | loss  3.034 | CER  75.61 (med  75.4, bad  100%) | WER 104.36 | chrF   4.3 | best  73.19@136 | blank 92.7% | len  76.6/173 | lr 2.6e-04 | g  32.2 w    180 | w 4034px |  180s |  9.0h/11h  (0/30 stale)
+32444.2s 1002 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32444.2s 1003 PRED: करा प रा प कर सरा स रा सरा सा य
+32623.7s 1004 ep 139 | loss  3.038 | CER  74.16 (med  74.2, bad  100%) | WER 106.40 | chrF   5.1 | best  73.19@136 | blank 91.9% | len  87.0/173 | lr 2.6e-04 | g  14.3 w    181 | w 4034px |  180s |  9.1h/11h  (0/30 stale)
+32623.7s 1005 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32623.7s 1006 PRED: सरा प सरा पर सरा सरा स रा सरा स सा य
+32803.3s 1007 ep 140 | loss  3.038 | CER  74.19 (med  74.1, bad  100%) | WER 106.79 | chrF   5.0 | best  73.19@136 | blank 91.8% | len  87.5/173 | lr 2.6e-04 | g  39.3 w    181 | w 4034px |  180s |  9.1h/11h  (0/30 stale)
+32803.3s 1008 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32803.3s 1009 PRED: सरा प परा स रा सरा सरा सरा सरा स स य
+32982.8s 1010 ep 141 | loss  3.034 | CER  75.14 (med  75.2, bad  100%) | WER 103.30 | chrF   4.9 | best  73.19@136 | blank 92.6% | len  78.2/173 | lr 2.6e-04 | g  40.3 w    181 | w 4034px |  179s |  9.2h/11h  (0/30 stale)
+32982.8s 1011 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+32982.8s 1012 PRED: सरा का प रा करा सा स सरा स  य
+33162.4s 1013 ep 142 | loss  3.051 | CER  74.60 (med  74.4, bad  100%) | WER 105.08 | chrF   5.2 | best  73.19@136 | blank 92.2% | len  82.6/173 | lr 2.6e-04 | g  43.0 w    181 | w 4034px |  180s |  9.2h/11h  (0/30 stale)
+33162.4s 1014 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+33162.4s 1015 PRED: सर रा सर  का सर स करा सरी  स य
+33342.0s 1016 ep 143 | loss  3.053 | CER  74.02 (med  74.1, bad  100%) | WER 104.86 | chrF   5.1 | best  73.19@136 | blank 92.0% | len  84.7/173 | lr 2.6e-04 | g  26.4 w    181 | w 4034px |  180s |  9.3h/11h  (0/30 stale)
+33342.0s 1017 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+33342.0s 1018 PRED: करा परा परा करा सरा स रा सा सा सा या
+33521.4s 1019 ep 144 | loss  3.040 | CER  74.77 (med  75.0, bad  100%) | WER 104.86 | chrF   4.9 | best  73.19@136 | blank 92.2% | len  81.4/173 | lr 2.6e-04 | g  45.9 w    181 | w 4034px |  179s |  9.3h/11h  (0/30 stale)
+33521.4s 1020 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+33521.4s 1021 PRED: करा परा सर र करा सर स सरा स कर का कहा य
+33700.8s 1022 ep 145 | loss  3.038 | CER  73.74 (med  74.1, bad  100%) | WER 107.99 | chrF   5.4 | best  73.19@136 | blank 91.5% | len  89.7/173 | lr 2.6e-04 | g  12.9 w    182 | w 4034px |  179s |  9.4h/11h  (0/30 stale)
+33700.8s 1023 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+33700.8s 1024 PRED: सरा क क  रा रा सर स सरा स  क स य
+33880.1s 1025 ep 146 | loss  3.035 | CER  73.74 (med  73.9, bad  100%) | WER 107.37 | chrF   5.2 | best  73.19@136 | blank 91.5% | len  90.0/173 | lr 2.6e-04 | g  19.2 w    182 | w 4034px |  179s |  9.4h/11h  (0/30 stale)
+33880.1s 1026 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+33880.1s 1027 PRED: करा क क र रा करा करा स रा स रा क य
+34059.4s 1028 ep 147 | loss  3.029 | CER  73.28 (med  73.2, bad  100%) | WER 107.46 | chrF   5.4 | best  73.19@136 | blank 91.3% | len  91.8/173 | lr 2.6e-04 | g  25.7 w    182 | w 4034px |  179s |  9.5h/11h  (0/30 stale)
+34059.4s 1029 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34059.4s 1030 PRED: सरा स  र रा करा सरा स रा स रा साया य
+34238.5s 1031 ep 148 | loss  3.027 | CER  74.27 (med  74.3, bad  100%) | WER 108.18 | chrF   4.5 | best  73.19@136 | blank 91.6% | len  89.6/173 | lr 2.6e-04 | g  52.7 w    182 | w 4034px |  179s |  9.5h/11h  (0/30 stale)
+34238.5s 1032 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34238.5s 1033 PRED: करर क रा करा करा कर सी करा करी सरा कया य
+34417.9s 1034 ep 149 | loss  3.027 | CER  74.17 (med  74.3, bad  100%) | WER 105.51 | chrF   5.2 | best  73.19@136 | blank 91.9% | len  85.8/173 | lr 2.6e-04 | g  25.1 w    182 | w 4034px |  179s |  9.6h/11h  (0/30 stale)
+34417.9s 1035 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34417.9s 1036 PRED: सरी सरा परा करा कर सारा सही सरा सा य
+34597.3s 1037 ep 150 | loss  3.028 | CER  74.97 (med  75.5, bad  100%) | WER 105.51 | chrF   4.9 | best  73.19@136 | blank 92.7% | len  77.9/173 | lr 2.6e-04 | g  15.5 w    182 | w 4034px |  179s |  9.6h/11h  (0/30 stale)
+34597.3s 1038 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34597.3s 1039 PRED: सर क क र करा सर सा सरा सत करा स य
+34776.5s 1040 ep 151 | loss  3.031 | CER  74.39 (med  74.8, bad  100%) | WER 104.89 | chrF   5.2 | best  73.19@136 | blank 92.1% | len  83.0/173 | lr 2.6e-04 | g  35.1 w    182 | w 4034px |  179s |  9.7h/11h  (0/30 stale)
+34776.5s 1041 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34776.5s 1042 PRED: करा पा पा रा करा करा स कर स सा स य
+34955.6s 1043 ep 152 | loss  3.027 | CER  74.41 (med  74.7, bad  100%) | WER 105.95 | chrF   4.7 | best  73.19@136 | blank 92.0% | len  85.0/173 | lr 2.6e-04 | g  80.9 w    183 | w 4034px |  179s |  9.7h/11h  (0/30 stale)
+34955.6s 1044 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+34955.6s 1045 PRED: करा का रा क रा करा कर सा करा स रा स व
+35134.7s 1046 ep 153 | loss  3.029 | CER  73.68 (med  73.7, bad  100%) | WER 110.42 | chrF   4.9 | best  73.19@136 | blank 91.7% | len  88.5/173 | lr 2.6e-04 | g  39.4 w    183 | w 4034px |  179s |  9.8h/11h  (0/30 stale)
+35134.7s 1047 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+35134.7s 1048 PRED: कर  रा  रा करा सरा स सरा सरा स या
+35313.9s 1049 ep 154 | loss  3.021 | CER  74.77 (med  75.2, bad  100%) | WER 106.14 | chrF   4.8 | best  73.19@136 | blank 92.1% | len  84.0/173 | lr 2.6e-04 | g   9.6 w    183 | w 4034px |  179s |  9.8h/11h  (0/30 stale)
+35313.9s 1050 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+35313.9s 1051 PRED: सर प परा करा करा कर स परा स  या
+35493.1s 1052 ep 155 | loss  3.016 | CER  73.74 (med  74.1, bad  100%) | WER 108.88 | chrF   5.4 | best  73.19@136 | blank 91.5% | len  90.0/173 | lr 2.5e-04 | g  35.6 w    183 | w 4034px |  179s |  9.9h/11h  (0/30 stale)
+35493.1s 1053 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+35493.1s 1054 PRED: करा पा सरा करा करा पर स सरा यर स य
+35672.2s 1055 ep 156 | loss  3.020 | CER  76.35 (med  77.2, bad  100%) | WER 103.39 | chrF   4.4 | best  73.19@136 | blank 93.3% | len  72.1/173 | lr 2.5e-04 | g  21.6 w    183 | w 4034px |  179s |  9.9h/11h  (0/30 stale)
+35672.2s 1056 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+35672.2s 1057 PRED: करा प परा पर परा पर स परा स वय
+35851.3s 1058 ep 157 | loss  3.016 | CER  73.81 (med  73.8, bad  100%) | WER 107.44 | chrF   5.0 | best  73.19@136 | blank 91.8% | len  87.6/173 | lr 2.5e-04 | g  20.3 w    183 | w 4034px |  179s | 10.0h/11h  (0/30 stale)
+35851.3s 1059 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+35851.3s 1060 PRED: सरा पा परा र क रा करा कर सा सरा सी क य
+36030.4s 1061 ep 158 | loss  3.024 | CER  74.42 (med  74.5, bad  100%) | WER 108.57 | chrF   4.6 | best  73.19@136 | blank 91.9% | len  86.1/173 | lr 2.5e-04 | g  23.1 w    184 | w 4034px |  179s | 10.0h/11h  (0/30 stale)
+36030.4s 1062 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36030.4s 1063 PRED: राजरी  करा परा करा कर स करा सरा क क  य
+36209.6s 1064 ep 159 | loss  3.036 | CER  74.02 (med  74.1, bad  100%) | WER 106.04 | chrF   5.0 | best  73.19@136 | blank 91.9% | len  85.3/173 | lr 2.5e-04 | g  16.0 w    184 | w 4034px |  179s | 10.1h/11h  (0/30 stale)
+36209.6s 1065 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36209.6s 1066 PRED: ररी स रा सरा सरा सर सा सरा सरा का क स या
+36388.8s 1067 ep 160 | loss  3.028 | CER  74.17 (med  74.2, bad  100%) | WER 104.77 | chrF   5.0 | best  73.19@136 | blank 92.1% | len  83.5/173 | lr 2.5e-04 | g 636.1 w    184 | w 4034px |  179s | 10.1h/11h  (0/30 stale)
+36388.8s 1068 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36388.8s 1069 PRED: क    करा का का सर स कर सर का या
+36567.9s 1070 ep 161 | loss  3.023 | CER  73.24 (med  73.3, bad  100%) | WER 106.93 | chrF   5.1 | best  73.19@136 | blank 91.0% | len  95.9/173 | lr 2.5e-04 | g  33.6 w    184 | w 4034px |  179s | 10.2h/11h  (0/30 stale)
+36567.9s 1071 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36567.9s 1072 PRED: रारी क रा क रा करा करा अ करा परा क क व
+36747.2s 1073 ep 162 | loss  3.023 | CER  73.18 (med  73.3, bad  100%) | WER 105.10 | chrF   5.5 | best  73.19@136 | blank 91.2% | len  93.5/173 | lr 2.5e-04 | g  24.4 w    184 | w 4034px |  179s | 10.2h/11h  (0/30 stale)
+36747.2s 1074 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36747.2s 1075 PRED: करा रा परा रा करा करा सरा सहा सरा सा का या
+36926.4s 1076 ep 163 | loss  3.039 | CER  74.52 (med  74.8, bad  100%) | WER 106.57 | chrF   4.6 | best  73.19@136 | blank 92.1% | len  83.6/173 | lr 2.5e-04 | g 124.7 w    184 | w 4034px |  179s | 10.3h/11h  (0/30 stale)
+36926.4s 1077 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+36926.4s 1078 PRED: सरा र सर रा कर कर कर स सरा सर स स य
+37105.6s 1079 ep 164 | loss  3.026 | CER  75.07 (med  75.8, bad  100%) | WER 104.89 | chrF   4.3 | best  73.19@136 | blank 92.4% | len  80.2/173 | lr 2.5e-04 | g  33.7 w    184 | w 4034px |  179s | 10.3h/11h  (0/30 stale)
+37105.6s 1080 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+37105.6s 1081 PRED: ररी कर पर  र रा कर स हा सरा स  य
+37284.9s 1082 ep 165 | loss  3.022 | CER  72.73 (med  73.0, bad  100%) | WER 108.98 | chrF   5.8 | best  72.73@165 | blank 90.8% | len  97.9/173 | lr 2.5e-04 | g 169.4 w    184 | w 4034px |  179s | 10.4h/11h  *BEST*
+37284.9s 1083 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+37284.9s 1084 PRED: सरा स  परा करा करा करा स सर स स करा य
+37464.5s 1085 ep 166 | loss  3.020 | CER  73.77 (med  74.1, bad  100%) | WER 105.63 | chrF   5.4 | best  72.73@165 | blank 91.9% | len  85.9/173 | lr 2.5e-04 | g 225.9 w    184 | w 4034px |  180s | 10.4h/11h  (0/30 stale)
+37464.5s 1086 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+37464.5s 1087 PRED: सरी स सरा सर सर करा सर सरा सरी स र य
+37643.7s 1088 ep 167 | loss  3.021 | CER  74.08 (med  74.2, bad  100%) | WER 106.86 | chrF   4.7 | best  72.73@165 | blank 91.6% | len  89.2/173 | lr 2.5e-04 | g 1313.2 w    185 | w 4034px |  179s | 10.5h/11h  (0/30 stale)
+37643.7s 1089 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+37643.7s 1090 PRED: सरा स रा कर र स सरा सरा सरा य
+37822.8s 1091 ep 168 | loss  3.030 | CER  75.43 (med  75.9, bad  100%) | WER 103.54 | chrF   4.4 | best  72.73@165 | blank 92.9% | len  75.2/173 | lr 2.5e-04 | g  94.3 w    185 | w 4034px |  179s | 10.5h/11h  (0/30 stale)
+37822.8s 1092 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+37822.8s 1093 PRED: करी स  रा करा क स क स क क य
+38002.0s 1094 ep 169 | loss  3.009 | CER  74.83 (med  75.2, bad  100%) | WER 103.83 | chrF   5.0 | best  72.73@165 | blank 92.4% | len  80.2/173 | lr 2.5e-04 | g  40.7 w    185 | w 4034px |  179s | 10.6h/11h  (0/30 stale)
+38002.0s 1095 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+38002.0s 1096 PRED: सरा प रा परा पर पर पर स पर स र पर या
+38181.2s 1097 ep 170 | loss  3.024 | CER  75.19 (med  75.6, bad  100%) | WER 106.50 | chrF   4.7 | best  72.73@165 | blank 92.7% | len  78.7/173 | lr 2.5e-04 | g  33.6 w    185 | w 4034px |  179s | 10.6h/11h  (0/30 stale)
+38181.2s 1098 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+38181.2s 1099 PRED: स सर स रा कर सर स सर र कर सर या
+38360.4s 1100 ep 171 | loss  3.024 | CER  74.71 (med  75.7, bad  100%) | WER 107.32 | chrF   4.7 | best  72.73@165 | blank 92.3% | len  82.2/173 | lr 2.5e-04 | g  10.3 w    185 | w 4034px |  179s | 10.7h/11h  (0/30 stale)
+38360.4s 1101 GT  : सागणे त्यास ही अलाहिदा पत्र लिहिले आहे तरी ये विशीचे उत्तर हुजूर लेहून पाटवणे जाणि
+38360.4s 1102 PRED: सरी प क क रा कर स सर सर कर सर या
+38360.4s 1103 TIME BUDGET reached (10.7 h) at epoch 171. last.pt is saved - attach this notebook's output as an input and commit again to continue at epoch 172.
+38360.4s 1104 done (stopped early): 171 epochs, best val CER 72.73 at epoch 165
+38376.3s 1105 {
+38376.3s 1106 "CER": 73.09225966687174,
+38376.3s 1107 "WER": 110.7132788271779,
+38376.3s 1108 "median_CER": 73.47304513203132,
+38376.3s 1109 "catastrophic_pct": 100.0,
+38376.3s 1110 "chrF_pp": 5.719259556363663,
+38376.3s 1111 "BLEU": 0.013434347222981093,
+38376.3s 1112 "n": 306,
+38376.3s 1113 "CER_CI95": [
+38376.3s 1114 72.82543461862505,
+38376.3s 1115 73.37552377612614
+38376.3s 1116 ],
+38376.3s 1117 "run": "B1_seed42",
+38376.3s 1118 "from_checkpoint": "/kaggle/working/runs/B1_seed42/best.pt",
+38376.3s 1119 "best_epoch": 165,
+38376.3s 1120 "val_CER": 72.72867084470761,
+38376.3s 1121 "hours": 10.66,
+38376.3s 1122 "blank_slot_pct": 92.3
+38376.3s 1123 }
+38377.0s 1124 GT  : श्री अखंडित लक्ष्मी अलंकृत राजमान्य राजश्री विसाजी हरी क र पाो नासिक गोसावी यांसी सेवक माधवराव नारायण प्रधान नमस्कार सु
+38377.0s 1125 PRED: करी कर पा परा परा करा पा स या परा परा का करा परा पा का करा परा क ा सरा का सरा सरा सरा स व व
+38377.0s 1126 
+38377.1s 1127 GT  : पाटविली आहे ही बेता प्राो बाल्याच्या हावाली करुन खोगरे फाजवणे निबगांव कनेरसर गोसासी येथे पटीचा तगादा करुन दोचौ
+38377.1s 1128 PRED: सा प रा पा पा परा पाया परा सरा पा रा परा करा आ करा सरा क रा करा करा कता
+38377.1s 1129 
+38377.1s 1130 GT  : नख्त २८॥ रुये
+38377.1s 1131 PRED: श  स स
+38377.1s 1132 
+38377.2s 1133 GT  : घेऊनु असल परतून देणें छ १८ सफर पाा हुजूर सही
+38377.2s 1134 PRED: त  रा पा सा पया परा पा प ता ता परा पा व ा प सहा सा वती
+38377.2s 1135 
+38377.2s 1136 outputs in /kaggle/working : ['__notebook__.ipynb', 'curves.png', 'data', 'image-processing-audit', 'runs', 'strip_64x8192.npy', 'strip_64x8192_widths.npy', 'test_metrics.json', 'test_predictions.csv']
+38377.2s 1137 total runtime 10.66 h
+38382.5s 1138 /usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+38382.5s 1139 cells[i][c] = re.sub('\\\\\|', '|', cell)
+38382.6s 1140 /usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+38382.6s 1141 text = re.sub(r'_', '\_', text) # Escape underscores in display text
+38383.4s 1142 [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+38383.5s 1143 [NbConvertApp] Writing 680086 bytes to __notebook__.ipynb
+38385.9s 1144 [NbConvertApp] Converting notebook __notebook__.ipynb to html
+38386.6s 1145 [NbConvertApp] Support files will be in __results___files/
+38386.6s 1146 [NbConvertApp] Making directory __results___files
+38386.6s 1147 [NbConvertApp] Making directory __results___files
+38386.6s 1148 [NbConvertApp] Making directory __results___files
+38386.7s 1149 [NbConvertApp] Making directory __results___files
+38386.7s 1150 [NbConvertApp] Making directory __results___files
+38386.7s 1151 [NbConvertApp] Making directory __results___files
+38386.7s 1152 [NbConvertApp] Making directory __results___files
+38386.7s 1153 [NbConvertApp] Writing 750389 bytes to __results__.html

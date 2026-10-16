@@ -1,0 +1,9 @@
+{
+ "run": "s1_offline_ens4_lm7",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "BEST Stage-1 pipeline. Average of the per-frame probabilities of four 40-px line CRNNs from notebook 05 (AUG, BIG, MIX, B60), CTC prefix beam search (beam 10, top-8) with a character 7-gram LM (alpha 0.3, beta 1.25) built from training transcriptions only. Chosen on VAL-SEL; test scored once. research/root-cause/offline/s6_search.py C",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "research/root-cause/offline/s6/test_predictions_new_pipeline.csv",
+ "source_column": "prediction",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

@@ -1,0 +1,46 @@
+{
+  "tag": "EM2",
+  "hyp": [
+    "N8b"
+  ],
+  "desc": "anchor + re-alignment after 1/3 and 2/3 of fine-tuning",
+  "status": "failed",
+  "capped": false,
+  "spec": {
+    "tag": "EM2",
+    "priority": 2,
+    "hyp": [
+      "N8b"
+    ],
+    "desc": "anchor + re-alignment after 1/3 and 2/3 of fine-tuning",
+    "size": "small",
+    "H": 40,
+    "vocab": "char",
+    "no_space": false,
+    "init": "/kaggle/working/runs/PT_A60/pre.pt",
+    "pretrain": null,
+    "finetune": {
+      "epochs": 57,
+      "lr": 0.001,
+      "batch": 32,
+      "aug": false,
+      "mix": 0.0,
+      "seed": 0,
+      "realign_at": [
+        19,
+        38
+      ]
+    },
+    "save_pre": false,
+    "after": [
+      "PT_A60"
+    ],
+    "pools": [],
+    "deadline": 1792005244.4431353,
+    "time_cap_s": 854.3200997293151
+  },
+  "params_M": 1.071,
+  "error": "Traceback (most recent call last):\n  File \"/kaggle/working/lr05_code/job.py\", line 563, in <module>\n    main()\n    ~~~~^^\n  File \"/kaggle/working/lr05_code/job.py\", line 554, in main\n    finetune(model, S[\"finetune\"])\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/lr05_code/job.py\", line 359, in finetune\n    ra_log.append(dict(epoch=ep, **realign(model, line_labels)))\n                                   ~~~~~~~^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/lr05_code/job.py\", line 270, in realign\n    pieces = L.realign_patch([lps[i] for i in ls], TEXT[p], vocab)\n  File \"/kaggle/working/lr05_code/lr05_lib.py\", line 639, in realign_patch\n    cof, _ = viterbi_ctc(logp, np.array(flat))\n             ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^\n  File \"/kaggle/working/lr05_code/lr05_lib.py\", line 618, in viterbi_ctc\n    s -= bp[t, s]\nOverflowError: Python integer 222 out of bounds for int8\n",
+  "job_minutes": 1.79,
+  "peak_gpu_mem": "1.01 GB"
+}

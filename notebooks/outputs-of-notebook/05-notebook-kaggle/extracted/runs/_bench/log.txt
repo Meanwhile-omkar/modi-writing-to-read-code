@@ -1,0 +1,7 @@
+JOB BENCH | hypotheses None | 
+  device cuda (Tesla T4) | torch 2.11.0+cu128 | AMP on | deadline in 4:36:45
+  model small | line height 40 px | targets {'kind': 'char', 'no_space': False, 'size': 89} | init random
+BENCH small_h40: 705 training lines/s (batch 32, AMP on) | val forward pass 0.3s | 1.071 M params | peak mem 0.69 GB
+BENCH big_h40: 443 training lines/s (batch 32, AMP on) | val forward pass 0.6s | 4.227 M params | peak mem 1.17 GB
+BENCH small_h64: 571 training lines/s (batch 32, AMP on) | val forward pass 0.6s | 1.071 M params | peak mem 1.54 GB
+JOB BENCH OK in 0.33 min
