@@ -1,0 +1,9 @@
+{
+ "run": "s1_armA_nopre_greedy",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "ARM A (real data only): notebook 05 control NOPRE, same CRNN as the anchor but no synthetic pretraining and 2x the fine-tuning epochs; greedy CTC decoding. Scored on test once, 16 Oct 2026 (research/root-cause/offline/s10_arm_a_test.py).",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "research/root-cause/offline/s10/test_predictions_nopre.csv",
+ "source_column": "greedy",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

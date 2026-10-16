@@ -378,3 +378,23 @@ Omkar's Stage 1 (baseline Reader + experimental variants) is complete: best test
 notebook 05), on free Kaggle T4s. The project-level summary, all observations and the whole-project future plan are in
 `Final_year_project/PROJECT_HANDOVER.md` — the entry point for the next session. Next: pull the teammate's GitHub work,
 commit the Stage-1 code, then Phase 0–1 of the handover plan (contracts → line level, Arm A vs B table, folder-18 OOD test).
+
+## 16 OCT 2026 — Arm A on test, and the first out-of-domain test (Folder 18)
+- **Arm A (real only) on TEST, once** (`offline/s10_arm_a_test.py`, NOPRE checkpoint of notebook 05): greedy 76.69
+  (76.10–77.29), + char 4-gram LM (0.3, 1.0 chosen on VAL-SEL) 73.18. Same-length test: own text better on 155/306 —
+  does not read. Arm B anchor − Arm A = −39.81 (−41.55..−37.96), with LM −40.98. Exported as `results/s1_armA_*`.
+- **Folder 18 = the answer key is in the book**: even pages print the editors' Devanagari copy of the handwritten letter on
+  the next page, and the printed lines follow the handwritten lines. Key made with Tesseract `mar` (tessdata_best,
+  downloaded into `FYP-modi-script-data/tessdata`) through `modi.evaluation.folder18_gt`; PaddleOCR 3.0.2 lacks the
+  PP-OCRv5 Devanagari model, so the second engine is PP-OCRv3 Devanagari (much weaker). Letters 3, 5, 8 proofread by
+  Claude against the page images: Tesseract needed 3.1–4.2 % of characters corrected.
+- Handwritten pages: half size, text block from the ink, `lr05_lib.segment` → 218 lines on 14 pages; bands with ink
+  over < 30 % of the block width skipped (stamps). Two-column (letter 11) and tilted (up to 6°) pages kept as they are.
+- Scores (final pipeline, letters as one text each): 3: 15.6, 5: 17.7, 8: 15.1, 11: 63.2, 12: 46.1, 13: 33.7, 15: 27.6.
+  **Better than in-domain on 3/5/8 → leakage check (lead-guide rule): 22–31 % of their 20-character pieces occur in
+  MoDeTrans TRAIN transcriptions (shared runs of 73–105 characters with val/test patches 66, 75, 23)** — the page-level
+  image matching of Oct 3 did not catch that MoDeTrans contains other scans of these letters. Text-overlap ≤ 1 %:
+  letters 11, 12, 13 → unseen-text CER **53.2** (anchor greedy 61.6). Inside the lead guide's expected 45–80.
+- Every letter reads (own text vs other letters' text, letters only: e.g. 34 vs 82 for letter 13).
+- Open: human transcription of the key (Omkar, in progress); per-column line cutting for two-column pages; hand line
+  counts (Udit). The Folder-18 strict tier should be redefined by TEXT overlap, not page matching.

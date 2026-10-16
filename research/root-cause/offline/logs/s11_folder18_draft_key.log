@@ -1,0 +1,33 @@
+
+=== best
+letter  3 | key: proofread by Claude    | text in MoDeTrans train  29.1 % |   507 chars | CER  15.6 | letters-only  14.6 | own vs other 15 vs 89
+letter  5 | key: proofread by Claude    | text in MoDeTrans train  21.7 % |   479 chars | CER  17.7 | letters-only  16.5 | own vs other 16 vs 83
+letter  8 | key: proofread by Claude    | text in MoDeTrans train  30.9 % |   405 chars | CER  15.1 | letters-only  13.8 | own vs other 14 vs 84
+letter 11 | key: Tesseract only         | text in MoDeTrans train   0.0 % |  1936 chars | CER  63.2 | letters-only  67.5 | own vs other 68 vs 250
+letter 12 | key: Tesseract only         | text in MoDeTrans train   0.7 % |  1470 chars | CER  46.1 | letters-only  46.7 | own vs other 47 vs 191
+letter 13 | key: Tesseract only         | text in MoDeTrans train   0.9 % |   476 chars | CER  33.7 | letters-only  34.5 | own vs other 34 vs 82
+letter 15 | key: Tesseract only         | text in MoDeTrans train  14.8 % |   339 chars | CER  27.6 | letters-only  27.4 | own vs other 27 vs 80
+UNSEEN-TEXT letters [11, 12, 13]: CER 53.2 | letters-only 55.6 | char BLEU 40.1
+all 7 letters: CER 42.7 | letters-only 43.8
+
+=== aug_lm
+letter  3 | key: proofread by Claude    | text in MoDeTrans train  29.1 % |   507 chars | CER  17.2 | letters-only  16.0 | own vs other 16 vs 89
+letter  5 | key: proofread by Claude    | text in MoDeTrans train  21.7 % |   479 chars | CER  20.3 | letters-only  19.8 | own vs other 20 vs 84
+letter  8 | key: proofread by Claude    | text in MoDeTrans train  30.9 % |   405 chars | CER  15.5 | letters-only  14.1 | own vs other 14 vs 83
+letter 11 | key: Tesseract only         | text in MoDeTrans train   0.0 % |  1936 chars | CER  65.7 | letters-only  69.5 | own vs other 69 vs 258
+letter 12 | key: Tesseract only         | text in MoDeTrans train   0.7 % |  1470 chars | CER  47.3 | letters-only  47.7 | own vs other 48 vs 193
+letter 13 | key: Tesseract only         | text in MoDeTrans train   0.9 % |   476 chars | CER  33.7 | letters-only  34.2 | own vs other 34 vs 83
+letter 15 | key: Tesseract only         | text in MoDeTrans train  14.8 % |   339 chars | CER  31.6 | letters-only  31.9 | own vs other 32 vs 81
+UNSEEN-TEXT letters [11, 12, 13]: CER 54.9 | letters-only 56.9 | char BLEU 40.5
+all 7 letters: CER 44.6 | letters-only 45.4
+
+=== anchor_greedy
+letter  3 | key: proofread by Claude    | text in MoDeTrans train  29.1 % |   507 chars | CER  28.9 | letters-only  28.0 | own vs other 28 vs 86
+letter  5 | key: proofread by Claude    | text in MoDeTrans train  21.7 % |   479 chars | CER  31.1 | letters-only  26.9 | own vs other 27 vs 84
+letter  8 | key: proofread by Claude    | text in MoDeTrans train  30.9 % |   405 chars | CER  34.8 | letters-only  31.9 | own vs other 32 vs 84
+letter 11 | key: Tesseract only         | text in MoDeTrans train   0.0 % |  1936 chars | CER  68.6 | letters-only  72.6 | own vs other 73 vs 240
+letter 12 | key: Tesseract only         | text in MoDeTrans train   0.7 % |  1470 chars | CER  58.0 | letters-only  60.3 | own vs other 60 vs 187
+letter 13 | key: Tesseract only         | text in MoDeTrans train   0.9 % |   476 chars | CER  44.1 | letters-only  45.8 | own vs other 46 vs 83
+letter 15 | key: Tesseract only         | text in MoDeTrans train  14.8 % |   339 chars | CER  41.7 | letters-only  42.8 | own vs other 43 vs 82
+UNSEEN-TEXT letters [11, 12, 13]: CER 61.6 | letters-only 64.7 | char BLEU 23.3
+all 7 letters: CER 53.1 | letters-only 54.5

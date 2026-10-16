@@ -1,0 +1,9 @@
+{
+ "run": "s1_armA_nopre_lm4",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "ARM A (real data only) + character 4-gram LM (alpha 0.3, beta 1.0, chosen on VAL-SEL).",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "research/root-cause/offline/s10/test_predictions_nopre.csv",
+ "source_column": "lm_beam",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

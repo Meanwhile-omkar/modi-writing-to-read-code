@@ -1,0 +1,3 @@
+NOPRE VAL-REP greedy CER 75.88 (notebook on T4: see runs/NOPRE/result.json) | 147s
+LM weights chosen on VAL-SEL: alpha 0.3 beta 1.0 (VAL-SEL 72.75) | 226s
+TEST (once) Arm A = NOPRE: greedy CER 76.69 | with LM 73.18 | 238s
