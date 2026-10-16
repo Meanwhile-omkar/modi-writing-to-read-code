@@ -70,8 +70,8 @@ A Reader at CER 80 or above is no better than guessing.
 
 The answer key is made from the printed transcriptions of the book's strict letters (3, 5, 8, 11, 12, 13, 15):
 each page is OCR'd twice and proofread by hand with the tool below. The answer key itself stays out of git
-(`assets/folder18_gt/` is ignored because of the book's terms) and is shared separately, together with its
-rules file `RULES.md`.
+(`assets/folder18_gt/` is ignored because of the book's terms) and is shared on the team Drive, together with
+its rules file `RULES.md`, the audit file `folder18_gt_audit.csv` and the out-of-alphabet list `oov_report.csv`.
 
 ```bash
 PYTHONPATH=src python -m modi.evaluation.folder18_gt ocr     # OCR + proofreading files
@@ -84,7 +84,9 @@ In PowerShell set the path first: `$env:PYTHONPATH='src'`. `ocr` needs:
 - PaddleOCR in its own environment, by default `../ocr-venv` (`bin/python`, on Windows `Scripts\python.exe`),
   or any interpreter named in the `PADDLE_PYTHON` environment variable.
 
-The book is scored per letter: all band predictions of a letter's handwritten pages joined, against the
+The book is scored per letter: the handwritten pages are cut into lines by `modi.segmentation.folder18_lines`
+(the Stage-1 line finder; images and `manifest.csv` in `<data>/processed/folder18_lines/`), the Reader's line
+predictions of a letter are joined with spaces in page and line order, and the result is scored against the
 letter's full text.
 
 ## Tests
