@@ -72,6 +72,27 @@ class SyntheticPatches:
 # train_set = torch.utils.data.ConcatDataset([real_train_set, SyntheticPatches(1430, transform)])
 ```
 
+## Pre-generated set (download instead of generating)
+
+The same pool, saved once as files: patch `i` is `make_patch(1_000_000 + i)`, 4,290 patches (226 MB zip),
+attached to the GitHub release `armB-synthetic-v1`. Rows 0-1,429 are the 1:1 set, all 4,290 the 1:3 set.
+Using the files gives byte-identical training data on every machine (generating on another machine can
+differ by a few pixels if its library versions differ).
+
+```python
+!wget -q https://github.com/Meanwhile-omkar/modi-writing-to-read-code/releases/download/armB-synthetic-v1/armB_synthetic_4290.zip
+!unzip -q armB_synthetic_4290.zip            # -> armB_synthetic_4290/syn_000000.png ... + labels.csv
+
+import numpy as np, pandas as pd
+from PIL import Image
+labels = pd.read_csv('armB_synthetic_4290/labels.csv', keep_default_na=False)   # image_id, seed, text
+pool = labels.iloc[:1430]                                                      # 1:1 set
+img = np.asarray(Image.open('armB_synthetic_4290/' + pool.image_id[0]))        # uint8 (512, 1408)
+text = pool.text[0]
+```
+
+To rebuild the set: `PYTHONPATH=src python -m modi.synthetic.export 4290 <folder>` (`export.py`).
+
 ## How a patch is made
 
 1. **Text** (`text_source.py`). A character model (order 6: the next character given the previous five)
@@ -127,6 +148,7 @@ class SyntheticPatches:
 | `render.py` | draws a text as a patch |
 | `font_gate.py` | Step 0 check that the font draws Modi correctly |
 | `calibrate.py` | Step 4 comparison of synthetic and real patches |
+| `export.py` | saves a fixed set of patches as PNG + labels.csv (the release zip) |
 
 Checks, from the repository root:
 
