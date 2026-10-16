@@ -8,7 +8,7 @@ import base64, hashlib, json, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 NB = HERE.parent / "05_line_reader_round2_GPU.ipynb"
-FONT = HERE.parents[1] / "research/root-cause/experiments/cache/fonts/NotoSansModi-Regular.ttf"
+FONT = HERE.parents[1] / "assets/fonts/NotoSansModi-Regular.ttf"   # same file (SHA-256 df1b8c67...) as the old cache copy; this one is in git
 FILES = ["lr05_lib.py", "render_pools.py", "job.py", "lr05_run.py", "lr05_final.py"]
 CELLS = []
 
