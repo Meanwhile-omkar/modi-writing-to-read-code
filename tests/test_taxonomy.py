@@ -8,17 +8,17 @@ from modi.evaluation.metrics import normalize
 from modi.evaluation.taxonomy import align, error_types
 
 CASES = [
-    ('भाव', 'माव', {'look-alike': 1}),               # भ read as म
-    ('कर', 'फर', {'look-alike': 1}),                 # क read as फ
-    ('टप', 'ढप', {'look-alike': 1}),                 # ट read as ढ
-    ('पाणी', 'पानी', {'look-alike': 1}),             # ण read as न
+    ('जर', 'नर', {'look-alike': 1}),                 # ज read as न (the most frequent swap on validation)
+    ('बाग', 'हाग', {'look-alike': 1}),               # ब read as ह
+    ('टप', 'ठप', {'look-alike': 1}),                 # ट read as ठ
+    ('कमल', 'कमळ', {'look-alike': 1}),               # ल read as ळ
     ('की', 'कि', {'vowel sign': 1}),                 # long ी read as short ि
     ('काम', 'कम', {'vowel sign': 1}),                # ा dropped
     ('संत', 'सत', {'anusvara': 1}),                  # ं dropped
     ('सत', 'संत', {'anusvara': 1}),                  # ं inserted
     ('श्री', 'शरी', {'virama': 1}),                  # conjunct broken: श ् र ी -> श र ी
-    ('भंग', 'मग', {'look-alike': 1, 'anusvara': 1}),  # two mistakes in one word
-    ('कमल', 'कमळ', {'other': 1}),                    # ल / ळ is not one of the look-alike groups
+    ('बंग', 'हग', {'look-alike': 1, 'anusvara': 1}),  # two mistakes in one word
+    ('भाव', 'माव', {'other': 1}),                    # भ/म: 0.8 % on validation, not a look-alike pair
     ('राजश्री', 'राजश्री', {}),                       # perfect reading: no errors
 ]
 

@@ -45,7 +45,8 @@ Results files do not share a row order: before comparing two runs, merge them on
 | `bootstrap_ci(refs, hyps)` | `(cer, low, high)`, 95 % interval |
 | `paired_bootstrap(refs, hyps_a, hyps_b, refs_b=None)` | `(cer_a - cer_b, low, high)` on the same resamples; a difference is real only if the interval excludes 0 |
 
-`taxonomy.error_types(refs, hyps)` counts mistakes by kind: look-alike letters ({भ म} {क फ} {ट ठ ढ} {न ण}),
+`taxonomy.error_types(refs, hyps)` counts mistakes by kind: look-alike letters (16 pairs the Reader really swaps on
+validation, e.g. ज/न, ब/ह, ल/ळ, ट/ठ; derived by `scripts/30_lookalike_groups.py`, see `outputs/reports/lookalike_confusions.md`),
 virama (broken conjuncts), anusvara dropped or added, space (word boundary missed or invented), vowel signs, other.
 
 ## Reference points (`floor_baselines.py`)
@@ -53,14 +54,15 @@ virama (broken conjuncts), anusvara dropped or added, space (word boundary misse
 What deliberately bad predictors score on the test split (`outputs/reports/floor_baselines.md`; regenerate with
 `PYTHONPATH=src python -m modi.evaluation.floor_baselines`, in PowerShell `$env:PYTHONPATH='src'; python -m modi.evaluation.floor_baselines`):
 
-| Predictor | Test CER |
+| Predictor | Test CER, mean ± std over 100 seeds |
 |---|---|
 | empty text | 100.0 |
-| random training sentence | 95.0 |
-| random training text of the right length | 83.2 |
-| correct letters, shuffled | 84.5 |
-| correct text, 10 % of characters damaged | 9.9 |
-| correct text, 30 % of characters damaged | 28.8 |
+| random training sentence | 98.1 ± 1.7 |
+| random training sentence, cut or padded with spaces to the right length | 84.3 ± 0.1 |
+| random training text of the right length | 83.1 ± 0.1 |
+| correct letters, shuffled | 84.6 ± 0.1 |
+| correct text, 10 % of characters damaged | 9.9 ± 0.0 |
+| correct text, 30 % of characters damaged | 28.9 ± 0.1 |
 
 A Reader at CER 80 or above is no better than guessing.
 
@@ -68,8 +70,8 @@ A Reader at CER 80 or above is no better than guessing.
 
 The answer key is made from the printed transcriptions of the book's strict letters (3, 5, 8, 11, 12, 13, 15):
 each page is OCR'd twice and proofread by hand with the tool below. The answer key itself stays out of git
-(`assets/folder18_gt/` is ignored because of the book's terms) and is shared separately, together with its
-rules file `RULES.md`.
+(`assets/folder18_gt/` is ignored because of the book's terms) and is shared on the team Drive, together with
+its rules file `RULES.md`, the audit file `folder18_gt_audit.csv` and the out-of-alphabet list `oov_report.csv`.
 
 ```bash
 PYTHONPATH=src python -m modi.evaluation.folder18_gt ocr     # OCR + proofreading files
@@ -82,7 +84,9 @@ In PowerShell set the path first: `$env:PYTHONPATH='src'`. `ocr` needs:
 - PaddleOCR in its own environment, by default `../ocr-venv` (`bin/python`, on Windows `Scripts\python.exe`),
   or any interpreter named in the `PADDLE_PYTHON` environment variable.
 
-The book is scored per letter: all band predictions of a letter's handwritten pages joined, against the
+The book is scored per letter: the handwritten pages are cut into lines by `modi.segmentation.folder18_lines`
+(the Stage-1 line finder; images and `manifest.csv` in `<data>/processed/folder18_lines/`), the Reader's line
+predictions of a letter are joined with spaces in page and line order, and the result is scored against the
 letter's full text.
 
 ## Tests

@@ -2,7 +2,7 @@
 
 Aligns each prediction with its reference (Levenshtein, keeping the operations) and puts every edit in the
 first category that fits, in this order:
-  look-alike  a substitution inside one of the groups {भ म} {क फ} {ट ठ ढ} {न ण}
+  look-alike  a substitution between two letters the Reader really confuses (LOOKALIKE, derived from validation)
   virama      the edit touches the virama ् (the conjunct marker), so a conjunct is broken or invented
   anusvara    ं inserted or dropped
   space       the edit touches a space (a word boundary missed or invented)
@@ -18,7 +18,10 @@ from collections import Counter
 
 from modi.evaluation.metrics import _pairs
 
-LOOKALIKE = [set('भम'), set('कफ'), set('टठढ'), set('नण')]
+# Look-alike pairs derived from VALIDATION confusions of the Stage-1 Reader by scripts/30_lookalike_groups.py
+# (outputs/reports/lookalike_confusions.md): swapped in >= 2 % of the two letters' occurrences, or >= 150 times.
+LOOKALIKE = [set(p) for p in ['जन', 'अआ', 'बह', 'कम', 'कल', 'नल', 'नम', 'दह', 'लळ', 'पय', 'तर', 'दप', 'टठ', 'इई',
+                              'घध', 'उऊ']]
 VIRAMA, ANUSVARA = '्', 'ं'
 CATEGORIES = ['look-alike', 'virama', 'anusvara', 'space', 'vowel sign', 'other']
 
