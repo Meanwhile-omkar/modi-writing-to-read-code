@@ -32,7 +32,7 @@ from modi.utils import console  # noqa: F401,E402
 from modi.utils.paths import CODE_ROOT, P  # noqa: E402
 
 SERIES = '#2a78d6'
-TYPE_COLORS = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4']  # one per error type, fixed order
+TYPE_COLORS = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#008300']  # one per error type, fixed order
 INK, MUTED, GRID = '#1f1f1e', '#6b6a63', '#e4e3dc'
 AVERAGED = ['cer', 'cer_nospace', 'wer', 'chrf_pp', 'median_cer', 'catastrophic_pct']
 
@@ -82,7 +82,8 @@ def compare(runs, a, b):
     pb = pb.loc[pa.index]
     if not (pa.reference == pb.reference).all():
         sys.exit(f'--compare: {a} and {b} have different references for the same images')
-    diff, low, high = paired_bootstrap(pa.reference.tolist(), pa.prediction.tolist(), pb.prediction.tolist())
+    diff, low, high = paired_bootstrap(pa.reference.tolist(), pa.prediction.tolist(), pb.prediction.tolist(),
+                                       refs_b=pb.reference.tolist())
     if low > 0:
         verdict = f'{a} has a clearly higher CER than {b} (worse)'
     elif high < 0:
@@ -170,6 +171,9 @@ def report(scores, groups, comparisons, results_dir):
     lines += [f'| {n} | ' + ' | '.join(str(s['error_types'][c]) for c in CATEGORIES) + ' |' for n, s in scores.items()]
     lines += ['', '![CER per test image](results_cer_per_image.png)', '', '![Error types](results_error_types.png)', '']
     return '\n'.join(lines)
+
+
+assert len(TYPE_COLORS) >= len(CATEGORIES), 'add a colour for the new error type'
 
 
 def main():
