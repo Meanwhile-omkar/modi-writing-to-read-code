@@ -1,0 +1,18 @@
+TRAINING ON cache/synth_lines_h40.pkl (12,000 lines); evaluating on REAL validation patches
+train lines 12,000 (dropped 0 whose label is too long for the width) | eval on 150 val patches and 150 train patches
+model 1.07 M params | lr 0.001 | batch 8 | aug 0 | budget 10.0 min
+ep  1 | train loss 2.824 | val(60 patches) CER  85.9  no-space  85.5  BLEU   0.0  best patch  76.7  len 36/105 | 10.1 min
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस
+   PRED: राििचेिाणीोितर कचेिणिुिरेलत लतरदिपरशेो
+
+FINAL after 1 epochs / 10.1 min:
+  VAL   150 patches: CER 84.9 | no-space 83.9 | BLEU 0.00 | patches with CER<50%: 0/150 | best patch 76.7
+  TRAIN 150 patches: CER 83.8 | no-space 83.3 | BLEU 0.00
+   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली व पेस्तर देणे
+   PRED: राििचेिाणीोितर कचेिणिुिरेलत लतरदिपरशेो
+   GT  : सदरहू प्रमाणे सालाबाद चालीले आहे हाली पाा मजकूर साहेब अर्जानीजाला आहे त्यास हाली कारकून ताजे खुर्दखत
+   PRED: सरीरेािूीीीणि सरििगिहििमरोबिरील रीीिििीिी
+   GT  : घेऊनु असल खुरा इनामदार मजकुरास देणे मोर्तब सूद
+   PRED: वीलेंिल
+logged to results.csv
+EXIT=0

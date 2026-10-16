@@ -1,0 +1,9 @@
+{
+ "run": "s1_cpu_x7_lm4",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "First working CPU baseline (X3a line CRNN, ~40 CPU-minutes of training), character 4-gram LM (alpha 0.3, beta 1.5).",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "research/root-cause/experiments/cache/x7_test_predictions_lm_beam.csv",
+ "source_column": "prediction",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

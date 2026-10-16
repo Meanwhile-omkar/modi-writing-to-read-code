@@ -17,6 +17,13 @@ To answer it fairly we build (1) a baseline Reader trained on real data, (2) an 
 
 Design of the baseline: [`docs/BASELINE_DESIGN.md`](docs/BASELINE_DESIGN.md).
 
+## Status
+
+**Stage 1 (baseline Reader) is complete** — tag `stage1-final-baseline`. The Reader works on text **lines**
+(per-strip line finding + synthetic-line pretraining + character LM + a 4-model ensemble) and reaches
+**test CER 24.55 %** (95 % CI 23.09–26.15) on the 306 MoDeTrans test patches. Results, recipe and how to reproduce:
+[`results/README.md`](results/README.md); the full experimental record: [`research/root-cause/`](research/root-cause/).
+
 ## Repository layout
 
 ```
@@ -57,7 +64,7 @@ python -m pytest                  # runs the unit tests
 | **MODI-HHDoc** — 3,350 unlabelled page photos | https://data.mendeley.com/datasets/sg337vf6wn/1 | research use only, **no redistribution** |
 | **MODI-HChar** — isolated character images | https://data.mendeley.com/datasets/pk2zrt58pp/1 | research use only, **no redistribution** |
 
-Never commit images or raw dataset files. Paths are read from `configs/paths.yaml`; edit that file if your data sits elsewhere.
+Never commit raw dataset files, or any image of MODI-HHDoc, MODI-HChar or the Folder-18 book (their terms forbid redistribution). Figures made from MoDeTrans images (MIT) or from synthetic renders may be committed as part of a run's record. Paths are read from `configs/paths.yaml`; edit that file if your data sits elsewhere.
 
 ### Ready-made data files (`assets/metadata/`)
 
@@ -83,7 +90,7 @@ Never commit images or raw dataset files. Paths are read from `configs/paths.yam
 
 1. One branch per workstream (`feat/reader`, `feat/eval`, `feat/synth`); open a pull request into `main`.
 2. Only change files in your own area; shared files (`configs/`, `requirements*.txt`, this README) change through a reviewed pull request.
-3. Raw data and images are never committed; derived files stay small.
+3. Raw data is never committed, nor images from HHDoc, HChar or the Folder-18 book; derived files stay small.
 4. Splits are made at **source-document level**, never at patch or line level.
 5. Every experiment logs its config, random seed and git commit hash, and keeps its failed runs.
 6. Report results as they are, with the seed and the number of times the test set was used.

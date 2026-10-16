@@ -15,8 +15,9 @@ ALPHABET = [s for s in json.load(open(META / 'charset.json', encoding='utf-8'))[
 
 
 def damage(text, share, rng):
-    """Damage `share` of the characters: a third deleted, a third replaced, a third followed by an extra letter.
-    Each damaged character is one edit, so the CER of the result is close to 100 * share."""
+    """Damage `share` of the characters: each one is deleted, replaced, or followed by an extra letter (a random
+    choice, so about a third each). Each damaged character is one edit, except that a deletion next to an insertion
+    can merge into one substitution, so the CER of the result is close to (slightly below) 100 * share."""
     chars = list(normalize(text))
     for i in sorted(rng.sample(range(len(chars)), round(share * len(chars))), reverse=True):
         op = rng.choice(('delete', 'replace', 'insert'))
@@ -37,11 +38,15 @@ def predictors(refs, train, rng):
             text += rng.choice(train) + ' '
         return text[:len(ref)]
 
+    def shuffled(ref):  # shuffle symbols, so <FRAC> moves as one symbol instead of six letters
+        symbols = normalize(ref)
+        return ''.join(rng.sample(symbols, len(symbols))).replace(_FRAC_CHAR, FRAC)
+
     return {
         'empty text': ['' for _ in refs],
         'random training sentence': [rng.choice(train) for _ in refs],
         'random training text, same length': [random_same_length(r) for r in refs],
-        'correct letters, shuffled': [''.join(rng.sample(r, len(r))) for r in refs],
+        'correct letters, shuffled': [shuffled(r) for r in refs],
         'correct text, 10 % damaged': [damage(r, 0.10, rng) for r in refs],
         'correct text, 30 % damaged': [damage(r, 0.30, rng) for r in refs],
     }

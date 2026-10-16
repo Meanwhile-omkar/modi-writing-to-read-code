@@ -1,0 +1,4 @@
+integrity: notebook pipeline (AUG+BIG+B60, LM 0.3/1.0/4) VAL-REP 29.15 (notebook reported 29.15)
+NEW PIPELINE ['AUG', 'BIG', 'MIX', 'B60'] LM (0.3, 1.25, 7): VAL-SEL 22.67 | VAL-REP greedy 37.86 -> LM 27.63 (no-space 28.05, BLEU 13.20, chrF++ 48.7)
+TEST (once, pipeline chosen on VAL-SEL only): CER 24.55 (95% CI 23.09-26.15) | no-space 24.26 | BLEU 12.99 | chrF++ 52.1 | <50%: 277/306 | notebook FINAL pipeline 25.91 | 47s
+EXIT=0

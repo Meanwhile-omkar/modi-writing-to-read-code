@@ -1,0 +1,1 @@
+{"tag": "BENCH", "work": "/tmp/lr05", "run_dir": "/kaggle/working/runs/_bench", "size": "small", "H": 40, "vocab": "char", "no_space": false, "deadline": 1792005244.4431353, "bench": [{"size": "small", "H": 40}, {"size": "big", "H": 40}, {"size": "small", "H": 64}]}

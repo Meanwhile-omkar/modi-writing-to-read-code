@@ -1,0 +1,384 @@
+{
+  "tag": "C60",
+  "hyp": [
+    "N12b"
+  ],
+  "desc": "pretrain on 60,000 lines whose TEXT is sampled from a char 4-gram of the training labels",
+  "status": "ok",
+  "capped": false,
+  "spec": {
+    "tag": "C60",
+    "priority": 2,
+    "hyp": [
+      "N12b"
+    ],
+    "desc": "pretrain on 60,000 lines whose TEXT is sampled from a char 4-gram of the training labels",
+    "size": "small",
+    "H": 40,
+    "vocab": "char",
+    "no_space": false,
+    "init": null,
+    "pretrain": {
+      "pool": "C",
+      "limit": 60000,
+      "samples": 428260,
+      "lr": 0.001,
+      "batch": 32,
+      "evals": 4,
+      "seed": 0
+    },
+    "finetune": {
+      "epochs": 57,
+      "lr": 0.001,
+      "batch": 32,
+      "aug": false,
+      "mix": 0.0,
+      "seed": 0,
+      "realign_at": []
+    },
+    "save_pre": false,
+    "after": [],
+    "pools": [
+      [
+        "C",
+        40,
+        60000
+      ]
+    ],
+    "deadline": 1792005244.4431353,
+    "time_cap_s": 1613.7067821790586
+  },
+  "params_M": 1.071,
+  "pre": {
+    "pool": "C",
+    "limit": 60000,
+    "steps_done": 13383,
+    "steps_planned": 13383,
+    "lines_seen": 428256,
+    "minutes": 8.9,
+    "final_loss_ema": 0.02041444726328372,
+    "skipped": 3,
+    "lines_per_s": 802.3
+  },
+  "ft": {
+    "epochs_done": 57,
+    "epochs_planned": 57,
+    "best_epoch": 21,
+    "best_val_sel_primary": 33.47687338998039,
+    "minutes": 5.14,
+    "lines_seen": 226062,
+    "skipped": 3,
+    "lines_per_s": 733.0,
+    "realign": [],
+    "train_lines": 3966,
+    "dropped": 9
+  },
+  "val_sel": {
+    "CER": 33.47687338998039,
+    "CER_nospace": 32.033628720745284,
+    "WER": 88.781896966779,
+    "BLEU": 2.4443122963729937,
+    "chrF_pp": 37.56599736137543,
+    "median_patch_CER": 35.22518382352941,
+    "patches_below_50": 122,
+    "best_patch_CER": 17.073170731707318,
+    "len_ratio": 0.8997654658002998,
+    "n": 150,
+    "blank_pct": 72.21126562154112,
+    "primary": 33.47687338998039
+  },
+  "val_rep": {
+    "CER": 42.13559122714177,
+    "CER_nospace": 41.65500839395635,
+    "WER": 93.27057182705718,
+    "BLEU": 1.251085221351558,
+    "chrF_pp": 29.11792275560885,
+    "median_patch_CER": 41.86046511627907,
+    "patches_below_50": 108,
+    "best_patch_CER": 12.244897959183673,
+    "len_ratio": 0.879696595519492,
+    "n": 157,
+    "blank_pct": 77.69569940571283,
+    "primary": 42.13559122714177
+  },
+  "train150": {
+    "CER": 33.47554821543261,
+    "CER_nospace": 34.500192339396605,
+    "WER": 80.27192748600373,
+    "BLEU": 7.480862838927583,
+    "chrF_pp": 39.7195177261479,
+    "median_patch_CER": 30.738221214411688,
+    "patches_below_50": 123,
+    "best_patch_CER": 3.508771929824561,
+    "len_ratio": 0.8664556381319387,
+    "n": 150,
+    "blank_pct": 82.53548598465512,
+    "primary": 33.47554821543261
+  },
+  "anatomy": {
+    "errors": 15873,
+    "deletions_pct": 42.0,
+    "insertions_pct": 12.7,
+    "substitutions_pct": 45.3,
+    "most_missed": [
+      [
+        " ",
+        1205
+      ],
+      [
+        "ा",
+        607
+      ],
+      [
+        "ं",
+        447
+      ],
+      [
+        "्",
+        435
+      ],
+      [
+        "े",
+        416
+      ],
+      [
+        "र",
+        404
+      ],
+      [
+        "त",
+        242
+      ],
+      [
+        "ी",
+        195
+      ],
+      [
+        "ल",
+        163
+      ],
+      [
+        "व",
+        160
+      ],
+      [
+        "म",
+        157
+      ],
+      [
+        "न",
+        155
+      ]
+    ],
+    "most_inserted": [
+      [
+        " ",
+        645
+      ],
+      [
+        "ा",
+        211
+      ],
+      [
+        "े",
+        105
+      ],
+      [
+        "्",
+        90
+      ],
+      [
+        "ं",
+        89
+      ],
+      [
+        "ज",
+        65
+      ],
+      [
+        "ल",
+        63
+      ],
+      [
+        "र",
+        61
+      ]
+    ],
+    "top_confusions": [
+      [
+        "ि->ी",
+        212
+      ],
+      [
+        "ी->ि",
+        181
+      ],
+      [
+        "ा-> ",
+        77
+      ],
+      [
+        "अ->आ",
+        74
+      ],
+      [
+        "ि-> ",
+        73
+      ],
+      [
+        "र-> ",
+        72
+      ],
+      [
+        " ->ा",
+        71
+      ],
+      [
+        "न->ज",
+        60
+      ],
+      [
+        "्-> ",
+        59
+      ],
+      [
+        "ज->न",
+        59
+      ],
+      [
+        "ा->ो",
+        53
+      ],
+      [
+        "ु->ू",
+        51
+      ],
+      [
+        "ो->ा",
+        49
+      ],
+      [
+        "क->ा",
+        46
+      ],
+      [
+        "ं-> ",
+        45
+      ]
+    ],
+    "focus_char_recall": {
+      " ": 73.4,
+      "ा": 76.2,
+      "्": 63.7,
+      "र": 69.5,
+      "ं": 33.4,
+      "ि": 49.9,
+      "ी": 69.9,
+      "ु": 54.0,
+      "ू": 45.1,
+      "े": 70.9,
+      "ो": 62.0
+    }
+  },
+  "n1n2": {
+    "n": 307,
+    "frames_per_char": {
+      "spearman_cer": 0.104,
+      "spearman_del": -0.093,
+      "cer_by_quartile": {
+        "Q1 low": 43.2,
+        "Q2": 36.1,
+        "Q3": 37.8,
+        "Q4 high": 46.8
+      },
+      "del_by_quartile": {
+        "Q1 low": 20.3,
+        "Q2": 16.6,
+        "Q3": 15.7,
+        "Q4 high": 16.8
+      }
+    },
+    "pitch": {
+      "spearman_cer": 0.19,
+      "spearman_del": 0.286,
+      "cer_by_quartile": {
+        "Q1 low": 36.5,
+        "Q2": 41.9,
+        "Q3": 40.9,
+        "Q4 high": 44.6
+      },
+      "del_by_quartile": {
+        "Q1 low": 14.4,
+        "Q2": 16.1,
+        "Q3": 17.0,
+        "Q4 high": 22.1
+      }
+    },
+    "n_lines": {
+      "spearman_cer": -0.3,
+      "spearman_del": -0.341,
+      "cer_by_quartile": {
+        "Q1 low": 46.2,
+        "Q2": 38.7,
+        "Q3": 43.5,
+        "Q4 high": 35.6
+      },
+      "del_by_quartile": {
+        "Q1 low": 22.7,
+        "Q2": 16.8,
+        "Q3": 16.4,
+        "Q4 high": 13.6
+      }
+    },
+    "label_len": {
+      "spearman_cer": -0.323,
+      "spearman_del": -0.265,
+      "cer_by_quartile": {
+        "Q1 low": 46.4,
+        "Q2": 42.2,
+        "Q3": 41.8,
+        "Q4 high": 33.5
+      },
+      "del_by_quartile": {
+        "Q1 low": 21.0,
+        "Q2": 17.9,
+        "Q3": 16.7,
+        "Q4 high": 14.0
+      }
+    },
+    "ink": {
+      "spearman_cer": -0.108,
+      "spearman_del": -0.172,
+      "cer_by_quartile": {
+        "Q1 low": 44.2,
+        "Q2": 38.8,
+        "Q3": 40.9,
+        "Q4 high": 40.0
+      },
+      "del_by_quartile": {
+        "Q1 low": 19.8,
+        "Q2": 17.1,
+        "Q3": 16.9,
+        "Q4 high": 15.7
+      }
+    },
+    "stroke": {
+      "spearman_cer": -0.097,
+      "spearman_del": -0.179,
+      "cer_by_quartile": {
+        "Q1 low": 47.4,
+        "Q2": 37.2,
+        "Q3": 35.0,
+        "Q4 high": 44.2
+      },
+      "del_by_quartile": {
+        "Q1 low": 21.0,
+        "Q2": 18.3,
+        "Q3": 13.8,
+        "Q4 high": 16.4
+      }
+    }
+  },
+  "job_minutes": 14.27,
+  "peak_gpu_mem": "1.02 GB"
+}

@@ -1,0 +1,9 @@
+# Never let line-ending conversion touch binary files (core.autocrlf is on for Windows clones)
+*.pt binary
+*.pth binary
+*.png binary
+*.jpg binary
+*.pdf binary
+*.ttf binary
+*.zip binary
+*.parquet binary

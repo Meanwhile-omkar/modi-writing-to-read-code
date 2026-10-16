@@ -1,0 +1,591 @@
+Time
+#
+Log Message
+6.7s	1	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+6.7s	2	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+6.7s	3	0.00s - to python to disable frozen modules.
+6.7s	4	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+7.3s	5	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+7.3s	6	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+7.3s	7	0.00s - to python to disable frozen modules.
+7.3s	8	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+14.6s	9	torch 2.11.0+cu128 | CUDA True
+14.6s	10	GPU: Tesla T4
+14.6s	11	budget: 10.5 h of training, then it stops and saves whatever it has
+14.6s	12	input image: 448 x 1024  run dir: /kaggle/working/runs/B1_seed42
+19.3s	13	   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 129.6/129.6 kB 7.4 MB/s eta 0:00:00
+19.4s	14	installed
+19.4s	15	metadata: /kaggle/input/datasets/meanwhileomkar/colab-data-packet/metadata ['charset.json', 'folder18_labels.csv', 'hhdoc_manifest.csv', 'modetrans_docs.csv', 'modetrans_text.csv', 'splits.json']
+22.9s	16	Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+22.9s	17	
+22.9s	18	Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+26.2s	19	splits: {'train': 1430, 'val': 307, 'test': 306}
+26.5s	20	89 classes, longest label 452 characters
+37.6s	21	lines per patch: {1: 150, 2: 826, 3: 508, 4: 374, 5: 177, 6: 7, 7: 1}
+37.7s	22	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2360 (\N{DEVANAGARI LETTER SA}) missing from font(s) DejaVu Sans.
+37.7s	23	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	24	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Matplotlib currently does not support Devanagari natively.
+37.7s	25	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	26	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2381 (\N{DEVANAGARI SIGN VIRAMA}) missing from font(s) DejaVu Sans.
+37.7s	27	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	28	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2357 (\N{DEVANAGARI LETTER VA}) missing from font(s) DejaVu Sans.
+37.7s	29	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	30	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2366 (\N{DEVANAGARI VOWEL SIGN AA}) missing from font(s) DejaVu Sans.
+37.7s	31	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	32	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2344 (\N{DEVANAGARI LETTER NA}) missing from font(s) DejaVu Sans.
+37.7s	33	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	34	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2367 (\N{DEVANAGARI VOWEL SIGN I}) missing from font(s) DejaVu Sans.
+37.7s	35	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	36	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2343 (\N{DEVANAGARI LETTER DHA}) missing from font(s) DejaVu Sans.
+37.7s	37	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	38	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2368 (\N{DEVANAGARI VOWEL SIGN II}) missing from font(s) DejaVu Sans.
+37.7s	39	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	40	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2352 (\N{DEVANAGARI LETTER RA}) missing from font(s) DejaVu Sans.
+37.7s	41	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	42	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2332 (\N{DEVANAGARI LETTER JA}) missing from font(s) DejaVu Sans.
+37.7s	43	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	44	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2350 (\N{DEVANAGARI LETTER MA}) missing from font(s) DejaVu Sans.
+37.7s	45	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	46	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2351 (\N{DEVANAGARI LETTER YA}) missing from font(s) DejaVu Sans.
+37.7s	47	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	48	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2358 (\N{DEVANAGARI LETTER SHA}) missing from font(s) DejaVu Sans.
+37.7s	49	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	50	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2346 (\N{DEVANAGARI LETTER PA}) missing from font(s) DejaVu Sans.
+37.7s	51	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	52	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2306 (\N{DEVANAGARI SIGN ANUSVARA}) missing from font(s) DejaVu Sans.
+37.7s	53	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	54	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2337 (\N{DEVANAGARI LETTER DDA}) missing from font(s) DejaVu Sans.
+37.7s	55	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	56	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2340 (\N{DEVANAGARI LETTER TA}) missing from font(s) DejaVu Sans.
+37.7s	57	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	58	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2379 (\N{DEVANAGARI VOWEL SIGN O}) missing from font(s) DejaVu Sans.
+37.7s	59	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	60	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2325 (\N{DEVANAGARI LETTER KA}) missing from font(s) DejaVu Sans.
+37.7s	61	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	62	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2342 (\N{DEVANAGARI LETTER DA}) missing from font(s) DejaVu Sans.
+37.7s	63	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	64	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2380 (\N{DEVANAGARI VOWEL SIGN AU}) missing from font(s) DejaVu Sans.
+37.7s	65	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	66	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2375 (\N{DEVANAGARI VOWEL SIGN E}) missing from font(s) DejaVu Sans.
+37.7s	67	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	68	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2336 (\N{DEVANAGARI LETTER TTHA}) missing from font(s) DejaVu Sans.
+37.7s	69	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	70	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2347 (\N{DEVANAGARI LETTER PHA}) missing from font(s) DejaVu Sans.
+37.7s	71	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	72	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2354 (\N{DEVANAGARI LETTER LA}) missing from font(s) DejaVu Sans.
+37.7s	73	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	74	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2335 (\N{DEVANAGARI LETTER TTA}) missing from font(s) DejaVu Sans.
+37.7s	75	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	76	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2339 (\N{DEVANAGARI LETTER NNA}) missing from font(s) DejaVu Sans.
+37.7s	77	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	78	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2369 (\N{DEVANAGARI VOWEL SIGN U}) missing from font(s) DejaVu Sans.
+37.7s	79	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	80	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2311 (\N{DEVANAGARI LETTER I}) missing from font(s) DejaVu Sans.
+37.7s	81	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	82	
+37.7s	83	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2360 (\N{DEVANAGARI LETTER SA}) missing from font(s) DejaVu Sans.
+37.7s	84	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	85	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Matplotlib currently does not support Devanagari natively.
+37.7s	86	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	87	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2381 (\N{DEVANAGARI SIGN VIRAMA}) missing from font(s) DejaVu Sans.
+37.7s	88	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	89	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2357 (\N{DEVANAGARI LETTER VA}) missing from font(s) DejaVu Sans.
+37.7s	90	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	91	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2366 (\N{DEVANAGARI VOWEL SIGN AA}) missing from font(s) DejaVu Sans.
+37.7s	92	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	93	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2344 (\N{DEVANAGARI LETTER NA}) missing from font(s) DejaVu Sans.
+37.7s	94	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	95	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2367 (\N{DEVANAGARI VOWEL SIGN I}) missing from font(s) DejaVu Sans.
+37.7s	96	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	97	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2343 (\N{DEVANAGARI LETTER DHA}) missing from font(s) DejaVu Sans.
+37.7s	98	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	99	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2368 (\N{DEVANAGARI VOWEL SIGN II}) missing from font(s) DejaVu Sans.
+37.7s	100	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	101	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2352 (\N{DEVANAGARI LETTER RA}) missing from font(s) DejaVu Sans.
+37.7s	102	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	103	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2332 (\N{DEVANAGARI LETTER JA}) missing from font(s) DejaVu Sans.
+37.7s	104	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	105	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2350 (\N{DEVANAGARI LETTER MA}) missing from font(s) DejaVu Sans.
+37.7s	106	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	107	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2351 (\N{DEVANAGARI LETTER YA}) missing from font(s) DejaVu Sans.
+37.7s	108	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	109	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2358 (\N{DEVANAGARI LETTER SHA}) missing from font(s) DejaVu Sans.
+37.7s	110	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	111	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2346 (\N{DEVANAGARI LETTER PA}) missing from font(s) DejaVu Sans.
+37.7s	112	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	113	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2306 (\N{DEVANAGARI SIGN ANUSVARA}) missing from font(s) DejaVu Sans.
+37.7s	114	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	115	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2337 (\N{DEVANAGARI LETTER DDA}) missing from font(s) DejaVu Sans.
+37.7s	116	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	117	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2340 (\N{DEVANAGARI LETTER TA}) missing from font(s) DejaVu Sans.
+37.7s	118	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	119	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2379 (\N{DEVANAGARI VOWEL SIGN O}) missing from font(s) DejaVu Sans.
+37.7s	120	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	121	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2325 (\N{DEVANAGARI LETTER KA}) missing from font(s) DejaVu Sans.
+37.7s	122	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	123	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2342 (\N{DEVANAGARI LETTER DA}) missing from font(s) DejaVu Sans.
+37.7s	124	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	125	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2380 (\N{DEVANAGARI VOWEL SIGN AU}) missing from font(s) DejaVu Sans.
+37.7s	126	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	127	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2375 (\N{DEVANAGARI VOWEL SIGN E}) missing from font(s) DejaVu Sans.
+37.7s	128	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	129	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2336 (\N{DEVANAGARI LETTER TTHA}) missing from font(s) DejaVu Sans.
+37.7s	130	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	131	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2347 (\N{DEVANAGARI LETTER PHA}) missing from font(s) DejaVu Sans.
+37.7s	132	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	133	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2354 (\N{DEVANAGARI LETTER LA}) missing from font(s) DejaVu Sans.
+37.7s	134	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	135	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2335 (\N{DEVANAGARI LETTER TTA}) missing from font(s) DejaVu Sans.
+37.7s	136	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	137	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2339 (\N{DEVANAGARI LETTER NNA}) missing from font(s) DejaVu Sans.
+37.7s	138	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	139	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2369 (\N{DEVANAGARI VOWEL SIGN U}) missing from font(s) DejaVu Sans.
+37.7s	140	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	141	/usr/local/lib/python3.13/dist-packages/IPython/core/pylabtools.py:151: UserWarning: Glyph 2311 (\N{DEVANAGARI LETTER I}) missing from font(s) DejaVu Sans.
+37.7s	142	  fig.canvas.print_figure(bytes_io, **kw)
+37.7s	143	cached (2043, 448, 1024) 0.94 GB
+38.0s	144	data pipeline ready
+39.8s	145	params 6.9 M
+39.8s	146	grid 7 rows x 128 cols = 896 slots | 7.4 slots per character
+39.8s	147	model OK
+39.9s	148	metrics self-test: {'CER': np.float64(14.29), 'WER': np.float64(50.0), 'median_CER': 14.29, 'catastrophic_pct': 0.0, 'chrF_pp': 61.08, 'BLEU': 0.0}
+40.0s	149	ready
+51.4s	150	ep   1 | loss 26.679 | val CER 180.67 | best 180.67 | lr 1.6e-04 | 6s * | 0.0h
+51.4s	151	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+51.4s	152	   PRED: ः६ःेईऐॉचआबआबेमेऐजेबेबऐआऐदऐेऐेदजआ६बेबखेखबऐबेफ<FRAC>आफञढॉै:०:जधजद:एस खबईबथऐईदजःज :द थ द
+53.6s	153	ep   2 | loss 23.279 | val CER  96.63 | best  96.63 | lr 3.6e-04 | 2s * | 0.0h
+53.6s	154	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+53.6s	155	   PRED:   
+103.4s	156	ep  25 | loss  3.391 | val CER 100.00 | best  96.63 | lr 1.0e-03 | 2s | 0.0h
+103.4s	157	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+103.4s	158	   PRED: 
+160.3s	159	ep  50 | loss  3.606 | val CER 100.00 | best  96.63 | lr 1.0e-03 | 2s | 0.0h
+160.3s	160	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+160.3s	161	   PRED: 
+216.0s	162	ep  75 | loss  3.273 | val CER  99.65 | best  96.63 | lr 1.0e-03 | 2s | 0.1h
+216.0s	163	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+216.0s	164	   PRED: 
+240.5s	165	ep  86 | loss  3.166 | val CER  96.07 | best  96.07 | lr 1.0e-03 | 2s * | 0.1h
+240.5s	166	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+240.5s	167	   PRED:       
+245.1s	168	ep  88 | loss  3.104 | val CER  95.23 | best  95.23 | lr 1.0e-03 | 2s * | 0.1h
+245.1s	169	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+245.1s	170	   PRED:     ा   
+247.3s	171	ep  89 | loss  3.093 | val CER  95.09 | best  95.09 | lr 1.0e-03 | 2s * | 0.1h
+247.3s	172	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+247.3s	173	   PRED:        
+249.6s	174	ep  90 | loss  3.056 | val CER  93.90 | best  93.90 | lr 1.0e-03 | 2s * | 0.1h
+249.6s	175	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+249.6s	176	   PRED:           
+251.8s	177	ep  91 | loss  3.044 | val CER  92.18 | best  92.18 | lr 1.0e-03 | 2s * | 0.1h
+251.8s	178	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+251.8s	179	   PRED: ा       ा  ा  
+254.1s	180	ep  92 | loss  3.031 | val CER  90.60 | best  90.60 | lr 1.0e-03 | 2s * | 0.1h
+254.1s	181	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+254.1s	182	   PRED: ा     ा    ा     ज
+258.6s	183	ep  94 | loss  3.029 | val CER  89.41 | best  89.41 | lr 1.0e-03 | 2s * | 0.1h
+258.6s	184	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+258.6s	185	   PRED: ा   ा    ा  ा   
+263.1s	186	ep  96 | loss  2.927 | val CER  88.00 | best  88.00 | lr 1.0e-03 | 2s * | 0.1h
+263.1s	187	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+263.1s	188	   PRED: ा     ा ज   ा ज    ु 
+267.6s	189	ep  98 | loss  2.918 | val CER  86.81 | best  86.81 | lr 1.0e-03 | 2s * | 0.1h
+267.6s	190	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+267.6s	191	   PRED:    ज  ा ज          ा ु  ा ज 
+269.8s	192	ep  99 | loss  2.904 | val CER  86.00 | best  86.00 | lr 1.0e-03 | 2s * | 0.1h
+269.8s	193	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+269.8s	194	   PRED: ा  ी     ा ौा ुा ज 
+272.1s	195	ep 100 | loss  2.881 | val CER  84.64 | best  84.64 | lr 1.0e-03 | 2s * | 0.1h
+272.1s	196	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+272.1s	197	   PRED: ा ा ा  ी   ा ्र   ा ौ   ा ु ा ज 
+274.4s	198	ep 101 | loss  2.827 | val CER  84.04 | best  84.04 | lr 1.0e-03 | 2s * | 0.1h
+274.4s	199	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+274.4s	200	   PRED: ा ा न    ज    ाी ौ    ास सु ा अ
+281.1s	201	ep 104 | loss  2.714 | val CER  81.97 | best  81.97 | lr 1.0e-03 | 2s * | 0.1h
+281.1s	202	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+281.1s	203	   PRED: ा ा  ी  ा र   ाी ौ  ास ु ाी अी े
+285.6s	204	ep 106 | loss  2.669 | val CER  80.60 | best  80.60 | lr 1.0e-03 | 2s * | 0.1h
+285.6s	205	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+285.6s	206	   PRED: ा ा ा  ी   ड ध    ा ौ    ा ु ाी अ
+287.9s	207	ep 107 | loss  2.669 | val CER  80.15 | best  80.15 | lr 1.0e-03 | 2s * | 0.1h
+287.9s	208	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+287.9s	209	   PRED: ा ान        ा ौ    ास सा  ा अ स
+290.1s	210	ep 108 | loss  2.670 | val CER  79.38 | best  79.38 | lr 1.0e-03 | 2s * | 0.1h
+290.1s	211	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+290.1s	212	   PRED: ा ान न ी  ा ्धन    ान ौ    ा सुी  ाी अ 
+301.4s	213	ep 113 | loss  2.449 | val CER  75.24 | best  75.24 | lr 1.0e-03 | 2s * | 0.1h
+301.4s	214	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+301.4s	215	   PRED: ा िी जा  ी जर ड ्धा   ान ौ   ा सा  ाी अ ु
+303.6s	216	ep 114 | loss  2.453 | val CER  74.96 | best  74.96 | lr 1.0e-03 | 2s * | 0.1h
+303.6s	217	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+303.6s	218	   PRED: ा ि  ी ज ड ्धा   ान ौज    ा सा  ा अ ु
+310.4s	219	ep 117 | loss  2.373 | val CER  74.85 | best  74.85 | lr 1.0e-03 | 2s * | 0.1h
+310.4s	220	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+310.4s	221	   PRED: ास िध न जी  पड प्ध   ान ौज  ा सा ा फ ु
+312.7s	222	ep 118 | loss  2.286 | val CER  71.13 | best  71.13 | lr 1.0e-03 | 2s * | 0.1h
+312.7s	223	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+312.7s	224	   PRED: ाी नि ान जरी  पडत प्ध   ान ौज   ा सा न ाी अ 
+317.2s	225	ep 120 | loss  2.143 | val CER  70.71 | best  70.71 | lr 1.0e-03 | 2s * | 0.1h
+317.2s	226	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+317.2s	227	   PRED: ास िधन ाा ी ाध पड पध   या ौज    ुा सा  ा अ ु
+319.5s	228	ep 121 | loss  2.123 | val CER  67.87 | best  67.87 | lr 1.0e-03 | 2s * | 0.1h
+319.5s	229	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+319.5s	230	   PRED: ा िर  शरी ा पड पध   ान ौज    ा सा  ा अ ु
+321.8s	231	ep 122 | loss  2.059 | val CER  66.43 | best  66.43 | lr 1.0e-03 | 2s * | 0.1h
+321.8s	232	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+321.8s	233	   PRED: ानिी रजानन जशरी ा डत प्धा   यान ौज    ुा इन  ा अ ु
+326.3s	234	ep 124 | loss  2.055 | val CER  65.49 | best  65.49 | lr 1.0e-03 | 2s * | 0.1h
+326.3s	235	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+326.3s	236	   PRED: ासनिधर रजान ा रजशरी राधव डत प्धा   रयान ौज    ुा इन  ा अत ु
+328.5s	237	ep 125 | loss  2.012 | val CER  65.59 | best  65.49 | lr 1.0e-03 | 2s | 0.1h
+328.5s	238	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+328.5s	239	   PRED: ानिध रजज जशरी मा पडत प्धन   यान ौज    ुा इन  ा अ ु
+330.8s	240	ep 126 | loss  2.029 | val CER  64.19 | best  64.19 | lr 1.0e-03 | 2s * | 0.1h
+330.8s	241	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+330.8s	242	   PRED: ासन िध राजाया रजशरी माध ड धा   यान ौज   ा सन न ा अफ ु
+335.3s	243	ep 128 | loss  2.003 | val CER  63.63 | best  63.63 | lr 1.0e-03 | 2s * | 0.1h
+335.3s	244	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+335.3s	245	   PRED: ासिधी जय जशरी मा पड प्धा    यान ौज   ण ा सनन  ा अत ु
+337.6s	246	ep 129 | loss  1.906 | val CER  61.45 | best  61.45 | lr 1.0e-03 | 2s * | 0.1h
+337.6s	247	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+337.6s	248	   PRED: ासिधी जाजान रजश्री ध डत प्धा  व यान ौज    ा इन न ा अु
+339.9s	249	ep 130 | loss  1.827 | val CER  57.35 | best  57.35 | lr 1.0e-03 | 2s * | 0.1h
+339.9s	250	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+339.9s	251	   PRED: ्ानिधी ाजानय रजश्री माधवराव पडत प्रान ा   यान ौज ा पा ाी ा इना न ा अ ु
+344.4s	252	ep 132 | loss  1.719 | val CER  55.49 | best  55.49 | lr 1.0e-03 | 2s * | 0.1h
+344.4s	253	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+344.4s	254	   PRED: स्ानिधाी ाजमानय रजश्री माधवव पडत ्धा    रयान ौज  प पणी ुा इसन न ा अफ ु
+346.7s	255	ep 133 | loss  1.647 | val CER  55.14 | best  55.14 | lr 1.0e-03 | 2s * | 0.1h
+346.7s	256	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+346.7s	257	   PRED: ्ानिधी ाजानय राजश्री माधा पड प्रधान   यान ौज  पा ण सुा सन न ा अफ तु
+351.2s	258	ep 135 | loss  1.581 | val CER  51.39 | best  51.39 | lr 1.0e-03 | 2s * | 0.1h
+351.2s	259	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+351.2s	260	   PRED: स्वासनिध रामानय राजश्री माधवाव पंडत प्धान ा   रयान ौज व पा ण सुा सन ैन ा अफ ु
+355.7s	261	ep 137 | loss  1.457 | val CER  49.46 | best  49.46 | lr 1.0e-03 | 2s * | 0.1h
+355.7s	262	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+355.7s	263	   PRED: स्ासनिधी राजय राजश्री माध पडत प्रधान   रयान ौज    ुा इसन न ा अफ ु
+358.0s	264	ep 138 | loss  1.397 | val CER  47.11 | best  47.11 | lr 1.0e-03 | 2s * | 0.1h
+358.0s	265	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+358.0s	266	   PRED: स्वानध राजनय राजश्री माधा पडत प्धान   रयान ौज र प ण ुा इसन ैन ा अफ तु
+360.3s	267	ep 139 | loss  1.414 | val CER  44.34 | best  44.34 | lr 1.0e-03 | 2s * | 0.1h
+360.3s	268	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+360.3s	269	   PRED: स्वासनिधी राजमनय राजश्री माधवाव पंडत प्धान  व रयान मौज  पण सुा इसन न या अफ ु
+369.3s	270	ep 143 | loss  1.228 | val CER  40.58 | best  40.58 | lr 1.0e-03 | 2s * | 0.1h
+369.3s	271	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+369.3s	272	   PRED: स्वासनिधी राजमानय रजश्री माधवराव पंडित प्रधान ा  रयान ौज र प फण सुा इने सैन या अफ तु
+371.6s	273	ep 144 | loss  1.169 | val CER  38.37 | best  38.37 | lr 1.0e-03 | 2s * | 0.1h
+371.6s	274	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+371.6s	275	   PRED: स्ासनिधी रजमन्य रजश्री माधाव पंड प्रधान ा म रयान मौज ाा ा फणी सुा इसने सैन या अफ तु
+373.9s	276	ep 145 | loss  1.120 | val CER  37.29 | best  37.29 | lr 1.0e-03 | 2s * | 0.1h
+373.9s	277	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+373.9s	278	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान   रयान मौजे वर पा फण सुा इने ैन या अफ
+376.1s	279	ep 146 | loss  1.096 | val CER  36.65 | best  36.65 | lr 1.0e-03 | 2s * | 0.1h
+376.1s	280	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+376.1s	281	   PRED: ्वासनिधी राजमान्य रजश्री माधवराव पडित प्धान ा म रयान मौज वाार पा फण सुा इने सैन या अफ
+380.6s	282	ep 148 | loss  1.068 | val CER  35.04 | best  35.04 | lr 1.0e-03 | 2s * | 0.1h
+380.6s	283	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+380.6s	284	   PRED: स्वासनिधरी राजान्य राजश्री माधवराव पंडित प्रधान ां म रयान मौजे वाठर पा फटण सुा इने सै
+382.9s	285	ep 149 | loss  1.079 | val CER  33.32 | best  33.32 | lr 1.0e-03 | 2s * | 0.1h
+382.9s	286	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+382.9s	287	   PRED: स्वासनिधी राजमान्य राजश्री माधवरव पंडत प्रधान ं म वरयान ौजे वाा पा फटण सुा इने सैन या
+385.2s	288	ep 150 | loss  1.029 | val CER  32.09 | best  32.09 | lr 1.0e-03 | 2s * | 0.1h
+385.2s	289	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+385.2s	290	   PRED: स्वासनिधी राजमान्य राजश्री माधवाव पंडत प्रधान ा  रयान मौज वाा पा फटण सुा इने सैन मा अ
+387.4s	291	ep 151 | loss  0.998 | val CER  31.92 | best  31.92 | lr 1.0e-03 | 2s * | 0.1h
+387.4s	292	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+387.4s	293	   PRED: स्वासनिधी राजमानय राजश्री माधवराव पंडित प्रधान ा म रयान मौजे वाठार पा टण सुा सने सैन 
+389.7s	294	ep 152 | loss  0.940 | val CER  29.81 | best  29.81 | lr 1.0e-03 | 2s * | 0.1h
+389.7s	295	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+389.7s	296	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंित प्रधान ा म म रयान मौजे वाठार पा पटण सुा इने स
+392.0s	297	ep 153 | loss  0.913 | val CER  28.45 | best  28.45 | lr 1.0e-03 | 2s * | 0.1h
+392.0s	298	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+392.0s	299	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तांन म रयान मौजे वाठार पा टण सुा इसने
+394.3s	300	ep 154 | loss  0.871 | val CER  25.50 | best  25.50 | lr 1.0e-03 | 2s * | 0.1h
+394.3s	301	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+394.3s	302	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान ा मो म रयान ौजे वाठार पा फटण सुा इने 
+396.6s	303	ep 155 | loss  0.845 | val CER  24.87 | best  24.87 | lr 1.0e-03 | 2s * | 0.1h
+396.6s	304	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+396.6s	305	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान ां मम रयान ौजे वाठार पा फटण सुा इसने 
+398.8s	306	ep 156 | loss  0.844 | val CER  23.71 | best  23.71 | lr 1.0e-03 | 2s * | 0.1h
+398.8s	307	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+398.8s	308	   PRED: स्वसनिधी राजमान्य राजश्री माधवराव पंडि प्रधान ं मोकम रयान मौजे वाठार पा फटण सुा इसने 
+407.9s	309	ep 160 | loss  0.779 | val CER  22.87 | best  22.87 | lr 1.0e-03 | 2s * | 0.1h
+407.9s	310	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+407.9s	311	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंित ्रान ं मोम रयान ौजे वाार पा फटण सुा इसने सबैन
+410.1s	312	ep 161 | loss  0.727 | val CER  21.01 | best  21.01 | lr 1.0e-03 | 2s * | 0.1h
+410.1s	313	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+410.1s	314	   PRED: स्वासनिधी राजान्य राजश्री माधवराव पंडित प्रधान ां मोम रयान मौजे वाार पा फटण सुा इसने 
+414.7s	315	ep 163 | loss  0.676 | val CER  18.91 | best  18.91 | lr 1.0e-03 | 2s * | 0.1h
+414.7s	316	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+414.7s	317	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान ां मोम रयान मौजे वाठार पा फटण सुा इसन
+419.2s	318	ep 165 | loss  0.634 | val CER  17.75 | best  17.75 | lr 1.0e-03 | 2s * | 0.1h
+419.2s	319	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+419.2s	320	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकम रयान मौजे ाठार पा फटण सुा इस
+423.7s	321	ep 167 | loss  0.608 | val CER  15.75 | best  15.75 | lr 1.0e-03 | 2s * | 0.1h
+423.7s	322	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+423.7s	323	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान ां मोकम व रयान मौजे वाठार पा फलटण सुा
+428.2s	324	ep 169 | loss  0.558 | val CER  14.77 | best  14.77 | lr 1.0e-03 | 2s * | 0.1h
+428.2s	325	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+428.2s	326	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकम रयान मौजे वाठार पा फलटण सुा 
+430.5s	327	ep 170 | loss  0.526 | val CER  13.61 | best  13.61 | lr 1.0e-03 | 2s * | 0.1h
+430.5s	328	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+430.5s	329	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकम व रयान मौजे वाठार पा फलटण सु
+432.7s	330	ep 171 | loss  0.520 | val CER  13.33 | best  13.33 | lr 1.0e-03 | 2s * | 0.1h
+432.7s	331	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+432.7s	332	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोम व रयान मौजे वाठार पा फलटण सुा
+437.3s	333	ep 173 | loss  0.486 | val CER  12.14 | best  12.14 | lr 1.0e-03 | 2s * | 0.1h
+437.3s	334	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+437.3s	335	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकम रयान मौजे वाठार पा फलटण सुा 
+441.8s	336	ep 175 | loss  0.476 | val CER  11.54 | best  11.54 | lr 1.0e-03 | 2s * | 0.1h
+441.8s	337	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+441.8s	338	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फटण सु
+444.0s	339	ep 176 | loss  0.426 | val CER  10.59 | best  10.59 | lr 1.0e-03 | 2s * | 0.1h
+444.0s	340	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+444.0s	341	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोदम व रयान मौजे वाठार पा फलटण सु
+448.5s	342	ep 178 | loss  0.429 | val CER   9.51 | best   9.51 | lr 1.0e-03 | 2s * | 0.1h
+448.5s	343	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+448.5s	344	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोदम व रयान मौजे वाठार पा फलटण सु
+450.8s	345	ep 179 | loss  0.421 | val CER   8.91 | best   8.91 | lr 1.0e-03 | 2s * | 0.1h
+450.8s	346	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+450.8s	347	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+462.0s	348	ep 184 | loss  0.369 | val CER   7.75 | best   7.75 | lr 1.0e-03 | 2s * | 0.1h
+462.0s	349	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+462.0s	350	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+466.5s	351	ep 186 | loss  0.349 | val CER   7.65 | best   7.65 | lr 1.0e-03 | 2s * | 0.1h
+466.5s	352	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+466.5s	353	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+468.7s	354	ep 187 | loss  0.331 | val CER   6.80 | best   6.80 | lr 1.0e-03 | 2s * | 0.1h
+468.7s	355	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+468.7s	356	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+471.0s	357	ep 188 | loss  0.319 | val CER   6.59 | best   6.59 | lr 1.0e-03 | 2s * | 0.1h
+471.0s	358	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+471.0s	359	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+473.3s	360	ep 189 | loss  0.305 | val CER   5.65 | best   5.65 | lr 1.0e-03 | 2s * | 0.1h
+473.3s	361	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+473.3s	362	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+475.5s	363	ep 190 | loss  0.305 | val CER   5.54 | best   5.54 | lr 1.0e-03 | 2s * | 0.1h
+475.5s	364	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+475.5s	365	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+480.0s	366	ep 192 | loss  0.310 | val CER   5.23 | best   5.23 | lr 1.0e-03 | 2s * | 0.1h
+480.0s	367	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+480.0s	368	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+482.2s	369	ep 193 | loss  0.280 | val CER   4.98 | best   4.98 | lr 1.0e-03 | 2s * | 0.1h
+482.2s	370	   GT  : स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पाा फलटण 
+482.2s	371	   PRED: स्वासनिधी राजमान्य राजश्री माधवराव पंडित प्रधान तां मोकदम व रयान मौजे वाठार पा फलटण स
+482.2s	372	reached CER 4.98, moving on
+482.2s	373	done: 193 epochs, best val CER 4.98
+595.0s	374	ep   1 | loss  7.537 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 112s * | 0.2h
+595.0s	375	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+595.0s	376	   PRED: 
+704.9s	377	ep   2 | loss  3.651 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 110s | 0.2h
+704.9s	378	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+704.9s	379	   PRED: 
+814.3s	380	ep   3 | loss  3.574 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 109s | 0.2h
+814.3s	381	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+814.3s	382	   PRED: 
+923.5s	383	ep   4 | loss  3.538 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 109s | 0.3h
+923.5s	384	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+923.5s	385	   PRED: 
+1033.0s	386	ep   5 | loss  3.526 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 109s | 0.3h
+1033.0s	387	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1033.0s	388	   PRED: 
+1142.1s	389	ep   6 | loss  3.517 | val CER 100.00 | best 100.00 | lr 1.0e-03 | 109s | 0.3h
+1142.1s	390	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1142.1s	391	   PRED: 
+1251.4s	392	ep   7 | loss  3.441 | val CER  95.90 | best  95.90 | lr 1.0e-03 | 109s * | 0.3h
+1251.4s	393	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1251.4s	394	   PRED:       
+1361.4s	395	ep   8 | loss  3.379 | val CER  93.08 | best  93.08 | lr 1.0e-03 | 110s * | 0.4h
+1361.4s	396	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1361.4s	397	   PRED: पी पी पी प प प प
+1471.8s	398	ep   9 | loss  3.341 | val CER  89.86 | best  89.86 | lr 1.0e-03 | 110s * | 0.4h
+1471.8s	399	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1471.8s	400	   PRED: पी से से के प पा पा
+1582.4s	401	ep  10 | loss  3.302 | val CER  89.70 | best  89.70 | lr 1.0e-03 | 111s * | 0.4h
+1582.4s	402	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1582.4s	403	   PRED: के की पे के सा पा प
+1692.3s	404	ep  11 | loss  3.284 | val CER  83.84 | best  83.84 | lr 1.0e-03 | 110s * | 0.5h
+1692.3s	405	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1692.3s	406	   PRED: सा  ी स ी पारी सरे सरे सरे स
+1801.5s	407	ep  12 | loss  3.254 | val CER  82.91 | best  82.91 | lr 1.0e-03 | 109s * | 0.5h
+1801.5s	408	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1801.5s	409	   PRED: प   पर क क क क प प प प क
+1909.5s	410	ep  13 | loss  3.252 | val CER  80.83 | best  80.83 | lr 1.0e-03 | 108s skip8 * | 0.5h
+1909.5s	411	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+1909.5s	412	   PRED: स सा का क म    ता  प प प प स
+2000.3s	413	ep  14 | loss  3.201 | val CER  79.60 | best  79.60 | lr 1.0e-03 | 91s skip100 * | 0.6h
+2000.3s	414	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2000.3s	415	   PRED: से क  क से  स ार क ी कसा स स प पर सार
+2051.5s	416	ep  15 | loss  3.143 | val CER  85.46 | best  79.60 | lr 1.0e-03 | 51s skip310 | 0.6h
+2051.5s	417	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2051.5s	418	   PRED: सेतान ता    स   आ क क क क क
+2097.0s	419	ep  16 | loss  3.093 | val CER  84.75 | best  79.60 | lr 1.0e-03 | 45s skip340 | 0.6h
+2097.0s	420	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2097.0s	421	   PRED: से प प प  आ सा पका  क क क प कर
+2140.0s	422	ep  17 | loss  3.078 | val CER  82.70 | best  79.60 | lr 1.0e-03 | 43s skip353 | 0.6h
+2140.0s	423	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2140.0s	424	   PRED: रा का क प  का सा  प कसे  क क क पर वार
+2182.7s	425	ep  18 | loss  3.080 | val CER  83.17 | best  79.60 | lr 1.0e-03 | 43s skip355 | 0.6h
+2182.7s	426	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2182.7s	427	   PRED: रा का  का  का सा क ा ी का क क पार वार
+2225.4s	428	ep  19 | loss  3.229 | val CER  82.99 | best  79.60 | lr 1.0e-03 | 43s skip355 | 0.6h
+2225.4s	429	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2225.4s	430	   PRED: रा काते का का  का सा काता ी का क क वार वार
+2267.9s	431	ep  20 | loss  3.199 | val CER  82.97 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.6h
+2267.9s	432	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2267.9s	433	   PRED: रा कता का का  का सा का ता ी का क क वार वार
+2310.7s	434	ep  21 | loss  3.219 | val CER  84.97 | best  79.60 | lr 1.0e-03 | 43s skip354 | 0.6h
+2310.7s	435	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2310.7s	436	   PRED: र क क क क क कता की क क क वार वार
+2353.1s	437	ep  22 | loss  3.297 | val CER  85.92 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.7h
+2353.1s	438	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2353.1s	439	   PRED: 
+2395.4s	440	ep  23 | loss  0.000 | val CER  85.92 | best  79.60 | lr 1.0e-03 | 42s skip357 | 0.7h
+2395.4s	441	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2395.4s	442	   PRED: 
+2437.8s	443	ep  24 | loss  3.205 | val CER  86.30 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.7h
+2437.8s	444	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2437.8s	445	   PRED:   क क क क कता ी क क क वर वार
+2480.0s	446	ep  25 | loss  0.000 | val CER  86.30 | best  79.60 | lr 1.0e-03 | 42s skip357 | 0.7h
+2480.0s	447	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2480.0s	448	   PRED:   क क क क कता ी क क क वर वार
+2522.3s	449	ep  26 | loss  0.000 | val CER  86.30 | best  79.60 | lr 1.0e-03 | 42s skip357 | 0.7h
+2522.3s	450	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2522.3s	451	   PRED:   क क क क कता ी क क क वर वार
+2564.8s	452	ep  27 | loss  3.215 | val CER  86.82 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.7h
+2564.8s	453	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2564.8s	454	   PRED:   क क क क क ता ी क क क वर वार
+2607.5s	455	ep  28 | loss  3.287 | val CER  87.52 | best  79.60 | lr 1.0e-03 | 43s skip355 | 0.7h
+2607.5s	456	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2607.5s	457	   PRED:   क क क क क ता ी क क क वर वर
+2650.0s	458	ep  29 | loss  3.127 | val CER  87.72 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.7h
+2650.0s	459	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2650.0s	460	   PRED:   क क क क क त  क क क वर वर
+2692.8s	461	ep  30 | loss  3.195 | val CER  87.84 | best  79.60 | lr 1.0e-03 | 43s skip354 | 0.7h
+2692.8s	462	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2692.8s	463	   PRED:  क क क क क क त  क क क पर वर
+2735.3s	464	ep  31 | loss  3.154 | val CER  88.14 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.8h
+2735.3s	465	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2735.3s	466	   PRED:  क क क क क क त  क क क पर वर
+2777.7s	467	ep  32 | loss  3.072 | val CER  88.19 | best  79.60 | lr 1.0e-03 | 42s skip356 | 0.8h
+2777.7s	468	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2777.7s	469	   PRED:  क क क क क क त  क क क पर वर
+2820.4s	470	ep  33 | loss  3.093 | val CER  87.86 | best  79.60 | lr 1.0e-03 | 43s skip355 | 0.8h
+2820.4s	471	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2820.4s	472	   PRED: र क क क स क प ता  क क क पर वर
+2862.7s	473	ep  34 | loss  0.000 | val CER  87.86 | best  79.60 | lr 1.0e-03 | 42s skip357 | 0.8h
+2862.7s	474	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2862.7s	475	   PRED: र क क क स क प ता  क क क पर वर
+2904.9s	476	ep  35 | loss  0.000 | val CER  87.86 | best  79.60 | lr 1.0e-03 | 42s skip357 | 0.8h
+2904.9s	477	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2904.9s	478	   PRED: र क क क स क प ता  क क क पर वर
+2947.6s	479	ep  36 | loss  3.109 | val CER  87.46 | best  79.60 | lr 1.0e-03 | 43s skip355 | 0.8h
+2947.6s	480	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+2947.6s	481	   PRED: र स प स प स     क क क पर वर
+2947.6s	482	STOPPED: loss 3.11 still at the letter-frequency prior after 12852 updates
+2947.6s	483	done: 36 epochs, best val CER 79.60
+2947.6s	484	warm-started (its val CER 79.60)
+3001.9s	485	ep   1 | loss  3.129 | val CER  80.76 | best  80.76 | lr 9.1e-05 | 54s skip296 * | 0.8h
+3001.9s	486	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3001.9s	487	   PRED: सा ककार क ते प सा क री कते क स स प पर सार
+3054.5s	488	ep   2 | loss  3.110 | val CER  81.51 | best  80.76 | lr 1.7e-04 | 53s skip303 | 0.8h
+3054.5s	489	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3054.5s	490	   PRED: सा ककार क ते क स क र कते  क स प पर सर
+3149.5s	491	ep   4 | loss  3.126 | val CER  81.59 | best  80.76 | lr 2.5e-04 | 47s skip333 | 0.9h
+3149.5s	492	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3149.5s	493	   PRED: से क क क  क स क कार सा क क प पर कार
+3242.1s	494	ep   6 | loss  3.113 | val CER  83.74 | best  80.76 | lr 3.0e-04 | 47s skip331 | 0.9h
+3242.1s	495	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3242.1s	496	   PRED: सा क क प  प स प कार स क क क पर कर
+3333.2s	497	ep   8 | loss  3.074 | val CER  83.81 | best  80.76 | lr 3.0e-04 | 46s skip339 | 0.9h
+3333.2s	498	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3333.2s	499	   PRED: सा प क प ते  सता प  प क क प पर पर
+3422.8s	500	ep  10 | loss  3.109 | val CER  83.68 | best  80.76 | lr 3.0e-04 | 45s skip343 | 0.9h
+3422.8s	501	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3422.8s	502	   PRED: सा क क क  त त स प  क क क क प कर
+3510.2s	503	ep  12 | loss  3.109 | val CER  84.55 | best  80.76 | lr 3.0e-04 | 43s skip352 | 1.0h
+3510.2s	504	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3510.2s	505	   PRED: सा क क क  ते  क क क क क क क प कर
+3599.2s	506	ep  14 | loss  3.114 | val CER  84.91 | best  80.76 | lr 3.0e-04 | 44s skip348 | 1.0h
+3599.2s	507	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3599.2s	508	   PRED: सा क क   ते  स क कते क क क क प सर
+3685.2s	509	ep  16 | loss  3.050 | val CER  84.82 | best  80.76 | lr 3.0e-04 | 43s skip353 | 1.0h
+3685.2s	510	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3685.2s	511	   PRED: सा क क क ते प स क कते क क क प प सर
+3771.0s	512	ep  18 | loss  3.101 | val CER  84.21 | best  80.76 | lr 3.0e-04 | 43s skip354 | 1.0h
+3771.0s	513	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3771.0s	514	   PRED: सा क क क ते प स क कते क क क प पर कर
+3857.4s	515	ep  20 | loss  3.071 | val CER  84.86 | best  80.76 | lr 3.0e-04 | 43s skip353 | 1.1h
+3857.4s	516	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3857.4s	517	   PRED: सा क क क ते क क  कता क क क प पर कर
+3942.9s	518	ep  22 | loss  3.165 | val CER  85.97 | best  80.76 | lr 3.0e-04 | 43s skip355 | 1.1h
+3942.9s	519	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+3942.9s	520	   PRED: सा क क क े क क ा क क क प पर कर
+4028.4s	521	ep  24 | loss  3.157 | val CER  86.15 | best  80.76 | lr 3.0e-04 | 43s skip355 | 1.1h
+4028.4s	522	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4028.4s	523	   PRED: सा क क क त क क कस  क क प पर कर
+4113.6s	524	ep  26 | loss  3.078 | val CER  85.95 | best  80.76 | lr 3.0e-04 | 43s skip355 | 1.1h
+4113.6s	525	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4113.6s	526	   PRED: सा क क क  त क स कस  क क पर पर कर
+4198.8s	527	ep  28 | loss  3.117 | val CER  85.10 | best  80.76 | lr 3.0e-04 | 43s skip354 | 1.2h
+4198.8s	528	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4198.8s	529	   PRED: सार क क क  ते क स क  क क क पर पर सार
+4284.3s	530	ep  30 | loss  3.098 | val CER  85.38 | best  80.76 | lr 3.0e-04 | 43s skip353 | 1.2h
+4284.3s	531	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4284.3s	532	   PRED: सार क क क  त त स क  क क क पर पर सर
+4370.2s	533	ep  32 | loss  3.120 | val CER  85.13 | best  80.76 | lr 3.0e-04 | 43s skip354 | 1.2h
+4370.2s	534	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4370.2s	535	   PRED: सा क क क क ते  स प  क क क प पर सर
+4456.4s	536	ep  34 | loss  3.131 | val CER  84.04 | best  80.76 | lr 3.0e-04 | 43s skip353 | 1.2h
+4456.4s	537	   GT  : इनामतीचे चावरांमधे आंबे व चिंचा व झाडझाडोरा आपण व प्रजेकरुन लाऊनु त्याचा राजमाग हाली 
+4456.4s	538	   PRED: का क क क  ते  कर क प   प क क प प सर
+4456.4s	539	STOPPED: loss 3.13 still at the letter-frequency prior after 12138 updates
+4456.4s	540	done: 34 epochs, best val CER 80.76
+4464.7s	541	{
+4464.7s	542	  "CER": 81.31565155968738,
+4464.7s	543	  "WER": 100.49337468283056,
+4464.7s	544	  "median_CER": 79.51313450523405,
+4464.7s	545	  "catastrophic_pct": 100.0,
+4464.7s	546	  "chrF_pp": 3.3668377524953232,
+4464.7s	547	  "BLEU": 0.009902994933323027,
+4464.7s	548	  "n": 306,
+4464.7s	549	  "CER_CI95": [
+4464.7s	550	    80.58091550510497,
+4464.7s	551	    82.12468753375617
+4464.7s	552	  ],
+4464.7s	553	  "run": "B1_seed42",
+4464.7s	554	  "from_checkpoint": "/kaggle/working/runs/B1_seed42/best.pt",
+4464.7s	555	  "best_epoch": 1,
+4464.7s	556	  "val_CER": 80.75666115575378,
+4464.7s	557	  "hours": 1.24
+4464.7s	558	}
+4465.6s	559	GT  : सिदोगी ताा मुनवली सु समान सबैन मया व आलफ साल
+4465.6s	560	PRED: सा    ता  प स स स प सार
+4465.6s	561	
+4465.7s	562	GT  : श्री अखंडित लक्ष्मी अलंकृत राजमान्य राजश्री विसाजी हरी क र पाो नासिक गोसावी यांसी सेवक माधवराव नारायण प्रधान नमस्कार सु 
+4465.7s	563	PRED: प र क क क कार कताता  प क   ता क कतात का सारपर पर पर पर सार
+4465.7s	564	
+4465.9s	565	GT  : राजश्री नारो बाबाजी व नारो आपाजी गाो सु तीसा सीतैन मया व अलफ राजश्री गोविंदराव गाईकवाड सेना खासखेल समसेर बहादर याजकडील य
+4465.9s	566	PRED: 
+4465.9s	567	
+4466.0s	568	GT  : आंबराई दर बनास पेडी १ जकाती व जाराईबपैकी
+4466.0s	569	PRED: 
+4466.0s	570	
+4466.0s	571	outputs in /kaggle/working : ['__notebook__.ipynb', 'curves.png', 'data', 'runs', 'stack_64x1024x7.npy', 'test_metrics.json', 'test_predictions.csv']
+4466.0s	572	total runtime 1.24 h
+4471.8s	573	/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+4471.8s	574	  cells[i][c] = re.sub('\\\\\|', '|', cell)
+4472.0s	575	/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+4472.0s	576	  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+4472.7s	577	[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+4472.9s	578	[NbConvertApp] Writing 1421962 bytes to __notebook__.ipynb
+4475.3s	579	[NbConvertApp] Converting notebook __notebook__.ipynb to html
+4476.0s	580	[NbConvertApp] Support files will be in __results___files/
+4476.0s	581	[NbConvertApp] Making directory __results___files
+4476.0s	582	[NbConvertApp] Making directory __results___files
+4476.0s	583	[NbConvertApp] Making directory __results___files
+4476.0s	584	[NbConvertApp] Making directory __results___files
+4476.0s	585	[NbConvertApp] Making directory __results___files
+4476.0s	586	[NbConvertApp] Making directory __results___files
+4476.0s	587	[NbConvertApp] Making directory __results___files
+4476.0s	588	[NbConvertApp] Writing 547087 bytes to __results__.html

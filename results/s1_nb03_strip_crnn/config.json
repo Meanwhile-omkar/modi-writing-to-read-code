@@ -1,0 +1,9 @@
+{
+ "run": "s1_nb03_strip_crnn",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "Notebook 03, lines joined into one strip, CRNN + BiLSTM. Its fixed-height line finder destroyed most inputs.",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "notebooks/outputs-of-notebook/kaggle-output-v2-03/test_predictions.txt",
+ "source_column": "prediction",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

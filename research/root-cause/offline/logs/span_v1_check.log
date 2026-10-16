@@ -1,0 +1,4 @@
+checkpoint keys: ['model', 'cfg', 'epoch', 'val'] | epoch 105
+TRAIN (first 100 train patches): CER 70.4 | median patch 70.9 | best patch 22.4 | below 50%: 2/100 | 219s
+VAL (first 100 val patches): CER 74.2 | median patch 74.0 | best patch 54.8 | below 50%: 0/100 | 237s
+EXIT=0

@@ -51,6 +51,8 @@ def cer_nospace(refs, hyps):
 
 def wer(refs, hyps):
     pairs = _pairs(refs, hyps)
+    if any(not r.split() for r, _ in pairs):
+        raise ValueError('reference without words')
     edits = sum(editdistance.eval(r.split(), h.split()) for r, h in pairs)
     return 100 * edits / sum(len(r.split()) for r, _ in pairs)
 
@@ -75,9 +77,13 @@ def chrf_pp(refs, hyps):
     return sacrebleu.corpus_chrf([h for _, h in pairs], [[r for r, _ in pairs]], word_order=2).score
 
 
-def bleu(refs, hyps):
-    """Character-level BLEU, 0-100. Only for comparison with the MoDeTrans paper (C01)."""
+def bleu(refs, hyps, keep_spaces=False):
+    """Character-level BLEU, 0-100. Only for comparison with the MoDeTrans paper (C01).
+    sacreBLEU's 'char' tokenizer drops spaces, so a missing or extra space costs nothing; keep_spaces=True makes
+    each space a token of its own."""
     pairs = _pairs(refs, hyps)
+    if keep_spaces:
+        pairs = [(r.replace(' ', '▁'), h.replace(' ', '▁')) for r, h in pairs]
     return sacrebleu.corpus_bleu([h for _, h in pairs], [[r for r, _ in pairs]], tokenize='char').score
 
 
@@ -90,9 +96,12 @@ def bootstrap_ci(refs, hyps, n=10_000, seed=0, level=95):
     return cer(refs, hyps), float(np.percentile(draws, tail)), float(np.percentile(draws, 100 - tail))
 
 
-def paired_bootstrap(refs, hyps_a, hyps_b, n=10_000, seed=0, level=95):
+def paired_bootstrap(refs, hyps_a, hyps_b, n=10_000, seed=0, level=95, refs_b=None):
     """CER(a) - CER(b) and its confidence interval, with the SAME re-drawn images for both systems.
-    The difference is real only if the interval excludes 0."""
+    The difference is real only if the interval excludes 0. Pass refs_b (run b's own reference column) to check
+    that both runs list the same images in the same order; results files are not guaranteed to share a row order."""
+    if refs_b is not None and [normalize(r) for r in refs_b] != [normalize(r) for r in refs]:
+        raise ValueError('the two runs are not aligned: sort or merge both on image_id first')
     edits_a, lengths = char_counts(refs, hyps_a)
     edits_b, _ = char_counts(refs, hyps_b)
     idx = np.random.default_rng(seed).integers(0, len(lengths), (n, len(lengths)))

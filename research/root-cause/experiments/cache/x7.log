@@ -1,0 +1,4 @@
+TEST (306 patches) greedy  : CER 44.9 (95% CI 43.4-46.5) | no-space 43.0 | BLEU 0.23 | median patch 47.1 | patches below 50%: 180/306
+TEST (306 patches) lm_beam : CER 36.3 (95% CI 34.9-37.9) | no-space 35.9 | BLEU 3.79 | median patch 37.5 | patches below 50%: 236/306
+logged to results.csv
+EXIT=0

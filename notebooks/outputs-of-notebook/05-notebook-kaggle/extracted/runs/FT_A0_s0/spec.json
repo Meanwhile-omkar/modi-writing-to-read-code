@@ -1,0 +1,32 @@
+{
+  "tag": "FT_A0_s0",
+  "priority": 1,
+  "hyp": [
+    "anchor"
+  ],
+  "desc": "ANCHOR: PT_A60 -> real lines, proportional line labels, seed 0",
+  "size": "small",
+  "H": 40,
+  "vocab": "char",
+  "no_space": false,
+  "init": "/kaggle/working/runs/PT_A60/pre.pt",
+  "pretrain": null,
+  "finetune": {
+    "epochs": 57,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.0,
+    "seed": 0,
+    "realign_at": []
+  },
+  "save_pre": false,
+  "after": [
+    "PT_A60"
+  ],
+  "pools": [],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/FT_A0_s0",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 792.813437777108
+}

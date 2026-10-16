@@ -1,0 +1,14 @@
+greedy (no LM):  tune half CER 60.1 / no-space 61.1  |  report half CER 48.4 / no-space 47.1
+  tune: alpha 0.3 beta 0.0 -> CER 62.3 / no-space 65.2  (11s)
+  tune: alpha 0.3 beta 0.5 -> CER 55.2 / no-space 57.9  (21s)
+  tune: alpha 0.3 beta 1.0 -> CER 51.6 / no-space 53.8  (31s)
+  tune: alpha 0.6 beta 0.0 -> CER 71.9 / no-space 74.2  (41s)
+  tune: alpha 0.6 beta 0.5 -> CER 63.2 / no-space 65.9  (50s)
+  tune: alpha 0.6 beta 1.0 -> CER 55.2 / no-space 58.3  (59s)
+  tune: alpha 1.0 beta 0.0 -> CER 81.9 / no-space 82.9  (68s)
+  tune: alpha 1.0 beta 0.5 -> CER 74.0 / no-space 75.8  (76s)
+  tune: alpha 1.0 beta 1.0 -> CER 66.8 / no-space 69.1  (85s)
+
+REPORT half (75 val patches never used for tuning): greedy CER 48.4 -> LM beam (alpha 0.3, beta 1.0) CER 40.8  | no-space 47.1 -> 41.0  | 104s
+logged to results.csv
+EXIT=0

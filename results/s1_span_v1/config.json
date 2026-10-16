@@ -1,0 +1,9 @@
+{
+ "run": "s1_span_v1",
+ "stage": "1 (Reader baseline, tag stage1-final-baseline)",
+ "description": "First, unfaithful SPAN-style paragraph model. Learned how much text a page holds, not which letters.",
+ "test_set": "MoDeTrans test split, 306 patches (assets/metadata/splits.json)",
+ "source_file": "notebooks/outputs-of-notebook/kaggle-output-span-version1/test_predictions.txt",
+ "source_column": "prediction",
+ "exported_by": "scripts/22_export_stage1_predictions.py"
+}

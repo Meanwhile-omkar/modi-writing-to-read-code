@@ -1,0 +1,44 @@
+{
+  "tag": "AKS",
+  "priority": 2,
+  "hyp": [
+    "N14"
+  ],
+  "desc": "akshara (syllable) targets, pretrain + fine-tune",
+  "size": "small",
+  "H": 40,
+  "vocab": "akshara",
+  "no_space": false,
+  "init": null,
+  "pretrain": {
+    "pool": "A",
+    "limit": 60000,
+    "samples": 428260,
+    "lr": 0.001,
+    "batch": 32,
+    "evals": 4,
+    "seed": 0
+  },
+  "finetune": {
+    "epochs": 57,
+    "lr": 0.001,
+    "batch": 32,
+    "aug": false,
+    "mix": 0.0,
+    "seed": 0,
+    "realign_at": []
+  },
+  "save_pre": false,
+  "after": [],
+  "pools": [
+    [
+      "A",
+      40,
+      60000
+    ]
+  ],
+  "work": "/tmp/lr05",
+  "run_dir": "/kaggle/working/runs/AKS",
+  "deadline": 1792005244.4431353,
+  "time_cap_s": 1700.5781931773301
+}
