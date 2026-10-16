@@ -56,7 +56,7 @@ def test_space_errors_have_their_own_category():
 
 
 @pytest.mark.parametrize('ref, hyp, expected', [
-    ('भिंत', 'मीत', {'look-alike': 1, 'vowel sign': 1, 'anusvara': 1}),  # भ->म, ि->ी, ं dropped
+    ('बिंत', 'हीत', {'look-alike': 1, 'vowel sign': 1, 'anusvara': 1}),  # ब->ह, ि->ी, ं dropped
     ('कां', 'कि', {'vowel sign': 1, 'anusvara': 1}),                     # ा->ि, ं dropped
 ])
 def test_dropped_anusvara_next_to_a_vowel_sign_error(ref, hyp, expected):

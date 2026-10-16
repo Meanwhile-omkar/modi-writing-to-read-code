@@ -11,12 +11,12 @@
       "median_cer": 47.08313077297035,
       "catastrophic_pct": 37.254901960784316,
       "error_types": {
-        "look-alike": 60,
+        "look-alike": 918,
         "virama": 1200,
         "anusvara": 854,
         "space": 4017,
         "vowel sign": 5411,
-        "other": 8156
+        "other": 7298
       }
     },
     "s1_cpu_x7_lm4": {
@@ -30,12 +30,12 @@
       "median_cer": 37.5,
       "catastrophic_pct": 22.22222222222222,
       "error_types": {
-        "look-alike": 39,
+        "look-alike": 839,
         "virama": 1043,
         "anusvara": 717,
         "space": 2974,
         "vowel sign": 4168,
-        "other": 7001
+        "other": 6201
       }
     },
     "s1_nb02_band_crnn": {
@@ -49,12 +49,12 @@
       "median_cer": 79.51313450523405,
       "catastrophic_pct": 100.0,
       "error_types": {
-        "look-alike": 10,
+        "look-alike": 399,
         "virama": 2028,
         "anusvara": 983,
         "space": 2996,
         "vowel sign": 10246,
-        "other": 19424
+        "other": 19035
       }
     },
     "s1_nb03_strip_crnn": {
@@ -68,12 +68,12 @@
       "median_cer": 73.4730451320313,
       "catastrophic_pct": 100.0,
       "error_types": {
-        "look-alike": 9,
+        "look-alike": 510,
         "virama": 2024,
         "anusvara": 892,
         "space": 2558,
         "vowel sign": 8796,
-        "other": 17799
+        "other": 17298
       }
     },
     "s1_nb05_anchor_greedy": {
@@ -87,12 +87,12 @@
       "median_cer": 39.90291262135922,
       "catastrophic_pct": 23.856209150326798,
       "error_types": {
-        "look-alike": 50,
+        "look-alike": 842,
         "virama": 931,
         "anusvara": 671,
         "space": 3566,
         "vowel sign": 4401,
-        "other": 6566
+        "other": 5774
       }
     },
     "s1_nb05_anchor_lm4": {
@@ -106,12 +106,12 @@
       "median_cer": 34.33589627619479,
       "catastrophic_pct": 19.28104575163399,
       "error_types": {
-        "look-alike": 21,
+        "look-alike": 675,
         "virama": 835,
         "anusvara": 640,
         "space": 2697,
         "vowel sign": 3816,
-        "other": 6124
+        "other": 5470
       }
     },
     "s1_nb05_final_ens3_greedy": {
@@ -125,12 +125,12 @@
       "median_cer": 36.111111111111114,
       "catastrophic_pct": 18.954248366013072,
       "error_types": {
-        "look-alike": 42,
+        "look-alike": 574,
         "virama": 768,
         "anusvara": 686,
         "space": 2915,
         "vowel sign": 3995,
-        "other": 5841
+        "other": 5309
       }
     },
     "s1_nb05_final_ens3_lm4": {
@@ -144,12 +144,12 @@
       "median_cer": 27.393887945670627,
       "catastrophic_pct": 9.477124183006536,
       "error_types": {
-        "look-alike": 25,
+        "look-alike": 505,
         "virama": 584,
         "anusvara": 609,
         "space": 2112,
         "vowel sign": 3123,
-        "other": 4916
+        "other": 4436
       }
     },
     "s1_offline_ens4_lm7": {
@@ -163,12 +163,12 @@
       "median_cer": 25.487526908952766,
       "catastrophic_pct": 9.477124183006536,
       "error_types": {
-        "look-alike": 24,
+        "look-alike": 467,
         "virama": 540,
         "anusvara": 622,
         "space": 1963,
         "vowel sign": 2980,
-        "other": 4646
+        "other": 4203
       }
     },
     "s1_span_v1": {
@@ -182,12 +182,12 @@
       "median_cer": 74.74747474747475,
       "catastrophic_pct": 100.0,
       "error_types": {
-        "look-alike": 44,
+        "look-alike": 611,
         "virama": 2052,
         "anusvara": 858,
         "space": 2494,
         "vowel sign": 9519,
-        "other": 17669
+        "other": 17102
       }
     },
     "s1_span_v2_iam": {
@@ -201,12 +201,12 @@
       "median_cer": 70.76923076923077,
       "catastrophic_pct": 99.67320261437908,
       "error_types": {
-        "look-alike": 20,
+        "look-alike": 714,
         "virama": 1899,
         "anusvara": 784,
         "space": 3006,
         "vowel sign": 8283,
-        "other": 16684
+        "other": 15990
       }
     },
     "s1_span_v2_scratch": {
@@ -220,12 +220,12 @@
       "median_cer": 72.85602273841027,
       "catastrophic_pct": 100.0,
       "error_types": {
-        "look-alike": 4,
+        "look-alike": 654,
         "virama": 2055,
         "anusvara": 733,
         "space": 3319,
         "vowel sign": 9207,
-        "other": 16528
+        "other": 15878
       }
     }
   },

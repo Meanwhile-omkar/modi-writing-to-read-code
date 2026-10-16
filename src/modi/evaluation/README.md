@@ -45,7 +45,8 @@ Results files do not share a row order: before comparing two runs, merge them on
 | `bootstrap_ci(refs, hyps)` | `(cer, low, high)`, 95 % interval |
 | `paired_bootstrap(refs, hyps_a, hyps_b, refs_b=None)` | `(cer_a - cer_b, low, high)` on the same resamples; a difference is real only if the interval excludes 0 |
 
-`taxonomy.error_types(refs, hyps)` counts mistakes by kind: look-alike letters ({भ म} {क फ} {ट ठ ढ} {न ण}),
+`taxonomy.error_types(refs, hyps)` counts mistakes by kind: look-alike letters (16 pairs the Reader really swaps on
+validation, e.g. ज/न, ब/ह, ल/ळ, ट/ठ; derived by `scripts/30_lookalike_groups.py`, see `outputs/reports/lookalike_confusions.md`),
 virama (broken conjuncts), anusvara dropped or added, space (word boundary missed or invented), vowel signs, other.
 
 ## Reference points (`floor_baselines.py`)
