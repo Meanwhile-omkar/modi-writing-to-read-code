@@ -1,4 +1,4 @@
-"""Build notebooks/05_line_reader_round2_GPU.ipynb.
+"""Build notebooks/06_strong_members_GPU.ipynb (notebook 05's builder; notebook 05 itself: git tag stage1-final-baseline).
 
 The five code files in notebooks/lr05/ are embedded verbatim with %%writefile, so the notebook runs exactly
 the code that was tested locally (unit tests + the CPU rehearsal, rehearse_nb05.py). The font is embedded
@@ -7,7 +7,7 @@ as base64 so the notebook needs no input beyond colab_pack.zip.
 import base64, hashlib, json, pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
-NB = HERE.parent / "05_line_reader_round2_GPU.ipynb"
+NB = HERE.parent / "06_strong_members_GPU.ipynb"
 FONT = HERE.parents[1] / "assets/fonts/NotoSansModi-Regular.ttf"   # same file (SHA-256 df1b8c67...) as the old cache copy; this one is in git
 FILES = ["lr05_lib.py", "render_pools.py", "job.py", "lr05_run.py", "lr05_final.py"]
 CELLS = []
@@ -22,7 +22,7 @@ def code(src):
 
 
 md(r"""
-# MODI-SYNTH · Notebook 05 — the line reader, and every round-2 hypothesis, in one run
+# MODI-SYNTH · Notebook 06 — strong ensemble members (AUG combined with the wider model and 64-px lines)
 
 **Run with: Accelerator `GPU T4 x2`, Internet `On`, input `colab_pack.zip` attached (the same one notebook 04 uses).
 Then *Save Version → Save & Run All (Commit)* and come back in about 5 hours.** Nothing needs watching.
@@ -118,7 +118,7 @@ def clock():
 smi = subprocess.run(['nvidia-smi', '-L'], capture_output=True, text=True).stdout.strip()
 GPUS = [int(l.split()[1].rstrip(':')) for l in smi.splitlines() if l.startswith('GPU')]
 import torch, platform
-log(f'MODI-SYNTH notebook 05 | started {time.strftime("%Y-%m-%d %H:%M:%S")} | budget {BUDGET_MIN} min | rehearsal: {LOCAL}')
+log(f'MODI-SYNTH notebook 06 | started {time.strftime("%Y-%m-%d %H:%M:%S")} | budget {BUDGET_MIN} min | rehearsal: {LOCAL}')
 log(f'python {platform.python_version()} | torch {torch.__version__} | CUDA {torch.version.cuda} | CPUs {os.cpu_count()}')
 log(smi or 'NO GPU FOUND')
 try:
@@ -383,7 +383,7 @@ R = LF.load_results(RUNS)
 sel = [R[t]['val_sel']['primary'] for t in ('FT_A0_s0', 'FT_A0_s1', 'FT_A0_s2') if t in R and R[t].get('status') == 'ok']
 MARGIN = max(1.0, 2 * float(np.std(sel, ddof=1))) if len(sel) >= 2 else 1.5
 log(f'[{clock()}] anchor seeds on VAL-SEL: {[round(s, 2) for s in sel]} -> a change must win by more than {MARGIN:.2f} CER points')
-CJOBS, WHY = LR.combo_jobs(R, BASE_SCALED, SIZES, RUNS, MARGIN, log)
+CJOBS, WHY = [], ['notebook 06: no COMBO/FINAL phase, the time goes to the strong members']  # was LR.combo_jobs(...)
 for w in WHY:
     log('  ', w)
 left = DEADLINE_JOBS - time.time()

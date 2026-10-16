@@ -1,4 +1,4 @@
-"""Execute every code cell of notebooks/05_line_reader_round2_GPU.ipynb on this PC's CPU.
+"""Execute every code cell of notebooks/06_strong_members_GPU.ipynb on this PC's CPU.
 
 Only the ENVIRONMENT is swapped: Kaggle paths -> a local folder, the HF download -> the local parquet, nvidia-smi ->
 two pretend GPUs (= two CPU job slots), pip -> nothing. LR05_LOCAL=1 makes the notebook use a handful of patches and
@@ -35,11 +35,11 @@ def main():
     shutil.rmtree(run, ignore_errors=True)
     (run / "out").mkdir(parents=True); (run / "work").mkdir()
     OUT, WORK = (run / "out").as_posix(), (run / "work").as_posix()
-    META = (ROOT / "FYP-modi-script-code/assets/metadata").as_posix()
+    META = (HERE.parents[1] / "assets/metadata").as_posix()  # this checkout, whatever its folder is called
     os.environ["LR05_LOCAL"] = "1"; os.environ["PYTHONIOENCODING"] = "utf-8"
     import subprocess
     subprocess.run([sys.executable, str(HERE / "build_nb05.py")], check=True)
-    nb = json.loads((HERE.parent / "05_line_reader_round2_GPU.ipynb").read_text(encoding="utf-8"))
+    nb = json.loads((HERE.parent / "06_strong_members_GPU.ipynb").read_text(encoding="utf-8"))
     cells = [c for c in nb["cells"] if c["cell_type"] == "code"]
     SUB = [
         ("WORK = ('/kaggle/temp' if os.path.isdir('/kaggle/temp') else '/tmp') + '/lr05'", f"WORK = r'{WORK}'"),

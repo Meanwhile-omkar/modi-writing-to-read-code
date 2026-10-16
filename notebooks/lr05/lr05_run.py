@@ -48,44 +48,22 @@ def experiment_matrix(runs, base, sizes):
                       init=init, pretrain=pretrain, finetune=finetune, save_pre=save_pre, after=list(after),
                       pools=[list(p) for p in pools]))
 
-    # priority 1: the anchor, the decisive control, and the cheapest high-value questions
+    # Notebook 06: the shared pretraining, then only the strong ensemble members (augmentation combined with the
+    # wider model and with 64-px lines, two more AUG seeds, and AUG with one CTC re-alignment of the line labels).
     add("PT_A60", 1, ["anchor"], f"shared pretraining: {a_mid:,} plain synthetic lines (X4 style)",
         pretrain=pre("A", a_mid), save_pre=True, pools=[("A", 40, a_mid)])
-    add("FT_A0_s0", 1, ["anchor"], "ANCHOR: PT_A60 -> real lines, proportional line labels, seed 0",
-        init=PTA, finetune=ft(seed=0), after=["PT_A60"])
-    add("NOPRE", 1, ["H24-GPU"], "CONTROL: real lines only, no synthetic pretraining, 2x the epochs",
-        finetune=ft(epochs=base["nopre_epochs"]))
-    add("A12", 1, ["N10a"], f"pretrain on only {a_small:,} distinct synthetic lines (same steps as the anchor)",
-        pretrain=pre("A", a_small), finetune=ft(), pools=[("A", 40, a_small)])
-    add("B60", 1, ["N4"], f"pretrain on {b_n:,} REALISTIC synthetic lines (no word gaps + continuous headline)",
-        pretrain=pre("B", b_n), finetune=ft(), pools=[("B", 40, b_n)])
-    add("EM1", 1, ["H9/N8a"], "anchor + one CTC re-alignment of the line labels after 1/3 of fine-tuning",
-        init=PTA, finetune=ft(realign_frac=[1 / 3]), after=["PT_A60"])
-    add("FT_A0_s1", 1, ["seeds"], "anchor, fine-tune seed 1 (measures run-to-run noise)", init=PTA, finetune=ft(seed=1), after=["PT_A60"])
-    # priority 2
-    add("A120", 2, ["N10b"], f"pretrain on {a_big:,} distinct synthetic lines (same steps)", pretrain=pre("A", a_big),
-        finetune=ft(), pools=[("A", 40, a_big)])
-    add("C60", 2, ["N12b"], f"pretrain on {c_n:,} lines whose TEXT is sampled from a char 4-gram of the training labels",
-        pretrain=pre("C", c_n), finetune=ft(), pools=[("C", 40, c_n)])
-    add("BIG", 2, ["N11"], "2x wider CRNN (conv 64-128-256-256-256, BiLSTM 2x256)", size="big",
-        pretrain=pre("A", a_mid), finetune=ft(), pools=[("A", 40, a_mid)])
-    add("AKS", 2, ["N14"], "akshara (syllable) targets, pretrain + fine-tune", vocab="akshara",
-        pretrain=pre("A", a_mid), finetune=ft(), pools=[("A", 40, a_mid)])
-    add("NS", 2, ["N5"], "no spaces in any target, pretrain + fine-tune (spaces put back by the LM afterwards)",
-        no_space=True, pretrain=pre("A", a_mid), finetune=ft(), pools=[("A", 40, a_mid)])
-    add("MIX", 2, ["N9"], "anchor fine-tune with one synthetic batch after every real batch",
-        init=PTA, finetune=ft(mix=0.5, mix_pool="A", mix_limit=a_mid), after=["PT_A60"], pools=[("A", 40, a_mid)])
-    add("AUG", 2, ["N6"], "anchor fine-tune with augmented real lines", init=PTA, finetune=ft(aug=True), after=["PT_A60"])
-    add("EM2", 2, ["N8b"], "anchor + re-alignment after 1/3 and 2/3 of fine-tuning", init=PTA,
-        finetune=ft(realign_frac=[1 / 3, 2 / 3]), after=["PT_A60"])
-    add("FT_A0_s2", 2, ["seeds"], "anchor, fine-tune seed 2", init=PTA, finetune=ft(seed=2), after=["PT_A60"])
-    # priority 3: run if time allows
-    add("H64", 3, ["N7"], "64-px line images (pretrain + fine-tune)", H=64,
-        pretrain=pre("A", min(a_mid, sizes["A_h64"])), finetune=ft(), pools=[("A", 64, min(a_mid, sizes["A_h64"]))])
-    add("FT_LONG", 3, ["H11-line"], "anchor fine-tune for 3x the epochs", init=PTA,
-        finetune=ft(epochs=base["long_ft_epochs"]), after=["PT_A60"])
-    add("PRE_LONG", 3, ["N10c"], f"3x longer pretraining on {a_big:,} lines", pretrain=pre("A", a_big, base["long_pre_samples"]),
-        finetune=ft(), pools=[("A", 40, a_big)])
+    add("AUG_s1", 1, ["N6"], "AUG, seed 1", init=PTA, finetune=ft(aug=True, seed=1), after=["PT_A60"])
+    add("AUG_s2", 1, ["N6"], "AUG, seed 2", init=PTA, finetune=ft(aug=True, seed=2), after=["PT_A60"])
+    add("BIG_AUG_s0", 1, ["N11+N6"], "2x wider CRNN + augmentation", size="big",
+        pretrain=pre("A", a_mid), finetune=ft(aug=True, seed=0), pools=[("A", 40, a_mid)])
+    add("BIG_AUG_s1", 2, ["N11+N6"], "2x wider CRNN + augmentation, seed 1", size="big",
+        pretrain=pre("A", a_mid), finetune=ft(aug=True, seed=1), pools=[("A", 40, a_mid)])
+    add("H64_AUG", 2, ["N7+N6"], "64-px lines + augmentation", H=64,
+        pretrain=pre("A", min(a_mid, sizes["A_h64"])), finetune=ft(aug=True), pools=[("A", 64, min(a_mid, sizes["A_h64"]))])
+    add("EM1_AUG", 3, ["H9"], "AUG + one CTC re-alignment of the line labels after 1/3 (Viterbi bug fixed)",
+        init=PTA, finetune=ft(aug=True, realign_frac=[1 / 3]), after=["PT_A60"])
+    add("H64_BIG_AUG", 3, ["N7+N11+N6"], "64-px + 2x wider + augmentation (slowest: ~190 lines/s)", size="big", H=64,
+        pretrain=pre("A", min(a_mid, sizes["A_h64"])), finetune=ft(aug=True), pools=[("A", 64, min(a_mid, sizes["A_h64"]))])
     return J
 
 
