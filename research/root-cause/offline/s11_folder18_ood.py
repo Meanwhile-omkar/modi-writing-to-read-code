@@ -9,6 +9,8 @@ and the book's text must not be published).
         modi.evaluation.folder18_gt (Tesseract `mar` draft, proofread for some letters), or a human transcription
         typed in the numbered format of folder18_transcription_pack/answers.txt
   python s11_folder18_ood.py overlap    how much of each letter's text already occurs in MoDeTrans transcriptions
+  python s11_folder18_ood.py read_runs <runs dir> <tag,tag,...> [prefix]
+        also read the lines with other checkpoints (e.g. notebook 07's runs/AUG_TILT/best.pt), then run `score`
 
 Page handling: each page is shrunk to half size, the text block is found from the ink, and lr05_lib.segment cuts it
 into lines (per-page deskew and line pitch). Bands whose ink covers < 30 % of the block width (stamps, page numbers)
@@ -115,6 +117,39 @@ def read_lines():
     json.dump(out, open(OUT / "predictions.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 
+def read_runs(runs_dir, tags, prefix):
+    """Read the lines with other checkpoints (e.g. a later notebook's runs/<tag>/best.pt): each model greedy and with the
+    char 6-gram LM (alpha 0.45, beta 1.0 - the single-model setting chosen on VAL-SEL in notebook 05). Adds
+    '<prefix>_<tag>_greedy' and '<prefix>_<tag>_lm' to predictions.json, so `score` compares them with the Stage-1 ones."""
+    torch.set_num_threads(8)
+    symbols, train_texts, _ = meta()
+    vocab = L.make_vocab(symbols, train_texts, "char")
+    pages = pickle.load(open(OUT / "lines.pkl", "rb"))
+    keys = [(p, i) for p in pages for i in range(len(pages[p]))]
+    pool = get_context("spawn").Pool(8, initializer=_init, initargs=(train_texts, vocab.itos))
+    pred = json.load(open(OUT / "predictions.json", encoding="utf-8"))
+    for tag in tags:
+        ck = torch.load(Path(runs_dir) / tag / "best.pt", map_location="cpu", weights_only=False)
+        m = L.build_crnn(len(vocab), ck["size"]); m.load_state_dict(ck["model"]); m.eval()
+        lp = {}
+        with torch.no_grad():
+            for p in pages:
+                x, lens = L.to_batch(pages[p], 40, round_to=L.STRIDE)
+                o = m(torch.from_numpy(x)).float().log_softmax(-1).numpy()
+                for i in range(len(pages[p])):
+                    lp[(p, i)] = o[i, :lens[i]]
+        out = {}
+        for r in pool.imap_unordered(_decode, [([(k, *L.topk_compress(lp[k], 8)) for k in keys][s::32], 0.45, 1.0, 6)
+                                                for s in range(32)]):
+            out.update(r)
+        pred[f"{prefix}_{tag}_lm"] = {str(p): [out[(p, i)] for i in range(len(pages[p]))] for p in pages}
+        pred[f"{prefix}_{tag}_greedy"] = {str(p): [vocab.decode(L.greedy_ids(lp[(p, i)])).strip() for i in range(len(pages[p]))]
+                                          for p in pages}
+        print("read with", tag, flush=True)
+    pool.close()
+    json.dump(pred, open(OUT / "predictions.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+
 def parse_answers(path):
     """Numbered human transcription (=== 01 ... === 14) -> {letter: text}. Two-column rows 'left | right' are read
     row by row, like the line finder reads the handwritten page."""
@@ -195,5 +230,7 @@ if __name__ == "__main__":
         read_lines()
     elif cmd == "overlap":
         print(overlap(references()[0]))
+    elif cmd == "read_runs":        # python s11_folder18_ood.py read_runs <runs dir> <tag,tag,...> <prefix>
+        read_runs(sys.argv[2], sys.argv[3].split(","), sys.argv[4] if len(sys.argv) > 4 else "new")
     else:
         score(sys.argv[2] if len(sys.argv) > 2 else None)
