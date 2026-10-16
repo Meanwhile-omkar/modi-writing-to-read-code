@@ -398,3 +398,10 @@ commit the Stage-1 code, then Phase 0–1 of the handover plan (contracts → li
 - Every letter reads (own text vs other letters' text, letters only: e.g. 34 vs 82 for letter 13).
 - Open: human transcription of the key (Omkar, in progress); per-column line cutting for two-column pages; hand line
   counts (Udit). The Folder-18 strict tier should be redefined by TEXT overlap, not page matching.
+- **Key v2 (later on 16 Oct):** letters 12, 13, 15 also proofread against the page images (letter 15's overlap with MoDeTrans
+  rises to 28.8 % on the corrected text; letter 12's to 2.0 %, greeting formulas). Unseen = ≤ 5 % overlap → letters 11, 12, 13.
+  Final pipeline: **unseen single-column letters 12 + 13 = 41.8 CER** (44.8 / 31.9); two-column letter 11 = 63.2 (Tesseract
+  read page 50 row by row and pages 52–56 column by column, our line finder reads every page row by row — part of the
+  error is reading order). A second transcription typed with an AI tool differed from the printed pages by 10–16 % on
+  the checked letters (modernised spellings, e.g. "राजमान्य" → "राजाभाय", "उभयता सक्तयारी" → "उमेदवार सत्कार्यासी") and
+  was not used as the key.

@@ -62,21 +62,24 @@ Code: `research/root-cause/offline/s10_arm_a_test.py`.
 **Out-of-domain test: unseen documents (Folder 18, preliminary, 16 Oct).** The book *Illustrative Modi Documents*
 (folder 18 of MODI-HHDoc) prints each handwritten Modi letter next to the editors' typed Devanagari copy, so the
 answer key is in the book. For the 7 "strict" letters (14 handwritten pages) the key was made with Tesseract
-(`mar`) through `modi.evaluation.folder18_gt`; letters 3, 5, 8 were then proofread line by line against the page
-images (Tesseract needed 3–4 % of characters corrected), the others are still OCR-only. The handwritten pages were cut
-into lines automatically by the Stage-1 line finder (no hand layout) and read by the frozen pipelines; each letter is
-scored as one text. A text-overlap check found that **22–31 % of the text of letters 3, 5, 8 (15 % of letter 15)
-already occurs in MoDeTrans training transcriptions** — those letters are not truly unseen even though their pages
-are. Only letters 11, 12, 13 (≤ 1 % overlap) count as unseen documents.
+(`mar`) through `modi.evaluation.folder18_gt` and proofread line by line against the printed page images for 6 of
+the 7 letters (Tesseract needed 3–4 % of characters corrected); letter 11, printed in two columns, is still OCR-only.
+The handwritten pages were cut into lines automatically by the Stage-1 line finder (no hand layout) and read by the
+frozen pipelines; each letter is scored as one text. A text-overlap check found that **22–31 % of the text of letters
+3, 5, 8 and 15 already occurs in MoDeTrans training transcriptions** — those letters are not truly unseen even
+though their pages are. Letters 11, 12, 13 (≤ 2 % overlap: shared greeting formulas only) count as unseen documents.
 
 | letters | final pipeline CER | single model (anchor), no LM |
 |---|---|---|
-| **unseen text: 11, 12, 13** (OCR-only key) | **53.2** (per letter 63.2 / 46.1 / 33.7) | 61.6 |
-| partly in MoDeTrans: 3, 5, 8 (proofread key) | 15.1–17.7 (inflated by the overlap) | 28.9–34.8 |
+| **unseen, single column: 12, 13** | **41.8** (per letter 44.8 / 31.9) | 53.7 |
+| unseen, two columns: 11 (OCR key; line order across columns differs from the key) | 63.2 | 68.6 |
+| all unseen: 11, 12, 13 | 52.7 | 61.3 |
+| partly in MoDeTrans: 3, 5, 8, 15 | 15.1–22.9 (inflated by the overlap) | 28.9–38.9 |
 
 Every letter's output matches its own text far better than other letters' texts, so the Reader does read unseen
-pages. Main losses: letter 11 is written in two columns, letter 12 is dense and tilted. Numbers will be re-scored
-against a human transcription; the key and the page images stay outside git (HHDoc terms).
+pages; on new documents it loses about 17 CER points against MoDeTrans (24.55 → 41.8 on single-column letters).
+Main losses: page layout (two columns; tilt beyond the ±6° deskew range on letter 12). The key and the page images
+stay outside git (HHDoc terms).
 Code: `research/root-cause/offline/s11_folder18_ood.py` (outputs in the git-ignored `assets/folder18_gt/ood/`).
 
 **Robustness check.** 8 of the 306 test patches share at least 50 characters of text with a training patch

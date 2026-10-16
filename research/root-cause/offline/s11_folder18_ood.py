@@ -170,7 +170,9 @@ def score(answers=None):
                         own_vs_other=[cer([strip(refs[n])], [strip(hyp[n])]),
                                       float(np.mean([cer([strip(refs[m])], [strip(hyp[n])]) for m in refs if m != n]))])
                 for n in refs}
-        clean = [n for n in refs if ov[n] <= 1.0]
+        # unseen text: at most 5 % of the letter's 20-character pieces occur in MoDeTrans training transcriptions
+        # (shared greeting formulas); the leaking letters 3, 5, 8, 15 have 22-31 %
+        clean = [n for n in refs if ov[n] <= 5.0]
         agg = lambda sel: dict(letters=sel, CER=cer([refs[n] for n in sel], [hyp[n] for n in sel]),
                                CER_letters_only=cer([strip(refs[n]) for n in sel], [strip(hyp[n]) for n in sel]),
                                char_BLEU=bleu([refs[n] for n in sel], [hyp[n] for n in sel]))
