@@ -80,6 +80,57 @@ On Windows (and macOS) DataLoader workers start fresh processes: with `num_worke
 class and `transform` at module level (no lambda) and start training under `if __name__ == '__main__':`.
 In a notebook there, use `num_workers=0`.
 
+## Single lines: `make_line`
+
+```python
+from modi.synthetic import make_line
+
+img, text = make_line(seed, height=40)              # or height=64
+img, text = make_line(seed, height=40, text_mode='ngram')
+```
+
+| | |
+|---|---|
+| `img` | `numpy.uint8`, shape `(height, width)`, dark ink = 0 on white = 255, cropped to the ink like the real lines of `notebooks/lr05` (`crop_line`). |
+| width | Always suits the line Reader, checked at height 40: at most 1,024 px, and at least `2 * (1.2 * characters + 2)` px so CTC has room (lr05 `line_ok`). A text that does not fit is replaced by another one; nothing is squeezed. |
+| `text` | `'chunk'` (default): a real 18-70-character piece of a training transcription, cut at spaces (4,422 pieces, median 33 characters). Invented text trained worse in Stage 1 (`results/README.md`). `'ngram'`: new text from the text source. |
+| seed | The same `(seed, height, text_mode)` always gives the same output. |
+| Speed | About 27 lines per second on one CPU core (Apple M1). |
+
+A line is drawn like one line of a patch (words hanging from a long top stroke, a lead-in stroke on the left,
+little or no word gap), stretched vertically like the patches (`TALL`), then slanted, warped, its strokes
+thickened or thinned and thresholded, and cropped. **Fit-to-page check:** the line is drawn on a canvas with
+room on every side, and `render_line` raises an error if any stroke still reaches the edge, so letters are
+never cut off silently.
+
+**Dotted circles.** Some transcriptions contain a vowel sign or virama that cannot attach to the letter before
+it (`अै` typed for `ऐ`, `सुखरू्प`). Text shaping then draws a dotted circle (◌) that is not in the label. Both
+`make_line` and `make_patch` load the font without its dotted-circle glyph, so the mark is drawn on its own.
+`render.has_dotted_circle(text)` tells whether a text would have shown one. The release `armB-synthetic-v1`
+was made before this fix: 29 of its 4,290 images (0.7 %) contain a dotted circle; the other 4,261 are
+byte-identical to what `make_patch` draws now.
+
+## Pre-generated set (download instead of generating)
+
+The same pool, saved once as files: patch `i` is `make_patch(1_000_000 + i)`, 4,290 patches (226 MB zip),
+attached to the GitHub release `armB-synthetic-v1`. Rows 0-1,429 are the 1:1 set, all 4,290 the 1:3 set.
+Using the files gives byte-identical training data on every machine (generating on another machine can
+differ by a few pixels if its library versions differ).
+
+```python
+!wget -q https://github.com/Meanwhile-omkar/modi-writing-to-read-code/releases/download/armB-synthetic-v1/armB_synthetic_4290.zip
+!unzip -q armB_synthetic_4290.zip            # -> armB_synthetic_4290/syn_000000.png ... + labels.csv
+
+import numpy as np, pandas as pd
+from PIL import Image
+labels = pd.read_csv('armB_synthetic_4290/labels.csv', keep_default_na=False)   # image_id, seed, text
+pool = labels.iloc[:1430]                                                      # 1:1 set
+img = np.asarray(Image.open('armB_synthetic_4290/' + pool.image_id[0]))        # uint8 (512, 1408)
+text = pool.text[0]
+```
+
+To rebuild the set: `PYTHONPATH=src python -m modi.synthetic.export 4290 <folder>` (`export.py`).
+
 ## How a patch is made
 
 1. **Text** (`text_source.py`). A character model (order 6: the next character given the previous five)
@@ -129,16 +180,17 @@ In a notebook there, use `num_workers=0`.
 
 | File | What it does |
 |---|---|
-| `__init__.py` | `make_patch(seed)` |
+| `__init__.py` | `make_patch(seed)`, `make_line(seed, height)` |
 | `mapping.py` | Devanagari <-> Modi characters |
 | `text_source.py` | new training-style text |
-| `render.py` | draws a text as a patch |
+| `render.py` | draws a text as a patch or a line |
 | `font_gate.py` | Step 0 check that the font draws Modi correctly |
 | `calibrate.py` | Step 4 comparison of synthetic and real patches |
+| `export.py` | saves a fixed set of patches as PNG + labels.csv (the release zip) |
 
 Checks, from the repository root:
 
 ```bash
-python -m pytest -q tests/test_mapping.py tests/test_text_source.py tests/test_make_patch.py
+python -m pytest -q tests/test_mapping.py tests/test_text_source.py tests/test_make_patch.py tests/test_make_line.py
 PYTHONPATH=src python -m modi.synthetic.calibrate     # 3-7 minutes; needs the MoDeTrans parquet at raw.modetrans_parquet in configs/paths.yaml
 ```

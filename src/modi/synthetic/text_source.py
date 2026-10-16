@@ -41,9 +41,11 @@ class TextSource:
                 counts[stream[i - k:i]][ch] += 1
         self.next = {ctx: (list(c), list(accumulate(c.values()))) for ctx, c in counts.items()}
 
-    def sample(self, rng):
-        """One new text, as long as a randomly chosen training sentence, ending at a word boundary."""
-        target = rng.choice(self.lengths)
+    def sample(self, rng, target=None):
+        """One new text ending at a word boundary, about `target` characters long (default: as long as a
+        randomly chosen training sentence)."""
+        if target is None:
+            target = rng.choice(self.lengths)
         out = ' '  # start as if after a space, i.e. at the beginning of a word
         while True:
             k = self.order - 1 - (rng.random() < BACKOFF)
